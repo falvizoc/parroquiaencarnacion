@@ -1,5 +1,11 @@
 <?php
 
+use App\Models\Chapel;
+use App\Models\Event;
+use App\Models\MassSchedule;
+use App\Models\News;
+use App\Models\ParishGroup;
+use App\Models\Priest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,40 +37,111 @@ Route::prefix('{locale}')
     ->group(function () {
         // Página de inicio
         Route::get('/', function () {
-            return view('pages.inicio');
+            // Horarios de la parroquia principal agrupados por día
+            $horariosPorDia = MassSchedule::activo()
+                ->parroquiaPrincipal()
+                ->ordenados()
+                ->get()
+                ->groupBy('dia_semana');
+
+            return view('pages.inicio', compact('horariosPorDia'));
         })->name('inicio');
 
         // Horarios de misa
         Route::get('/horarios', function () {
-            return view('pages.horarios');
+            // Horarios de la parroquia principal
+            $horariosParroquia = MassSchedule::activo()
+                ->parroquiaPrincipal()
+                ->ordenados()
+                ->get()
+                ->groupBy('dia_semana');
+
+            // Capillas con sus horarios
+            $capillas = Chapel::activo()
+                ->ordenado()
+                ->with(['massSchedules' => function ($query) {
+                    $query->activo()->ordenados();
+                }])
+                ->get();
+
+            return view('pages.horarios', compact('horariosParroquia', 'capillas'));
         })->name('horarios');
 
         // Noticias
         Route::get('/noticias', function () {
-            return view('pages.noticias.index');
+            $noticias = News::activo()->publicado()->reciente()->paginate(9);
+            $noticiasDestacadas = News::activo()->publicado()->destacado()->reciente()->take(3)->get();
+            return view('pages.noticias.index', compact('noticias', 'noticiasDestacadas'));
         })->name('noticias.index');
 
         Route::get('/noticias/{slug}', function (string $locale, string $slug) {
-            return view('pages.noticias.detalle', compact('slug'));
+            $noticia = News::where('slug', $slug)->activo()->publicado()->firstOrFail();
+            $otrasNoticias = News::activo()
+                ->publicado()
+                ->reciente()
+                ->where('id', '!=', $noticia->id)
+                ->take(3)
+                ->get();
+            return view('pages.noticias.detalle', compact('noticia', 'otrasNoticias'));
         })->name('noticias.detalle');
 
         // Eventos
         Route::get('/eventos', function () {
-            return view('pages.eventos.index');
+            $eventosProximos = Event::activo()->proximos()->take(12)->get();
+            $eventosPasados = Event::activo()->pasados()->take(6)->get();
+            return view('pages.eventos.index', compact('eventosProximos', 'eventosPasados'));
         })->name('eventos.index');
 
         Route::get('/eventos/{slug}', function (string $locale, string $slug) {
-            return view('pages.eventos.detalle', compact('slug'));
+            $evento = Event::where('slug', $slug)->activo()->firstOrFail();
+            $otrosEventos = Event::activo()
+                ->proximos()
+                ->where('id', '!=', $evento->id)
+                ->take(3)
+                ->get();
+            return view('pages.eventos.detalle', compact('evento', 'otrosEventos'));
         })->name('eventos.detalle');
 
         // Grupos parroquiales
         Route::get('/grupos', function () {
-            return view('pages.grupos.index');
+            $grupos = ParishGroup::activo()->ordenado()->get();
+            return view('pages.grupos.index', compact('grupos'));
         })->name('grupos.index');
 
         Route::get('/grupos/{slug}', function (string $locale, string $slug) {
-            return view('pages.grupos.detalle', compact('slug'));
+            $grupo = ParishGroup::where('slug', $slug)->activo()->firstOrFail();
+            $otrosGrupos = ParishGroup::activo()
+                ->where('id', '!=', $grupo->id)
+                ->ordenado()
+                ->take(3)
+                ->get();
+            return view('pages.grupos.detalle', compact('grupo', 'otrosGrupos'));
         })->name('grupos.detalle');
+
+        // Capillas
+        Route::get('/capillas', function () {
+            $capillas = Chapel::activo()->ordenado()->get();
+            return view('pages.capillas.index', compact('capillas'));
+        })->name('capillas.index');
+
+        Route::get('/capillas/{slug}', function (string $locale, string $slug) {
+            $capilla = Chapel::where('slug', $slug)->activo()->firstOrFail();
+            $horarios = MassSchedule::where('chapel_id', $capilla->id)->activo()->ordenados()->get();
+            $grupos = ParishGroup::where('chapel_id', $capilla->id)->activo()->ordenado()->get();
+            $otrasCapillas = Chapel::activo()
+                ->where('id', '!=', $capilla->id)
+                ->ordenado()
+                ->take(3)
+                ->get();
+            return view('pages.capillas.detalle', compact('capilla', 'horarios', 'grupos', 'otrasCapillas'));
+        })->name('capillas.detalle');
+
+        // Sacerdotes
+        Route::get('/sacerdotes', function () {
+            $parroco = Priest::activo()->parroco()->first();
+            $vicarios = Priest::activo()->vicarios()->ordenado()->get();
+            return view('pages.sacerdotes', compact('parroco', 'vicarios'));
+        })->name('sacerdotes');
 
         // Adoración perpetua
         Route::get('/adoracion', function () {

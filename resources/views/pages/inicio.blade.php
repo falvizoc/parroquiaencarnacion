@@ -59,7 +59,13 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ __('general.days.sunday') }}</h3>
-                    <p class="text-gray-600 text-sm">8:00, 10:00, 12:00, 19:00</p>
+                    <p class="text-gray-600 text-sm">
+                        @if(isset($horariosPorDia[0]) && $horariosPorDia[0]->count() > 0)
+                            {{ $horariosPorDia[0]->pluck('hora')->map(fn($h) => $h->format('H:i'))->implode(', ') }}
+                        @else
+                            Consultar horarios
+                        @endif
+                    </p>
                 </div>
 
                 {{-- Entre Semana --}}
@@ -70,7 +76,15 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-lg text-gray-900 mb-2">Lunes a Viernes</h3>
-                    <p class="text-gray-600 text-sm">7:00, 19:00</p>
+                    <p class="text-gray-600 text-sm">
+                        @php
+                            // Obtener horarios únicos de lunes (día 1) como referencia
+                            $horariosEntreSemana = isset($horariosPorDia[1])
+                                ? $horariosPorDia[1]->pluck('hora')->map(fn($h) => $h->format('H:i'))->unique()->implode(', ')
+                                : 'Consultar horarios';
+                        @endphp
+                        {{ $horariosEntreSemana }}
+                    </p>
                 </div>
 
                 {{-- Sábado --}}
@@ -81,7 +95,13 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ __('general.days.saturday') }}</h3>
-                    <p class="text-gray-600 text-sm">8:00, 19:00</p>
+                    <p class="text-gray-600 text-sm">
+                        @if(isset($horariosPorDia[6]) && $horariosPorDia[6]->count() > 0)
+                            {{ $horariosPorDia[6]->pluck('hora')->map(fn($h) => $h->format('H:i'))->implode(', ') }}
+                        @else
+                            Consultar horarios
+                        @endif
+                    </p>
                 </div>
             </div>
 

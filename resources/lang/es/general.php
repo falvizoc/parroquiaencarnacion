@@ -8,6 +8,8 @@ return [
         'news' => 'Noticias',
         'events' => 'Eventos',
         'groups' => 'Grupos Parroquiales',
+        'chapels' => 'Capillas',
+        'priests' => 'Sacerdotes',
         'adoration' => 'Adoración Perpetua',
         'contact' => 'Contacto',
         'register' => 'Registrarse',

@@ -68,19 +68,19 @@
     {{-- Schema.org JSON-LD --}}
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Church",
+        "@@context": "https://schema.org",
+        "@@type": "Church",
         "name": "{{ __('general.site.name') }}",
         "description": "{{ __('general.seo.default_description') }}",
         "url": "{{ config('app.url') }}",
         "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "addressLocality": "Tampico",
             "addressRegion": "Tamaulipas",
             "addressCountry": "MX"
         },
         "geo": {
-            "@type": "GeoCoordinates",
+            "@@type": "GeoCoordinates",
             "latitude": "22.2475",
             "longitude": "-97.8508"
         }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MassScheduleResource\Pages;
+use App\Models\Chapel;
 use App\Models\MassSchedule;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -30,6 +31,15 @@ class MassScheduleResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Información del Horario')
                     ->schema([
+                        Forms\Components\Select::make('chapel_id')
+                            ->label('Ubicación')
+                            ->relationship('chapel', 'nombre')
+                            ->placeholder('Templo Principal (Parroquia)')
+                            ->helperText('Selecciona dónde se celebrará la misa')
+                            ->native(false)
+                            ->searchable()
+                            ->preload(),
+
                         Forms\Components\Select::make('dia_semana')
                             ->label('Día de la semana')
                             ->options(MassSchedule::DIAS_SEMANA)
@@ -47,11 +57,6 @@ class MassScheduleResource extends Resource
                             ->default('ordinaria')
                             ->required()
                             ->native(false),
-
-                        Forms\Components\TextInput::make('ubicacion')
-                            ->label('Ubicación')
-                            ->default('Templo Principal')
-                            ->maxLength(255),
                     ])
                     ->columns(2),
 
@@ -102,6 +107,13 @@ class MassScheduleResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('chapel.nombre')
+                    ->label('Ubicación')
+                    ->default('Templo Principal')
+                    ->badge()
+                    ->color(fn (?string $state): string => $state === 'Templo Principal' ? 'primary' : 'gray')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('nombre_dia')
                     ->label('Día')
                     ->sortable(query: fn ($query, $direction) => $query->orderBy('dia_semana', $direction))
@@ -122,11 +134,6 @@ class MassScheduleResource extends Resource
                     ->badge()
                     ->color('info'),
 
-                Tables\Columns\TextColumn::make('ubicacion')
-                    ->label('Ubicación')
-                    ->searchable()
-                    ->toggleable(),
-
                 Tables\Columns\TextColumn::make('descripcion')
                     ->label('Descripción')
                     ->limit(30)
@@ -146,6 +153,23 @@ class MassScheduleResource extends Resource
             ])
             ->defaultSort('dia_semana')
             ->filters([
+                Tables\Filters\SelectFilter::make('chapel_id')
+                    ->label('Ubicación')
+                    ->relationship('chapel', 'nombre')
+                    ->placeholder('Todas las ubicaciones')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\TernaryFilter::make('templo_principal')
+                    ->label('Templo Principal')
+                    ->placeholder('Todas')
+                    ->trueLabel('Solo Templo Principal')
+                    ->falseLabel('Solo Capillas')
+                    ->queries(
+                        true: fn ($query) => $query->whereNull('chapel_id'),
+                        false: fn ($query) => $query->whereNotNull('chapel_id'),
+                    ),
+
                 Tables\Filters\SelectFilter::make('dia_semana')
                     ->label('Día')
                     ->options(MassSchedule::DIAS_SEMANA),

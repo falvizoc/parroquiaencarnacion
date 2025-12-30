@@ -8,7 +8,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 |------|--------|--------|----------|
 | 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Completado | 100% |
-| 2 | Contenido Dinámico | Pendiente | 0% |
+| 2 | Contenido Dinámico | En Progreso | 85% |
 | 3 | Comunidad | Pendiente | 0% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
 | 5 | Preparación Producción | Pendiente | 0% |
@@ -112,34 +112,53 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M2.1 - Grupos Parroquiales
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Modelo ParishGroup | Pendiente | |
-| CRUD en Filament | Pendiente | |
-| Listado público | Pendiente | |
-| Página de detalle | Pendiente | |
-| Horarios y actividades | Pendiente | |
+| Modelo ParishGroup | Completado | Con scopes y accessors |
+| CRUD en Filament | Completado | ParishGroupResource |
+| Listado público | Completado | pages/grupos/index.blade.php |
+| Página de detalle | Completado | pages/grupos/detalle.blade.php |
+| Horarios y actividades | Completado | Incluido en modelo y vistas |
 
 ### M2.2 - Sistema de Eventos
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Modelo Event | Pendiente | |
-| CRUD en Filament | Pendiente | |
-| Integración FullCalendar | Pendiente | |
-| Vista de calendario | Pendiente | |
-| Vista de lista | Pendiente | |
-| Página de detalle | Pendiente | |
-| Filtros y búsqueda | Pendiente | |
+| Modelo Event | Completado | Con scopes y accessors |
+| CRUD en Filament | Completado | EventResource |
+| Integración FullCalendar | Pendiente | Para M2.4 opcional |
+| Vista de calendario | Completado | Badges de fecha en cards |
+| Vista de lista | Completado | pages/eventos/index.blade.php |
+| Página de detalle | Completado | pages/eventos/detalle.blade.php |
+| Filtros y búsqueda | Completado | En Filament |
 
 ### M2.3 - Sistema de Noticias
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Modelo News | Pendiente | |
-| CRUD en Filament | Pendiente | |
-| Listado con paginación | Pendiente | |
-| Página de detalle | Pendiente | |
-| Categorías | Pendiente | |
-| Imágenes destacadas | Pendiente | |
+| Modelo News | Completado | Con scopes y accessors |
+| CRUD en Filament | Completado | NewsResource |
+| Listado con paginación | Completado | pages/noticias/index.blade.php |
+| Página de detalle | Completado | pages/noticias/detalle.blade.php |
+| Categorías | Completado | parroquia, diocesis, papa, comunidad, general |
+| Imágenes destacadas | Completado | FileUpload con resize |
 
-### M2.4 - Integración Facebook
+### M2.4 - Sistema de Capillas
+| Tarea | Estado | Notas |
+|-------|--------|-------|
+| Modelo Chapel | Completado | Con relaciones a MassSchedule y ParishGroup |
+| CRUD en Filament | Completado | ChapelResource |
+| Listado público | Completado | pages/capillas/index.blade.php |
+| Página de detalle | Completado | Con horarios y grupos de la capilla |
+| Actualizar MassSchedule | Completado | Relación belongsTo Chapel |
+| Actualizar ParishGroup | Completado | Relación belongsTo Chapel |
+
+### M2.5 - Sistema de Sacerdotes
+| Tarea | Estado | Notas |
+|-------|--------|-------|
+| Modelo Priest | Completado | Validación de único párroco |
+| CRUD en Filament | Completado | PriestResource |
+| Vista pública | Completado | pages/sacerdotes.blade.php |
+| Mensaje personal | Completado | RichEditor en Filament |
+| Foto y biografía | Completado | FileUpload con resize 3:4 |
+
+### M2.6 - Integración Facebook
 | Tarea | Estado | Notas |
 |-------|--------|-------|
 | Configurar Facebook App | Pendiente | Requiere credenciales |
@@ -281,15 +300,32 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 
 ## Fase 6: Post-MVP (Futuro)
 
-### M6.1 - Sistema de Donaciones
+### M6.1 - Sistema de Intenciones de Misa
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Integración pasarela de pago | Futuro | OpenPay/Stripe |
-| Formulario de donación | Futuro | |
-| Recibos automáticos | Futuro | |
-| Reportes de donaciones | Futuro | |
+| Modelo MassIntention | Futuro | Con relaciones a MassSchedule y Chapel |
+| Formulario público de solicitud | Futuro | Selección de horario/capilla |
+| Tipos de intención | Futuro | Individual, triduo, recurrente (diario/semanal) |
+| Validación de disponibilidad | Futuro | Hasta 1 hora antes de la misa |
+| Límite de recurrencia | Futuro | Máximo 1 mes |
+| Integración pasarela de pago | Futuro | Stripe/OpenPay/Conekta |
+| Donativos recurrentes | Futuro | Suscripciones para intenciones periódicas |
+| CRUD en Filament | Futuro | Para administradores |
+| Registro manual (oficina) | Futuro | Intenciones solicitadas presencialmente |
+| Calendario de intenciones | Futuro | Vista por día/semana/mes |
+| Generación de PDF | Futuro | Comprobantes e impresión |
+| Notificaciones email | Futuro | Confirmación y recordatorios |
+| Reportes de intenciones | Futuro | Por período, capilla, tipo |
 
-### M6.2 - PWA / App Móvil
+### M6.2 - Sistema de Donaciones Generales
+| Tarea | Estado | Notas |
+|-------|--------|-------|
+| Formulario de donación única | Futuro | Donaciones sin intención |
+| Donaciones recurrentes | Futuro | Suscripciones mensuales |
+| Recibos automáticos | Futuro | PDF por email |
+| Reportes de donaciones | Futuro | Dashboard financiero |
+
+### M6.4 - PWA / App Móvil
 | Tarea | Estado | Notas |
 |-------|--------|-------|
 | Service Worker | Futuro | |
@@ -297,7 +333,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | Notificaciones push | Futuro | |
 | Modo offline | Futuro | |
 
-### M6.3 - Transmisiones en Vivo
+### M6.5 - Transmisiones en Vivo
 | Tarea | Estado | Notas |
 |-------|--------|-------|
 | Integración YouTube Live | Futuro | |
@@ -313,7 +349,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ```
 Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
-Fase 2: ░░░░░░░░░░ 0%
+Fase 2: ████████░░ 85%
 Fase 3: ░░░░░░░░░░ 0%
 Fase 4: ░░░░░░░░░░ 0%
 Fase 5: ░░░░░░░░░░ 0%
@@ -322,7 +358,7 @@ Fase 5: ░░░░░░░░░░ 0%
 ### General MVP
 
 ```
-Progreso total: ██████░░░░░░░░░░░░░░ ~30%
+Progreso total: █████████░░░░░░░░░░░ ~45%
 ```
 
 ---

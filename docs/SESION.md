@@ -60,36 +60,39 @@ Al recibir el comando de cierre, el agente debe:
 
 | Campo | Valor |
 |-------|-------|
-| **Última sesión** | 2025-12-29 |
+| **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
-| **Versión actual** | 0.0.0 |
-| **Milestone activo** | M1 - Núcleo Informativo (Completado) |
+| **Versión actual** | 0.2.0 |
+| **Milestone activo** | M2 - Contenido Dinámico (90%) |
 
-### Progreso del Día
+### Progreso del Día (2025-12-30)
 
 **Completado:**
 - Fase 0: Fundación completa
 - Fase 1: Núcleo Informativo completa
-  - Layout base público (header, footer, navegación)
-  - Página de inicio con hero, horarios, eventos
-  - Página de horarios de misa
-  - Página de contacto con formulario
-  - Página de adoración perpetua
-  - Página de grupos parroquiales
-  - Página de registro de fieles
-  - Modelo MassSchedule con CRUD en Filament
-  - Meta tags SEO, Open Graph, Schema.org
+- Fase 2: Contenido Dinámico (90%)
+  - M2.1 Grupos Parroquiales (CRUD + vistas públicas)
+  - M2.2 Sistema de Eventos (CRUD + vistas públicas)
+  - M2.3 Sistema de Noticias (CRUD + vistas públicas)
+  - M2.4 Sistema de Capillas con relación a MassSchedule y ParishGroup
+  - M2.5 Sistema de Sacerdotes (párroco único + vicarios)
+  - Horarios de misa dinámicos desde BD en inicio y horarios
+  - Navegación actualizada con Capillas y Sacerdotes
+  - Simplificación UX del formulario de horarios (eliminado campo redundante)
 
 **En progreso:**
-- (ninguno actualmente)
+- Mejora UX del formulario de horarios de misa
 
-**Pendiente:**
-- Fase 2: Contenido Dinámico
+**Pendiente para próxima sesión:**
+1. Agregar "Templo Parroquial" como opción explícita en selector de ubicación
+2. Implementar creación masiva de horarios con periodicidad (UX Frictionless)
+3. Evitar crear misa por misa para horarios recurrentes
 
 ### Notas Importantes
 
-- El proyecto está en fase inicial de configuración
-- No hay código de producción aún
+- Sistema de Intenciones de Misa documentado para Fase 6 (Post-MVP)
+- Campo `ubicacion` eliminado del modelo MassSchedule (redundante con chapel_id)
+- Terminología unificada: "Templo Principal" en lugar de "Parroquia Principal"
 
 ### Bloqueos o Problemas
 
@@ -99,18 +102,46 @@ Al recibir el comando de cierre, el agente debe:
 
 ## Historial de Sesiones
 
-### 2024-12-29 - Sesión 1
+### 2025-12-30 - Sesión 3
+
+**Actividades:**
+- Completado M2.3 Sistema de Noticias
+- Implementado M2.4 Sistema de Capillas (modelo, CRUD, relaciones, vistas públicas)
+- Implementado M2.5 Sistema de Sacerdotes (párroco único, vicarios, vistas públicas)
+- Actualizada relación MassSchedule y ParishGroup con Chapel
+- Horarios de misa ahora dinámicos desde BD en inicio.blade.php y horarios.blade.php
+- Página de horarios muestra Templo Principal + cada capilla con sus horarios
+- Agregados Capillas y Sacerdotes al menú de navegación (con i18n)
+- Simplificación UX: eliminado campo redundante "ubicación específica"
+- Documentado Sistema de Intenciones de Misa para Fase 6 (Post-MVP)
+
+**Resultado:**
+- Fase 2 al 90% completada
+- Pendiente: mejora UX para creación masiva de horarios
+
+### 2025-12-29 - Sesión 2
+
+**Actividades:**
+- Completado M2.1 Grupos Parroquiales
+- Completado M2.2 Sistema de Eventos
+- Iniciado M2.3 Sistema de Noticias
+
+**Resultado:**
+- Fase 2 al 60% completada
+
+### 2025-12-29 - Sesión 1
 
 **Duración:** Inicio del proyecto
 
 **Actividades:**
 - Análisis de requisitos
-- Definición de stack técnico (Laravel 11 + Filament 3)
+- Definición de stack técnico (Laravel 12 + Filament 3)
 - Creación de documentación base
+- Completada Fase 0 y Fase 1
 
 **Resultado:**
 - Documentación inicial creada
-- Listo para inicializar proyecto Laravel
+- Fase 0 y Fase 1 completadas
 
 ---
 

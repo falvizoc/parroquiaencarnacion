@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MassSchedule extends Model
 {
@@ -19,11 +20,11 @@ class MassSchedule extends Model
      * Atributos asignables masivamente.
      */
     protected $fillable = [
+        'chapel_id',
         'dia_semana',
         'hora',
         'tipo',
         'descripcion',
-        'ubicacion',
         'idioma',
         'activo',
         'notas',
@@ -65,6 +66,46 @@ class MassSchedule extends Model
         5 => 'Viernes',
         6 => 'Sábado',
     ];
+
+    /**
+     * Relación con capilla.
+     */
+    public function chapel(): BelongsTo
+    {
+        return $this->belongsTo(Chapel::class);
+    }
+
+    /**
+     * Scope para horarios de la parroquia principal (sin capilla).
+     */
+    public function scopeParroquiaPrincipal(Builder $query): Builder
+    {
+        return $query->whereNull('chapel_id');
+    }
+
+    /**
+     * Scope para horarios de una capilla específica.
+     */
+    public function scopeDeCapilla(Builder $query, int $chapelId): Builder
+    {
+        return $query->where('chapel_id', $chapelId);
+    }
+
+    /**
+     * Scope para horarios activos (alias para consistencia).
+     */
+    public function scopeActivo(Builder $query): Builder
+    {
+        return $query->where('activo', true);
+    }
+
+    /**
+     * Obtener el nombre de la ubicación (capilla o templo principal).
+     */
+    public function getNombreUbicacionAttribute(): string
+    {
+        return $this->chapel ? $this->chapel->nombre : 'Templo Principal';
+    }
 
     /**
      * Obtener el nombre del día de la semana.

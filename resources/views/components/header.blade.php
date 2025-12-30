@@ -65,6 +65,12 @@
                 <x-nav-link href="{{ route('grupos.index', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('grupos.*')">
                     {{ __('general.nav.groups') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('capillas.index', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('capillas.*')">
+                    {{ __('general.nav.chapels') }}
+                </x-nav-link>
+                <x-nav-link href="{{ route('sacerdotes', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('sacerdotes')">
+                    {{ __('general.nav.priests') }}
+                </x-nav-link>
                 <x-nav-link href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('adoracion')">
                     {{ __('general.nav.adoration') }}
                 </x-nav-link>
@@ -123,6 +129,12 @@
                 </x-nav-link-mobile>
                 <x-nav-link-mobile href="{{ route('grupos.index', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('grupos.*')">
                     {{ __('general.nav.groups') }}
+                </x-nav-link-mobile>
+                <x-nav-link-mobile href="{{ route('capillas.index', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('capillas.*')">
+                    {{ __('general.nav.chapels') }}
+                </x-nav-link-mobile>
+                <x-nav-link-mobile href="{{ route('sacerdotes', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('sacerdotes')">
+                    {{ __('general.nav.priests') }}
                 </x-nav-link-mobile>
                 <x-nav-link-mobile href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('adoracion')">
                     {{ __('general.nav.adoration') }}
