@@ -28,6 +28,10 @@ Route::get('/robots.txt', function () {
     return response(view('seo.robots')->render(), 200)
         ->header('Content-Type', 'text/plain');
 })->name('robots');
+Route::get('/llms.txt', function () {
+    return response(view('seo.llms')->render(), 200)
+        ->header('Content-Type', 'text/plain; charset=utf-8');
+})->name('llms');
 
 // Ruta raíz - redirige al idioma predeterminado
 Route::get('/', function () {
@@ -162,6 +166,11 @@ Route::prefix('{locale}')
         Route::get('/adoracion', function () {
             return view('pages.adoracion');
         })->name('adoracion');
+
+        // Nuestra Parroquia (About)
+        Route::get('/nosotros', function () {
+            return view('pages.nosotros');
+        })->name('nosotros');
 
         // Contacto
         Route::get('/contacto', function () {

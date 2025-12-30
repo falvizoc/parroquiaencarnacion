@@ -74,6 +74,9 @@
                 <x-nav-link href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('adoracion')">
                     {{ __('general.nav.adoration') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('nosotros', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('nosotros')">
+                    {{ __('general.nav.about') }}
+                </x-nav-link>
                 <x-nav-link href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('contacto')">
                     {{ __('general.nav.contact') }}
                 </x-nav-link>
@@ -138,6 +141,9 @@
                 </x-nav-link-mobile>
                 <x-nav-link-mobile href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('adoracion')">
                     {{ __('general.nav.adoration') }}
+                </x-nav-link-mobile>
+                <x-nav-link-mobile href="{{ route('nosotros', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('nosotros')">
+                    {{ __('general.nav.about') }}
                 </x-nav-link-mobile>
                 <x-nav-link-mobile href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" :active="request()->routeIs('contacto')">
                     {{ __('general.nav.contact') }}

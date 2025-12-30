@@ -11,6 +11,7 @@ return [
         'chapels' => 'Chapels',
         'priests' => 'Priests',
         'adoration' => 'Perpetual Adoration',
+        'about' => 'About Us',
         'contact' => 'Contact',
         'register' => 'Register',
         'login' => 'Log In',

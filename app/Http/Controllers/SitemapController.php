@@ -35,6 +35,7 @@ class SitemapController extends Controller
             'capillas.index' => ['priority' => '0.7', 'changefreq' => 'monthly'],
             'sacerdotes' => ['priority' => '0.6', 'changefreq' => 'monthly'],
             'adoracion' => ['priority' => '0.6', 'changefreq' => 'monthly'],
+            'nosotros' => ['priority' => '0.7', 'changefreq' => 'monthly'],
             'contacto' => ['priority' => '0.5', 'changefreq' => 'monthly'],
             'registro' => ['priority' => '0.5', 'changefreq' => 'monthly'],
         ];

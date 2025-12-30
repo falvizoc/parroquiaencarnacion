@@ -11,6 +11,7 @@ return [
         'chapels' => 'Capillas',
         'priests' => 'Sacerdotes',
         'adoration' => 'Adoración Perpetua',
+        'about' => 'Nosotros',
         'contact' => 'Contacto',
         'register' => 'Registrarse',
         'login' => 'Iniciar Sesión',
