@@ -10,7 +10,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Completado | 100% |
-| 4 | Optimización y Calidad | En Progreso | 40% |
+| 4 | Optimización y Calidad | En Progreso | 60% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
 
@@ -246,11 +246,11 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M4.3 - Performance
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Caché de vistas | Pendiente | |
-| Optimización de imágenes | Pendiente | |
-| Lazy loading | Pendiente | |
-| Minificación CSS/JS | Pendiente | |
-| Core Web Vitals | Pendiente | |
+| Caché de vistas | Completado | CacheControl middleware + app:optimizar |
+| Optimización de imágenes | Completado | Componente x-imagen optimizado |
+| Lazy loading | Completado | loading=lazy nativo + fetchpriority |
+| Minificación CSS/JS | Completado | Vite + Terser en producción |
+| Core Web Vitals | Completado | Preconnect, DNS prefetch, theme-color |
 
 ### M4.4 - Analítica
 | Tarea | Estado | Notas |
@@ -362,14 +362,14 @@ Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
 Fase 3: ██████████ 100% ✓
-Fase 4: ████░░░░░░ 40%
+Fase 4: ██████░░░░ 60%
 Fase 5: ░░░░░░░░░░ 0%
 ```
 
 ### General MVP
 
 ```
-Progreso total: █████████████████░░░ ~88%
+Progreso total: ██████████████████░░ ~92%
 ```
 
 ---
