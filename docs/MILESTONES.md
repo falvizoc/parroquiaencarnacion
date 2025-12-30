@@ -10,7 +10,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Completado | 100% |
-| 4 | Optimización y Calidad | Pendiente | 0% |
+| 4 | Optimización y Calidad | En Progreso | 20% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
 
@@ -227,13 +227,13 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M4.1 - SEO Técnico
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Meta tags dinámicos | Pendiente | |
-| Sitemap.xml | Pendiente | |
-| Robots.txt | Pendiente | |
-| Schema.org (JSON-LD) | Pendiente | |
-| Open Graph / Twitter Cards | Pendiente | |
-| Canonical URLs | Pendiente | |
-| Breadcrumbs | Pendiente | |
+| Meta tags dinámicos | Completado | SeoService + View Composer |
+| Sitemap.xml | Completado | Dinámico con SitemapController |
+| Robots.txt | Completado | Bloqueo admin/livewire |
+| Schema.org (JSON-LD) | Completado | Church, NewsArticle, Event |
+| Open Graph / Twitter Cards | Completado | Integrado en layout |
+| Canonical URLs | Completado | Automático en layout |
+| Breadcrumbs | Completado | Componente con Schema.org |
 
 ### M4.2 - AEO (Answer Engine Optimization)
 | Tarea | Estado | Notas |
@@ -362,14 +362,14 @@ Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
 Fase 3: ██████████ 100% ✓
-Fase 4: ░░░░░░░░░░ 0%
+Fase 4: ██░░░░░░░░ 20%
 Fase 5: ░░░░░░░░░░ 0%
 ```
 
 ### General MVP
 
 ```
-Progreso total: ████████████████░░░░ ~80%
+Progreso total: █████████████████░░░ ~84%
 ```
 
 ---
