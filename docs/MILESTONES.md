@@ -7,7 +7,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | Fase | Nombre | Estado | Progreso |
 |------|--------|--------|----------|
 | 0 | Fundación | Completado | 100% |
-| 1 | Núcleo Informativo | Pendiente | 0% |
+| 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Pendiente | 0% |
 | 3 | Comunidad | Pendiente | 0% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
@@ -312,7 +312,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 
 ```
 Fase 0: ██████████ 100% ✓
-Fase 1: ░░░░░░░░░░ 0%
+Fase 1: ██████████ 100% ✓
 Fase 2: ░░░░░░░░░░ 0%
 Fase 3: ░░░░░░░░░░ 0%
 Fase 4: ░░░░░░░░░░ 0%
@@ -322,7 +322,7 @@ Fase 5: ░░░░░░░░░░ 0%
 ### General MVP
 
 ```
-Progreso total: ███░░░░░░░░░░░░░░░░░ ~15%
+Progreso total: ██████░░░░░░░░░░░░░░ ~30%
 ```
 
 ---

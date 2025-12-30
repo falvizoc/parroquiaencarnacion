@@ -63,25 +63,28 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-29 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.0.0 |
-| **Milestone activo** | M0 - Fundación (Completado) |
+| **Milestone activo** | M1 - Núcleo Informativo (Completado) |
 
 ### Progreso del Día
 
 **Completado:**
-- Definición de requisitos del proyecto
-- Selección de stack técnico (Laravel 12 + Filament 3 + Tailwind CSS 4)
-- Creación de estructura documental (docs/)
-- Inicialización del proyecto Laravel 12
-- Instalación y configuración de Filament 3
-- Configuración de Tailwind CSS 4 con paleta personalizada
-- Configuración de internacionalización (es/en)
-- Inicialización de repositorio Git con ramas main/develop
+- Fase 0: Fundación completa
+- Fase 1: Núcleo Informativo completa
+  - Layout base público (header, footer, navegación)
+  - Página de inicio con hero, horarios, eventos
+  - Página de horarios de misa
+  - Página de contacto con formulario
+  - Página de adoración perpetua
+  - Página de grupos parroquiales
+  - Página de registro de fieles
+  - Modelo MassSchedule con CRUD en Filament
+  - Meta tags SEO, Open Graph, Schema.org
 
 **En progreso:**
 - (ninguno actualmente)
 
 **Pendiente:**
-- Fase 1: Núcleo Informativo
+- Fase 2: Contenido Dinámico
 
 ### Notas Importantes
 
