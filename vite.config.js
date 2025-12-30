@@ -15,4 +15,26 @@ export default defineConfig({
             ignored: ['**/storage/framework/views/**'],
         },
     },
+    build: {
+        // Minificación agresiva para producción
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: true,
+                drop_debugger: true,
+            },
+        },
+        // Code splitting para mejor caching
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['alpinejs'],
+                },
+            },
+        },
+        // Target moderno para menor bundle size
+        target: 'es2020',
+        // Source maps solo en desarrollo
+        sourcemap: false,
+    },
 });

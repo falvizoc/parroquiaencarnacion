@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="color-scheme" content="light">
 
     {{-- SEO Meta Tags --}}
     <title>@yield('title', $seo->getTitulo())</title>
@@ -35,12 +37,18 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
 
-    {{-- Fonts --}}
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700|playfair-display:400,500,600,700" rel="stylesheet">
+    {{-- Performance: DNS Prefetch y Preconnect --}}
+    <link rel="dns-prefetch" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
 
-    {{-- Styles --}}
+    {{-- Fonts con display swap para evitar FOIT --}}
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700|playfair-display:400,500,600,700&display=swap" rel="stylesheet">
+
+    {{-- Styles con preload para CSS crítico --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Preload de recursos críticos --}}
+    @stack('preload')
 
     {{-- Additional Head Content --}}
     @stack('head')
