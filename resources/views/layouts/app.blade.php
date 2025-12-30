@@ -6,25 +6,25 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- SEO Meta Tags --}}
-    <title>@yield('title', __('general.seo.default_title'))</title>
-    <meta name="description" content="@yield('description', __('general.seo.default_description'))">
-    <meta name="robots" content="index, follow">
+    <title>@yield('title', $seo->getTitulo())</title>
+    <meta name="description" content="@yield('description', $seo->getDescripcion())">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
     <link rel="canonical" href="{{ url()->current() }}">
 
     {{-- Open Graph --}}
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{{ $seo->getTipo() }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', __('general.seo.default_title'))">
-    <meta property="og:description" content="@yield('description', __('general.seo.default_description'))">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:title" content="@yield('title', $seo->getTitulo())">
+    <meta property="og:description" content="@yield('description', $seo->getDescripcion())">
+    <meta property="og:image" content="@yield('og_image', $seo->getImagen())">
     <meta property="og:locale" content="{{ app()->getLocale() == 'es' ? 'es_MX' : 'en_US' }}">
     <meta property="og:site_name" content="{{ __('general.site.name') }}">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', __('general.seo.default_title'))">
-    <meta name="twitter:description" content="@yield('description', __('general.seo.default_description'))">
-    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta name="twitter:title" content="@yield('title', $seo->getTitulo())">
+    <meta name="twitter:description" content="@yield('description', $seo->getDescripcion())">
+    <meta name="twitter:image" content="@yield('og_image', $seo->getImagen())">
 
     {{-- Alternate Languages --}}
     <link rel="alternate" hreflang="es" href="{{ url('/es' . request()->getPathInfo()) }}">
@@ -53,6 +53,11 @@
 
     {{-- Header --}}
     <x-header />
+
+    {{-- Breadcrumbs --}}
+    @hasSection('breadcrumbs')
+        @yield('breadcrumbs')
+    @endif
 
     {{-- Main Content --}}
     <main id="main-content" class="flex-grow">

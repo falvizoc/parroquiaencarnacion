@@ -2,6 +2,14 @@
 
 @section('title', $evento->titulo . ' | ' . __('general.site.short_name'))
 @section('description', $evento->descripcion_corta ?? 'Evento: ' . $evento->titulo)
+@section('og_image', $evento->imagen ? asset('storage/' . $evento->imagen) : asset('images/og-default.jpg'))
+
+@section('breadcrumbs')
+    <x-breadcrumbs :items="[
+        ['nombre' => __('general.nav.events'), 'url' => route('eventos.index', ['locale' => app()->getLocale()])],
+        ['nombre' => $evento->titulo, 'url' => '']
+    ]" />
+@endsection
 
 @section('content')
     {{-- Hero --}}
@@ -187,3 +195,39 @@
         </section>
     @endif
 @endsection
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{{ $evento->titulo }}",
+    "description": "{{ $evento->descripcion_corta ?? Str::limit(strip_tags($evento->descripcion ?? ''), 160) }}",
+    @if($evento->imagen)
+    "image": "{{ asset('storage/' . $evento->imagen) }}",
+    @endif
+    "startDate": "{{ $evento->fecha_inicio->toIso8601String() }}",
+    @if($evento->fecha_fin)
+    "endDate": "{{ $evento->fecha_fin->toIso8601String() }}",
+    @endif
+    "location": {
+        "@type": "Place",
+        "name": "{{ $evento->lugar ?? __('general.site.name') }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ $evento->direccion ?? '' }}",
+            "addressLocality": "Tampico",
+            "addressRegion": "Tamaulipas",
+            "addressCountry": "MX"
+        }
+    },
+    "organizer": {
+        "@type": "Organization",
+        "name": "{{ __('general.site.name') }}",
+        "url": "{{ config('app.url') }}"
+    },
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode"
+}
+</script>
+@endpush

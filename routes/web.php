@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\VerificacionController;
 use App\Models\Chapel;
 use App\Models\CryptCampaign;
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 | Las rutas soportan prefijo de idioma opcional (es/en).
 |
 */
+
+// SEO Routes
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', function () {
+    return response(view('seo.robots')->render(), 200)
+        ->header('Content-Type', 'text/plain');
+})->name('robots');
 
 // Ruta raíz - redirige al idioma predeterminado
 Route::get('/', function () {

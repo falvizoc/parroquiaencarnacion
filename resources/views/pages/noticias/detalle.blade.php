@@ -2,6 +2,14 @@
 
 @section('title', $noticia->titulo . ' | ' . __('general.site.short_name'))
 @section('description', $noticia->extracto ?? 'Noticia: ' . $noticia->titulo)
+@section('og_image', $noticia->imagen ? asset('storage/' . $noticia->imagen) : asset('images/og-default.jpg'))
+
+@section('breadcrumbs')
+    <x-breadcrumbs :items="[
+        ['nombre' => __('general.nav.news'), 'url' => route('noticias.index', ['locale' => app()->getLocale()])],
+        ['nombre' => $noticia->titulo, 'url' => '']
+    ]" />
+@endsection
 
 @section('content')
     {{-- Hero --}}
@@ -243,3 +251,35 @@
         </section>
     @endif
 @endsection
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "{{ $noticia->titulo }}",
+    "description": "{{ $noticia->extracto ?? Str::limit(strip_tags($noticia->contenido), 160) }}",
+    @if($noticia->imagen)
+    "image": "{{ asset('storage/' . $noticia->imagen) }}",
+    @endif
+    "datePublished": "{{ $noticia->fecha_publicacion->toIso8601String() }}",
+    "dateModified": "{{ $noticia->updated_at->toIso8601String() }}",
+    "author": {
+        "@type": "Organization",
+        "name": "{{ __('general.site.name') }}"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ __('general.site.name') }}",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ asset('images/logo.png') }}"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ url()->current() }}"
+    }
+}
+</script>
+@endpush
