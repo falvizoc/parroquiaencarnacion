@@ -181,7 +181,7 @@ Route::prefix('{locale}')
             // Procesar formulario de contacto
             return redirect()->route('contacto', ['locale' => app()->getLocale()])
                 ->with('success', __('general.messages.success'));
-        })->name('contacto.enviar');
+        })->name('contacto.enviar')->middleware('throttle:formularios');
 
         // Registro de fieles
         Route::get('/registro', function () {
@@ -192,14 +192,15 @@ Route::prefix('{locale}')
             // Procesar registro de fiel (ya no se usa, Livewire maneja esto)
             return redirect()->route('registro', ['locale' => app()->getLocale()])
                 ->with('success', __('general.messages.success'));
-        })->name('registro.guardar');
+        })->name('registro.guardar')->middleware('throttle:formularios');
 
         // Verificación de email
         Route::get('/verificar/{id}/{token}', [VerificacionController::class, 'verificarEmail'])
             ->name('verificar.email');
 
         Route::post('/reenviar-verificacion', [VerificacionController::class, 'reenviarVerificacion'])
-            ->name('reenviar.verificacion');
+            ->name('reenviar.verificacion')
+            ->middleware('throttle:verificacion');
 
         // Newsletter y preferencias
         Route::get('/newsletter', function () {

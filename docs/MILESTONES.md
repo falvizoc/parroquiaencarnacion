@@ -10,8 +10,8 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Completado | 100% |
-| 4 | Optimización y Calidad | En Progreso | 80% |
-| 5 | Preparación Producción | Pendiente | 0% |
+| 4 | Optimización y Calidad | Completado | 100% |
+| 5 | Preparación Producción | En Progreso | 75% |
 | 6 | Post-MVP | Futuro | 0% |
 
 ---
@@ -277,27 +277,28 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M5.1 - Seguridad
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Auditoría OWASP | Pendiente | |
-| Headers de seguridad | Pendiente | |
-| Rate limiting | Pendiente | |
-| Configurar backups | Pendiente | |
-| Revisión de permisos | Pendiente | |
+| Auditoría OWASP | Completado | Verificado: Mass Assignment, SQL Injection, XSS, CSRF |
+| Headers de seguridad | Completado | SecurityHeaders middleware con CSP, HSTS, X-Frame-Options |
+| Rate limiting | Completado | Formularios, verificación, newsletter, login |
+| Configurar backups | Pendiente | En cPanel |
+| Revisión de permisos | Completado | Modelos con $fillable, CSRF en Livewire |
 
 ### M5.2 - Despliegue cPanel
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Configurar dominio | Pendiente | |
-| Instalar SSL | Pendiente | |
-| Configurar .env producción | Pendiente | |
-| Migrar base de datos | Pendiente | |
-| Configurar cron jobs | Pendiente | |
+| Configurar dominio | Pendiente | En servidor |
+| Instalar SSL | Pendiente | En servidor |
+| Configurar .env producción | Completado | .env.production.example creado |
+| Migrar base de datos | Pendiente | En servidor |
+| Configurar cron jobs | Pendiente | En servidor |
+| Script de despliegue | Completado | scripts/deploy-cpanel.sh |
 
 ### M5.3 - Documentación Usuario
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Manual de administrador | Pendiente | |
-| Guía de uso del panel | Pendiente | |
-| FAQ para voluntarios | Pendiente | |
+| Manual de administrador | Completado | docs/MANUAL_ADMIN.md |
+| Guía de uso del panel | Completado | Incluido en manual |
+| FAQ para voluntarios | Pendiente | Opcional |
 
 ### M5.4 - Go-Live
 | Tarea | Estado | Notas |
@@ -362,14 +363,14 @@ Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
 Fase 3: ██████████ 100% ✓
-Fase 4: ████████░░ 80%
-Fase 5: ░░░░░░░░░░ 0%
+Fase 4: ██████████ 100% ✓
+Fase 5: ███████░░░ 75%
 ```
 
 ### General MVP
 
 ```
-Progreso total: ██████████████████░░ ~96%
+Progreso total: ███████████████████░ ~98%
 ```
 
 ---

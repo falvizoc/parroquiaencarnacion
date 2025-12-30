@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CacheControl;
+use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,16 +14,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Middleware de idioma y caché para todas las rutas web
+        // Middleware de idioma, caché y seguridad para todas las rutas web
         $middleware->web(append: [
             SetLocale::class,
             CacheControl::class,
+            SecurityHeaders::class,
         ]);
 
         // Alias para uso en rutas específicas
         $middleware->alias([
             'locale' => SetLocale::class,
             'cache.control' => CacheControl::class,
+            'security' => SecurityHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
