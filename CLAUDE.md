@@ -30,13 +30,17 @@ Leer en orden: `CLAUDE.md` → `docs/PROYECTO.md` → `docs/SESION.md`
 
 ## Documentación del Proyecto
 
-| Archivo | Contenido |
-|---------|-----------|
-| `docs/PROYECTO.md` | Información general, objetivos, módulos |
-| `docs/CONVENCIONES.md` | **Consultar siempre** - Estándares de código |
-| `docs/CHANGELOG.md` | Registro de cambios y bugs |
-| `docs/SESION.md` | Estado actual, progreso, bloqueos |
-| `docs/MILESTONES.md` | Plan de desarrollo, tareas por fase |
+La carpeta `docs/` contiene documentación oficial del proyecto, consultable tanto por
+desarrolladores humanos como por agentes de IA. Es fuente de verdad para decisiones
+técnicas, estado del proyecto y convenciones.
+
+| Archivo | Contenido | Cuándo consultar |
+|---------|-----------|------------------|
+| `docs/PROYECTO.md` | Información general, objetivos, módulos | Contexto inicial |
+| `docs/CONVENCIONES.md` | Estándares de código, patrones, nomenclatura | **Antes de escribir código** |
+| `docs/CHANGELOG.md` | Registro de cambios, bugs, versiones | Al documentar cambios |
+| `docs/SESION.md` | Estado actual, progreso, bloqueos | Inicio/cierre de sesión |
+| `docs/MILESTONES.md` | Plan de desarrollo, tareas por fase | Planificación de tareas |
 
 ## Comandos Frecuentes
 
