@@ -28,6 +28,7 @@ class Integraciones extends Page implements HasForms
     protected static string $view = 'filament.pages.integraciones';
 
     public ?array $facebookData = [];
+    public ?array $analyticsData = [];
 
     public function mount(): void
     {
@@ -39,13 +40,21 @@ class Integraciones extends Page implements HasForms
             'facebook_access_token' => Setting::obtener('facebook_access_token', ''),
         ];
 
+        $this->analyticsData = [
+            'analytics_activo' => Setting::obtener('analytics_activo', false),
+            'ga4_measurement_id' => Setting::obtener('ga4_measurement_id', ''),
+            'search_console_verificacion' => Setting::obtener('search_console_verificacion', ''),
+        ];
+
         $this->facebookForm->fill($this->facebookData);
+        $this->analyticsForm->fill($this->analyticsData);
     }
 
     protected function getForms(): array
     {
         return [
             'facebookForm',
+            'analyticsForm',
         ];
     }
 
@@ -112,6 +121,77 @@ class Integraciones extends Page implements HasForms
                     ]),
             ])
             ->statePath('facebookData');
+    }
+
+    public function analyticsForm(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('Google Analytics & Search Console')
+                    ->description('Configura el seguimiento de analíticas y verificación de Search Console.')
+                    ->icon('heroicon-o-chart-bar')
+                    ->schema([
+                        Forms\Components\Toggle::make('analytics_activo')
+                            ->label('Analytics activo')
+                            ->helperText('Activa o desactiva el tracking de Google Analytics')
+                            ->live(),
+
+                        Forms\Components\TextInput::make('ga4_measurement_id')
+                            ->label('GA4 Measurement ID')
+                            ->placeholder('G-XXXXXXXXXX')
+                            ->helperText('ID de medición de Google Analytics 4 (formato: G-XXXXXXXXXX)')
+                            ->disabled(fn (Forms\Get $get) => !$get('analytics_activo'))
+                            ->regex('/^G-[A-Z0-9]+$/i'),
+
+                        Forms\Components\TextInput::make('search_console_verificacion')
+                            ->label('Verificación Search Console')
+                            ->placeholder('google-site-verification=XXXXX')
+                            ->helperText('Contenido del meta tag de verificación de Google Search Console')
+                            ->columnSpanFull(),
+
+                        Forms\Components\Placeholder::make('analytics_estado')
+                            ->label('Estado')
+                            ->content(function () {
+                                $activo = Setting::obtener('analytics_activo', false);
+                                $gaId = Setting::obtener('ga4_measurement_id');
+
+                                if (!$activo) {
+                                    return '⚪ Analytics desactivado';
+                                }
+
+                                if (empty($gaId)) {
+                                    return '🟡 Falta configurar Measurement ID';
+                                }
+
+                                return '🟢 Analytics configurado y activo';
+                            }),
+                    ]),
+            ])
+            ->statePath('analyticsData');
+    }
+
+    public function guardarAnalytics(): void
+    {
+        $data = $this->analyticsForm->getState();
+
+        Setting::establecer('analytics_activo', $data['analytics_activo'], [
+            'grupo' => 'analytics',
+            'tipo' => 'boolean',
+        ]);
+
+        Setting::establecer('ga4_measurement_id', $data['ga4_measurement_id'], [
+            'grupo' => 'analytics',
+        ]);
+
+        Setting::establecer('search_console_verificacion', $data['search_console_verificacion'], [
+            'grupo' => 'analytics',
+        ]);
+
+        Notification::make()
+            ->title('Configuración guardada')
+            ->body('La configuración de Analytics se ha guardado correctamente.')
+            ->success()
+            ->send();
     }
 
     public function guardarFacebook(): void

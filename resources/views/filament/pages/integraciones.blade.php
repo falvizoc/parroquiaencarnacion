@@ -1,5 +1,46 @@
 <x-filament-panels::page>
     <div class="space-y-6">
+        {{-- Sección Analytics --}}
+        <form wire:submit="guardarAnalytics">
+            {{ $this->analyticsForm }}
+
+            <div class="mt-4">
+                <x-filament::button type="submit">
+                    Guardar Configuración
+                </x-filament::button>
+            </div>
+        </form>
+
+        {{-- Información de ayuda Analytics --}}
+        <x-filament::section collapsible collapsed>
+            <x-slot name="heading">
+                Cómo configurar Google Analytics 4
+            </x-slot>
+
+            <div class="prose prose-sm dark:prose-invert max-w-none">
+                <ol>
+                    <li>
+                        <strong>Crear propiedad GA4:</strong>
+                        <ul>
+                            <li>Ve a <a href="https://analytics.google.com" target="_blank" class="text-primary-600 hover:underline">analytics.google.com</a></li>
+                            <li>Crea una nueva propiedad GA4</li>
+                            <li>Copia el <strong>Measurement ID</strong> (formato: G-XXXXXXXXXX)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Verificar Search Console:</strong>
+                        <ul>
+                            <li>Ve a <a href="https://search.google.com/search-console" target="_blank" class="text-primary-600 hover:underline">search.google.com/search-console</a></li>
+                            <li>Añade tu propiedad</li>
+                            <li>Copia el contenido del meta tag de verificación</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </x-filament::section>
+
+        <hr class="border-gray-200 dark:border-gray-700">
+
         {{-- Sección Facebook --}}
         <form wire:submit="guardarFacebook">
             {{ $this->facebookForm }}
@@ -19,7 +60,7 @@
             </div>
         </form>
 
-        {{-- Información de ayuda --}}
+        {{-- Información de ayuda Facebook --}}
         <x-filament::section collapsible collapsed>
             <x-slot name="heading">
                 Cómo obtener las credenciales de Facebook

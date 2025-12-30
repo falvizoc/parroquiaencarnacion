@@ -50,6 +50,9 @@
     {{-- Preload de recursos críticos --}}
     @stack('preload')
 
+    {{-- Analytics --}}
+    <x-analytics />
+
     {{-- Additional Head Content --}}
     @stack('head')
 </head>

@@ -90,6 +90,9 @@ class SuscripcionNewsletter extends Component
         }
 
         $this->exito = true;
+
+        // Disparar evento para tracking de conversión
+        $this->dispatch('conversion-newsletter');
     }
 
     public function render()

@@ -157,6 +157,9 @@ class RegistroFiel extends Component
 
         // Enviar email de verificación
         Mail::to($fiel->email)->send(new VerificacionFielMail($fiel));
+
+        // Disparar evento para tracking de conversión
+        $this->dispatch('conversion-registro');
     }
 
     public function getCapillasProperty(): array
