@@ -1,0 +1,156 @@
+# Prompt de Inicio de Proyecto Web
+
+Este prompt está optimizado para sitios web con enfoque en SEO, AEO y Conversión.
+
+1. Pregunta qué sitio web vamos a desarrollar y haz las preguntas necesarias
+   para entender profundamente:
+   - El objetivo del sitio (informativo, e-commerce, landing, SaaS, blog, etc.)
+   - El público objetivo y sus necesidades
+   - Los competidores principales
+   - Las acciones de conversión esperadas (compra, registro, contacto, etc.)
+
+2. Analiza los requisitos y propón el mejor STACK de desarrollo basado en:
+   - Facilidad y eficiencia
+   - Consistencia
+   - Velocidad de carga (crítico para SEO)
+   - Seguridad
+   - Madurez
+   - Capacidad de renderizado SSR/SSG (para SEO)
+
+3. Pregunta sobre la base de datos requerida y evalúa la mejor opción según
+   el contexto del proyecto (tipo de datos, volumen, relaciones, escalabilidad).
+
+4. Pregunta si el sitio será:
+   - Multi Tenant: si es afirmativo, incluir un panel de administración para
+     gestión de tenants, usuarios y configuraciones por organización.
+   - Multi idioma: si es afirmativo, implementar sistema de internacionalización
+     (i18n) desde el inicio con URLs localizadas (ejemplo.com/es/, ejemplo.com/en/).
+
+5. Basado en el alcance del proyecto, pregunta y sugiere opciones de
+   hosting/despliegue adecuadas (Vercel, AWS, Railway, etc.) y evalúa
+   la necesidad de CI/CD (GitHub Actions, etc.).
+
+6. El proceso del desarrollo para cada funcionalidad es:
+   - Análisis profundo: entender el requisito, identificar casos de uso y
+     criterios de aceptación
+   - Planificación puntual: diseño técnico, Milestones, dependencias y
+     división en tareas
+   - Implementación alineada: desarrollo incremental con código limpio y
+     consistente a través de todo el proyecto
+   - Validación: pruebas unitarias y verificación de criterios de aceptación
+   - Revisión: verificar calidad antes de merge
+
+7. Implementa la estructura documental del proyecto que permita aumentar la
+   productividad y asegurar consistencia durante todas las fases, con alcance
+   en datos, políticas, convenciones, contratos, APIs, y todos los elementos
+   involucrados a través del STACK técnico y entre los Milestones del
+   desarrollo.
+
+   Esta documentación debe considerar un protocolo de inicio y cierre de
+   sesión del día según instrucción explícita del programador con frases como
+   "iniciamos el día" o "cierra el día", debe consultarse por el agente cuando
+   Claude Code resuma el contexto o se cierre inesperadamente el IDE.
+
+   El cierre de sesión debe incluir:
+   - Commit de los cambios realizados
+   - Push a GitHub
+
+   Mantener un CHANGELOG para registrar:
+   - Bugs identificados y sus reparaciones
+   - Nuevas funcionalidades agregadas
+   - Cambios importantes en el código
+
+   Crear un Documento de Convenciones y Principios como eje conductor del
+   proyecto que unifique criterios de principio a fin:
+   - Convenciones de nombres (variables, funciones, archivos, carpetas)
+   - Patrones de diseño a utilizar
+   - Estructura de carpetas estándar
+   - Manejo de errores unificado
+   - Formato de respuestas API
+   - Estilo de código (configurado en linters)
+   Este documento debe consultarse ante cualquier duda para mantener la
+   coherencia en todo el proyecto.
+
+8. Implementar control de versiones semántico (MAJOR.MINOR.PATCH) que impacte
+   en las ramas de GitHub:
+   - main/master: versiones estables de producción
+   - develop: integración de features
+   - feature/*: nuevas funcionalidades
+   - bugfix/*: corrección de errores
+   - release/*: preparación de versiones
+
+9. Alinea este proyecto a las mejores prácticas de seguridad utilizando la
+   versión más reciente de OWASP como framework.
+
+10. Implementa SEO técnico desde el inicio:
+    - Estructura de URLs limpias y semánticas
+    - Metaetiquetas optimizadas (title, description, Open Graph, Twitter Cards)
+    - Datos estructurados (Schema.org/JSON-LD) para rich snippets
+    - Breadcrumbs para navegación y SEO (con marcado estructurado)
+    - Sitemap.xml dinámico
+    - Robots.txt configurado correctamente
+    - Canonical URLs para evitar contenido duplicado
+    - Redirecciones 301 para migraciones y URLs obsoletas
+    - Velocidad de carga optimizada (Core Web Vitals: LCP, INP, CLS)
+    - Imágenes optimizadas con lazy loading y formatos modernos (WebP, AVIF)
+    - HTML semántico (header, nav, main, article, section, footer)
+    - Enlaces internos estratégicos
+    - HTTPS obligatorio
+
+11. Implementa AEO (Answer Engine Optimization) para visibilidad en IA:
+    - Contenido estructurado en formato pregunta-respuesta
+    - Respuestas claras y concisas en los primeros párrafos
+    - Uso de listas, tablas y formatos fáciles de extraer
+    - Citas de fuentes confiables cuando aplique
+    - Datos estructurados FAQ Schema
+    - Contenido actualizado y fechado
+    - Autoría clara (About, autor del contenido)
+    - Información factual y verificable
+    - Archivo llms.txt para indicar a los LLMs cómo interpretar el sitio
+
+12. Implementa CRO (Conversion Rate Optimization) desde el diseño:
+    - Jerarquía visual clara que guíe al usuario hacia la conversión
+    - CTAs (Call to Action) visibles, claros y con texto orientado a beneficios
+    - Formularios simplificados (mínimos campos necesarios)
+    - Pruebas sociales (testimonios, reviews, logos de clientes)
+    - Urgencia y escasez cuando sea apropiado y honesto
+    - Propuesta de valor clara above the fold
+    - Reducción de fricciones en el proceso de conversión
+    - Múltiples puntos de conversión en páginas largas
+    - Páginas de destino específicas por campaña/segmento
+    - Seguimiento de conversiones (eventos, goals)
+
+13. Aplica principios de diseño FRICTIONLESS y patrones UX probados (Material
+    Design, Apple HIG, etc.) para el FRONTEND:
+    - Mínima cantidad de clicks por acción
+    - Autenticación social (Google, Microsoft, Apple, Windows Hello)
+    - Configuraciones con toggles de efecto inmediato
+    - Sin botones "Guardar" innecesarios
+    - Paneles de configuración simplificados
+    - Accesibilidad (a11y): navegación por teclado, lectores de pantalla,
+      contraste adecuado
+    - Experiencia diferenciadora que el usuario prefiera sobre la competencia
+    - Mobile-first: diseño responsivo priorizando móviles
+
+14. Implementa analítica y medición:
+    - Google Analytics 4 o alternativa privacy-friendly (Plausible, Fathom)
+    - Google Search Console para monitoreo SEO
+    - Eventos de conversión configurados
+    - Mapas de calor y grabaciones de sesión (Hotjar, Clarity) según necesidad
+    - Reportes de Core Web Vitals
+    - A/B testing para optimización continua de CRO (VWO, Optimizely, PostHog)
+
+15. El proyecto es un enfoque MVP iterativo de mejoras. Debe incluir las fases
+    de desarrollo necesarias antes de liberar el MVP: pruebas unitarias y todos
+    los procesos propios de calidad de software y validaciones antes de
+    producción.
+
+16. El agente debe identificar si está en entorno de desarrollo o producción
+    verificando el archivo de variables de entorno (.env) del proyecto.
+    Adaptar el comportamiento según el contexto (logs, validaciones, etc.).
+
+17. El desarrollo debe mantener clara separación entre lógica de BACKEND y
+    FRONTEND, documentando las responsabilidades de cada capa.
+
+18. Idioma preferido: español para toda la documentación, comentarios en
+    código y nombres de variables/funciones cuando sea posible.

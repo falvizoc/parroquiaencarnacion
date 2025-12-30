@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    /* Tipografía */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+    /* Colores de la parroquia - Paleta inspirada en tonos litúrgicos */
+    --color-primary-50: oklch(0.97 0.01 260);
+    --color-primary-100: oklch(0.94 0.02 260);
+    --color-primary-200: oklch(0.88 0.05 260);
+    --color-primary-300: oklch(0.79 0.08 260);
+    --color-primary-400: oklch(0.68 0.12 260);
+    --color-primary-500: oklch(0.55 0.15 260);
+    --color-primary-600: oklch(0.47 0.15 260);
+    --color-primary-700: oklch(0.40 0.13 260);
+    --color-primary-800: oklch(0.35 0.10 260);
+    --color-primary-900: oklch(0.30 0.08 260);
+    --color-primary-950: oklch(0.22 0.06 260);
+
+    /* Dorado - acento litúrgico */
+    --color-gold-50: oklch(0.98 0.02 85);
+    --color-gold-100: oklch(0.95 0.05 85);
+    --color-gold-200: oklch(0.90 0.10 85);
+    --color-gold-300: oklch(0.85 0.15 85);
+    --color-gold-400: oklch(0.78 0.18 85);
+    --color-gold-500: oklch(0.70 0.18 85);
+    --color-gold-600: oklch(0.60 0.16 85);
+    --color-gold-700: oklch(0.50 0.14 85);
+    --color-gold-800: oklch(0.42 0.12 85);
+    --color-gold-900: oklch(0.35 0.10 85);
+}
+
+/* Estilos base */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply antialiased;
+    }
+
+    /* Tipografía para encabezados */
+    h1, h2, h3 {
+        @apply font-serif;
+    }
+
+    /* Focus visible para accesibilidad */
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-primary-500;
+    }
+}
+
+/* Componentes personalizados */
+@layer components {
+    /* Botón primario */
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-6 py-3
+               bg-primary-600 text-white font-medium rounded-lg
+               hover:bg-primary-700 focus:ring-4 focus:ring-primary-300
+               transition-colors duration-200;
+    }
+
+    /* Botón secundario */
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-6 py-3
+               bg-white text-primary-700 font-medium rounded-lg
+               border-2 border-primary-600
+               hover:bg-primary-50 focus:ring-4 focus:ring-primary-300
+               transition-colors duration-200;
+    }
+
+    /* Tarjeta */
+    .card {
+        @apply bg-white rounded-xl shadow-sm border border-gray-100
+               overflow-hidden;
+    }
+
+    /* Contenedor principal */
+    .container-main {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+}
+
+/* Utilidades */
+@layer utilities {
+    /* Animación suave de entrada */
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
