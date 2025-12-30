@@ -81,6 +81,7 @@ Al recibir el comando de cierre, el agente debe:
     - Rate limiting en AppServiceProvider (formularios, verificación, login)
     - Throttle aplicado a rutas críticas
     - Auditoría OWASP básica (Mass Assignment, SQL Injection, XSS, CSRF)
+    - **CSP actualizado para permitir Vite en desarrollo**
   - M5.2 Despliegue (parcial)
     - .env.production.example con configuración segura
     - Script deploy-cpanel.sh para automatizar despliegue
@@ -89,11 +90,20 @@ Al recibir el comando de cierre, el agente debe:
     - MANUAL_ADMIN.md con guía completa del panel
   - M5.4 Go-Live (pendiente)
     - Requiere acceso al servidor de producción
+- **Mejoras Sesión 5 (2025-12-30)**
+  - Corregido symlink de storage (case sensitivity)
+  - CSP actualizado para desarrollo (Vite localhost:5173)
+  - Previsualización en tiempo real en página Apariencia
+  - Selector de posición de imagen (arriba/centro/abajo) para Adoración
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
+- **Página Apariencia - Mejoras UI:**
+  1. Corregir posicionamiento de imagen (no funciona correctamente)
+  2. Reestructurar página con pestañas (tabs) en lugar de secciones
+  3. Cada nueva configuración de apariencia = nueva pestaña
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 - Verificación final pre-lanzamiento
 

@@ -24,6 +24,11 @@ class Apariencia extends Page implements HasForms
     public ?array $heroData = [];
     public ?array $adoracionData = [];
 
+    // URLs de previsualización (actualizadas en tiempo real)
+    public ?string $heroPreviewUrl = null;
+    public ?string $adoracionPreviewUrl = null;
+    public string $adoracionPosicion = 'center';
+
     public function mount(): void
     {
         // Cargar datos del Hero
@@ -42,11 +47,76 @@ class Apariencia extends Page implements HasForms
         // Cargar datos de Adoración
         $this->adoracionData = [
             'adoracion_imagen' => Setting::obtener('adoracion_imagen', ''),
+            'adoracion_posicion' => Setting::obtener('adoracion_posicion', 'center'),
             'adoracion_efectos_activos' => Setting::obtener('adoracion_efectos_activos', true),
         ];
 
         $this->heroForm->fill($this->heroData);
         $this->adoracionForm->fill($this->adoracionData);
+
+        // Inicializar URLs de previsualización
+        $this->actualizarPreviews();
+    }
+
+    /**
+     * Actualiza las URLs de previsualización basadas en los datos del formulario
+     */
+    public function actualizarPreviews(): void
+    {
+        // Hero preview
+        $heroImagen = $this->heroData['hero_imagen'] ?? null;
+        $this->heroPreviewUrl = $this->obtenerUrlImagen($heroImagen);
+
+        // Adoración preview
+        $adoracionImagen = $this->adoracionData['adoracion_imagen'] ?? null;
+        $this->adoracionPreviewUrl = $this->obtenerUrlImagen($adoracionImagen);
+        $this->adoracionPosicion = $this->adoracionData['adoracion_posicion'] ?? 'center';
+    }
+
+    /**
+     * Obtiene la URL de una imagen, manejando archivos temporales y permanentes
+     */
+    protected function obtenerUrlImagen($imagen): ?string
+    {
+        if (empty($imagen)) {
+            return null;
+        }
+
+        // Si es un array (Filament FileUpload devuelve array)
+        if (is_array($imagen)) {
+            $imagen = reset($imagen); // Obtener primer elemento
+            if (empty($imagen)) {
+                return null;
+            }
+        }
+
+        // Si es un string (path guardado en BD)
+        if (is_string($imagen)) {
+            return \Illuminate\Support\Facades\Storage::disk('public')->url($imagen);
+        }
+
+        // Si es un archivo temporal de Livewire (TemporaryUploadedFile)
+        if ($imagen instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+            return $imagen->temporaryUrl();
+        }
+
+        return null;
+    }
+
+    /**
+     * Listener para cuando cambia la imagen del Hero
+     */
+    public function updatedHeroData(): void
+    {
+        $this->actualizarPreviews();
+    }
+
+    /**
+     * Listener para cuando cambia la imagen de Adoración
+     */
+    public function updatedAdoracionData(): void
+    {
+        $this->actualizarPreviews();
     }
 
     protected function getForms(): array
@@ -72,6 +142,8 @@ class Apariencia extends Page implements HasForms
                             ->imageResizeTargetWidth('1920')
                             ->imageResizeTargetHeight('1080')
                             ->helperText('Recomendado: 1920x1080px. Si no se sube imagen, se usará el gradiente predeterminado.')
+                            ->live()
+                            ->afterStateUpdated(fn () => $this->actualizarPreviews())
                             ->columnSpanFull(),
 
                         Forms\Components\Toggle::make('hero_efectos_activos')
@@ -121,11 +193,24 @@ class Apariencia extends Page implements HasForms
                             ->directory('adoracion')
                             ->disk('public')
                             ->imageResizeMode('cover')
-                            ->imageCropAspectRatio('16:9')
                             ->imageResizeTargetWidth('1920')
-                            ->imageResizeTargetHeight('800')
-                            ->helperText('Recomendado: 1920x800px. Si no se sube imagen, se usará el gradiente dorado.')
+                            ->imageResizeTargetHeight('1080')
+                            ->helperText('Recomendado: imagen horizontal de alta resolución.')
+                            ->live()
+                            ->afterStateUpdated(fn () => $this->actualizarPreviews())
                             ->columnSpanFull(),
+
+                        Forms\Components\Select::make('adoracion_posicion')
+                            ->label('Posición de la imagen')
+                            ->options([
+                                'top' => '↑ Arriba - Muestra la parte superior',
+                                'center' => '⬤ Centro - Muestra el centro (predeterminado)',
+                                'bottom' => '↓ Abajo - Muestra la parte inferior',
+                            ])
+                            ->default('center')
+                            ->live()
+                            ->afterStateUpdated(fn () => $this->actualizarPreviews())
+                            ->helperText('Selecciona qué parte de la imagen se mostrará en la sección.'),
 
                         Forms\Components\Toggle::make('adoracion_efectos_activos')
                             ->label('Efectos visuales activos')
@@ -181,6 +266,10 @@ class Apariencia extends Page implements HasForms
         $data = $this->adoracionForm->getState();
 
         Setting::establecer('adoracion_imagen', $data['adoracion_imagen'] ?? '', [
+            'grupo' => 'apariencia',
+        ]);
+
+        Setting::establecer('adoracion_posicion', $data['adoracion_posicion'] ?? 'center', [
             'grupo' => 'apariencia',
         ]);
 

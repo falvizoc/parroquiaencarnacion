@@ -58,21 +58,24 @@ class SecurityHeaders
         $unsafeEval = "'unsafe-eval'"; // Necesario para algunos scripts de terceros
 
         // Dominios de terceros confiables
-        $googleFonts = 'https://fonts.googleapis.com https://fonts.gstatic.com';
+        $googleFonts = 'https://fonts.googleapis.com https://fonts.gstatic.com https://fonts.bunny.net';
         $googleAnalytics = 'https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com';
         $googleMaps = 'https://maps.googleapis.com https://maps.gstatic.com https://*.google.com';
         $facebook = 'https://connect.facebook.net https://www.facebook.com https://graph.facebook.com';
         $youtube = 'https://www.youtube.com https://www.youtube-nocookie.com';
 
+        // Vite dev server en desarrollo
+        $vite = app()->isLocal() ? 'http://localhost:5173 http://127.0.0.1:5173 ws://localhost:5173 ws://127.0.0.1:5173' : '';
+
         $directives = [
             // Fuentes por defecto
-            "default-src {$self}",
+            "default-src {$self} {$vite}",
 
             // Scripts - permitir inline para Livewire/Alpine
-            "script-src {$self} {$unsafeInline} {$unsafeEval} {$googleAnalytics} {$facebook}",
+            "script-src {$self} {$unsafeInline} {$unsafeEval} {$googleAnalytics} {$facebook} {$vite}",
 
             // Estilos - permitir inline para Tailwind/Livewire
-            "style-src {$self} {$unsafeInline} {$googleFonts}",
+            "style-src {$self} {$unsafeInline} {$googleFonts} {$vite}",
 
             // Imágenes
             "img-src {$self} data: blob: https: {$googleAnalytics} {$facebook}",
@@ -80,8 +83,8 @@ class SecurityHeaders
             // Fuentes
             "font-src {$self} data: {$googleFonts}",
 
-            // Conexiones (AJAX, WebSocket)
-            "connect-src {$self} {$googleAnalytics} {$facebook} wss:",
+            // Conexiones (AJAX, WebSocket, Vite HMR)
+            "connect-src {$self} {$googleAnalytics} {$facebook} wss: {$vite}",
 
             // Frames (YouTube, Google Maps, Facebook)
             "frame-src {$self} {$youtube} {$googleMaps} {$facebook}",

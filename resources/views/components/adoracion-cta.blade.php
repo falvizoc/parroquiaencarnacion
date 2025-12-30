@@ -3,9 +3,17 @@
     use Illuminate\Support\Facades\Storage;
 
     $imagen_adoracion = Setting::obtener('adoracion_imagen');
+    $posicion_adoracion = Setting::obtener('adoracion_posicion', 'center');
     $efectos_activos = Setting::obtener('adoracion_efectos_activos', true);
 
     $tiene_imagen = !empty($imagen_adoracion);
+
+    // Convertir posición a CSS background-position
+    $bg_position = match($posicion_adoracion) {
+        'top' => 'top',
+        'bottom' => 'bottom',
+        default => 'center',
+    };
 @endphp
 
 <section class="relative py-16 lg:py-24 overflow-hidden
@@ -16,7 +24,7 @@
         <div class="absolute inset-0 parallax-container">
             <div class="parallax-bg"
                  @if($efectos_activos) data-parallax="adoracion" @endif
-                 style="background-image: url('{{ Storage::url($imagen_adoracion) }}');">
+                 style="background-image: url('{{ Storage::url($imagen_adoracion) }}'); background-position: center {{ $bg_position }};">
             </div>
         </div>
 
