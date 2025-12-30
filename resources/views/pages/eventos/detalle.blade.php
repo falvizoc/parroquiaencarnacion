@@ -199,8 +199,8 @@
 @push('schema')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "Event",
+    "@@context": "https://schema.org",
+    "@@type": "Event",
     "name": "{{ $evento->titulo }}",
     "description": "{{ $evento->descripcion_corta ?? Str::limit(strip_tags($evento->descripcion ?? ''), 160) }}",
     @if($evento->imagen)
@@ -211,10 +211,10 @@
     "endDate": "{{ $evento->fecha_fin->toIso8601String() }}",
     @endif
     "location": {
-        "@type": "Place",
+        "@@type": "Place",
         "name": "{{ $evento->lugar ?? __('general.site.name') }}",
         "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "streetAddress": "{{ $evento->direccion ?? '' }}",
             "addressLocality": "Tampico",
             "addressRegion": "Tamaulipas",
@@ -222,7 +222,7 @@
         }
     },
     "organizer": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "{{ __('general.site.name') }}",
         "url": "{{ config('app.url') }}"
     },

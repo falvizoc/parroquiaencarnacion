@@ -30,15 +30,15 @@
 @push('schema')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@@context": "https://schema.org",
+    "@@type": "FAQPage",
     "mainEntity": [
         @foreach($items as $index => $item)
         {
-            "@type": "Question",
+            "@@type": "Question",
             "name": "{{ $item['pregunta'] }}",
             "acceptedAnswer": {
-                "@type": "Answer",
+                "@@type": "Answer",
                 "text": "{{ strip_tags($item['respuesta']) }}"
             }
         }@if(!$loop->last),@endif

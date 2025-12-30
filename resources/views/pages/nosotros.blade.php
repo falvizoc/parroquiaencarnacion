@@ -196,8 +196,8 @@
 @push('schema')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "Church",
+    "@@context": "https://schema.org",
+    "@@type": "Church",
     "name": "{{ __('general.site.name') }}",
     "alternateName": "{{ __('general.site.short_name') }}",
     "description": "Parroquia católica en Tampico, Tamaulipas, México. Comunidad de fe, esperanza y caridad.",
@@ -205,18 +205,18 @@
     "logo": "{{ asset('images/logo.png') }}",
     "image": "{{ asset('images/og-default.jpg') }}",
     "address": {
-        "@type": "PostalAddress",
+        "@@type": "PostalAddress",
         "addressLocality": "Tampico",
         "addressRegion": "Tamaulipas",
         "addressCountry": "MX"
     },
     "geo": {
-        "@type": "GeoCoordinates",
+        "@@type": "GeoCoordinates",
         "latitude": "22.2475",
         "longitude": "-97.8508"
     },
     "parentOrganization": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "Diócesis de Tampico"
     },
     "sameAs": []

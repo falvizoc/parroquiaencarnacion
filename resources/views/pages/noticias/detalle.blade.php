@@ -255,8 +255,8 @@
 @push('schema')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
+    "@@context": "https://schema.org",
+    "@@type": "NewsArticle",
     "headline": "{{ $noticia->titulo }}",
     "description": "{{ $noticia->extracto ?? Str::limit(strip_tags($noticia->contenido), 160) }}",
     @if($noticia->imagen)
@@ -265,20 +265,20 @@
     "datePublished": "{{ $noticia->fecha_publicacion->toIso8601String() }}",
     "dateModified": "{{ $noticia->updated_at->toIso8601String() }}",
     "author": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "{{ __('general.site.name') }}"
     },
     "publisher": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "{{ __('general.site.name') }}",
         "logo": {
-            "@type": "ImageObject",
+            "@@type": "ImageObject",
             "url": "{{ asset('images/logo.png') }}"
         }
     },
     "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ url()->current() }}"
+        "@@type": "WebPage",
+        "@@id": "{{ url()->current() }}"
     }
 }
 </script>
