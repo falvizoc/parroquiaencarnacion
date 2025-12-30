@@ -62,87 +62,47 @@ Al recibir el comando de cierre, el agente debe:
 |-------|-------|
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
-| **Versión actual** | 0.3.0 |
-| **Milestone activo** | Fase 4 - Optimización (100%) ✓ |
+| **Versión actual** | 0.4.0 |
+| **Milestone activo** | Fase 5 - Preparación Producción (75%) |
 
 ### Progreso del Día (2025-12-30)
 
 **Completado:**
-- Fase 0: Fundación completa
-- Fase 1: Núcleo Informativo completa
-- Fase 2: Contenido Dinámico (100%)
-  - M2.1 Grupos Parroquiales (CRUD + vistas públicas)
-  - M2.2 Sistema de Eventos (CRUD + vistas públicas)
-  - M2.3 Sistema de Noticias (CRUD + vistas públicas)
-  - M2.4 Sistema de Capillas con relación a MassSchedule y ParishGroup
-  - M2.5 Sistema de Sacerdotes (párroco único + vicarios)
-  - M2.6 Integración Facebook configurable desde panel admin
-- Fase 3: Comunidad (100%) ✓
-  - M3.1 Registro de Fieles (formulario Livewire 3 pasos + verificación email)
-  - M3.2 Directorio de Fieles (filtros + exportación CSV/Excel)
-  - M3.3 Sistema de Comunicaciones
-    - Modelos: EmailTemplate, EmailCampaign, EmailLog
-    - CRUD completo en Filament para plantillas y campañas
-    - Segmentación de destinatarios (newsletter, eventos, avisos, capilla)
-    - Job EnviarCampanaEmail con queue para envío masivo
-    - Variables dinámicas en templates
-  - M3.4 Newsletter
-    - Suscripción rápida (Livewire)
-    - Gestión de preferencias con token
-    - Cancelación de suscripción un clic
-    - Widget en footer
-    - Links de preferencias en emails
-- **Sección de Criptas** (adicional)
-  - Modelo CryptInfo para información general
-  - Modelo CryptCampaign para campañas estacionales
-  - CRUD en Filament (grupo Servicios)
-  - Sección en página de inicio con banner de campaña
-  - Activación automática por fechas (dic-ene)
-  - Seeder con datos de ejemplo
-- **Fase 4: Optimización (100%)** ✓
-  - M4.1 SEO Técnico (completado)
-    - SeoService con View Composer
-    - Sitemap.xml dinámico
-    - Robots.txt configurado
-    - Schema.org (Church, NewsArticle, Event)
-    - Open Graph y Twitter Cards
-    - Canonical URLs automáticos
-    - Componente Breadcrumbs con Schema.org
-  - M4.2 AEO (completado)
-    - llms.txt para motores AI
-    - Componente FAQ con Schema.org FAQPage
-    - Página "Nosotros" con E-E-A-T signals
-    - FAQs estructuradas
-  - M4.3 Performance (completado)
-    - CacheControl middleware HTTP
-    - Componente x-imagen con lazy loading
-    - Vite optimizado (Terser, code splitting)
-    - Core Web Vitals (preconnect, theme-color)
-    - Comando app:optimizar para producción
-  - M4.4 Analítica (completado)
-    - GA4 configurable desde admin
-    - Verificación Search Console
-    - Eventos de conversión (registro, newsletter)
-    - Componente x-analytics
-  - M4.5 Testing (completado)
-    - Trait HasFactory en modelos Event, News, FaithfulMember
-    - Factories para Event, News, FaithfulMember
-    - Tests unitarios para modelos (scopes, accessors, métodos)
-    - Tests de Feature para páginas públicas (6 archivos)
-    - Tests de integración para SeoService
-    - 45 tests pasando (62 assertions)
+- Fase 0-4: Completadas (100%) ✓
+- **Sistema Hero/Adoración Dinámico** (adicional pre-Fase 5)
+  - Página Filament "Apariencia" para gestionar imágenes
+  - Componentes hero-inicio y adoracion-cta con efectos visuales
+  - Parallax, overlay oscuro, shimmer de luz
+  - CTAs configurables desde admin
+  - Fallback a gradientes si no hay imagen
+- **Fase 5: Preparación Producción (75%)**
+  - M5.1 Seguridad (completado)
+    - SecurityHeaders middleware (CSP, HSTS, X-Frame-Options, Referrer-Policy)
+    - Rate limiting en AppServiceProvider (formularios, verificación, login)
+    - Throttle aplicado a rutas críticas
+    - Auditoría OWASP básica (Mass Assignment, SQL Injection, XSS, CSRF)
+  - M5.2 Despliegue (parcial)
+    - .env.production.example con configuración segura
+    - Script deploy-cpanel.sh para automatizar despliegue
+    - Pendiente: configuración en servidor real
+  - M5.3 Documentación (completado)
+    - MANUAL_ADMIN.md con guía completa del panel
+  - M5.4 Go-Live (pendiente)
+    - Requiere acceso al servidor de producción
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- Fase 5: Preparación Producción
+- M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
+- Verificación final pre-lanzamiento
 
 ### Notas Importantes
 
 - Sistema de Intenciones de Misa y Pasarela de Pago documentado para Fase 6 (Post-MVP)
 - Criptas: sección informativa en inicio, no tiene página dedicada ni enlace en menú
 - Newsletter integrado con sistema de verificación de email existente
+- Hero y Adoración ahora configurables desde Admin > Configuración > Apariencia
 
 ### Bloqueos o Problemas
 
@@ -151,6 +111,28 @@ Al recibir el comando de cierre, el agente debe:
 ---
 
 ## Historial de Sesiones
+
+### 2025-12-30 - Sesión 4
+
+**Actividades:**
+- Sistema Hero/Adoración Dinámico
+  - Página Filament "Apariencia" para gestionar imágenes de fondo
+  - Componentes Blade: hero-inicio, adoracion-cta
+  - Efectos visuales: parallax, overlay, shimmer
+  - CTAs configurables con fallback a rutas predeterminadas
+- Fase 5: Preparación Producción (75%)
+  - SecurityHeaders middleware con headers OWASP
+  - Rate limiting para rutas críticas
+  - Auditoría de seguridad básica
+  - .env.production.example con checklist
+  - Script de despliegue para cPanel
+  - Manual de administrador (MANUAL_ADMIN.md)
+
+**Resultado:**
+- Proyecto al 98% de completitud
+- Pendiente: despliegue en servidor de producción
+
+---
 
 ### 2025-12-30 - Sesión 3
 
