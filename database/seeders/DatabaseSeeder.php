@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ParishGroupSeeder::class,
             EventSeeder::class,
             NewsSeeder::class,
+            CryptSeeder::class,
         ]);
     }
 }

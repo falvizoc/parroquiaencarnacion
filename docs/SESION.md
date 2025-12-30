@@ -62,8 +62,8 @@ Al recibir el comando de cierre, el agente debe:
 |-------|-------|
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
-| **Versión actual** | 0.2.0 |
-| **Milestone activo** | Fase 3 - Comunidad (50%) |
+| **Versión actual** | 0.3.0 |
+| **Milestone activo** | Fase 3 - Comunidad (100%) ✓ |
 
 ### Progreso del Día (2025-12-30)
 
@@ -76,44 +76,42 @@ Al recibir el comando de cierre, el agente debe:
   - M2.3 Sistema de Noticias (CRUD + vistas públicas)
   - M2.4 Sistema de Capillas con relación a MassSchedule y ParishGroup
   - M2.5 Sistema de Sacerdotes (párroco único + vicarios)
-  - Horarios de misa dinámicos desde BD en inicio y horarios
-  - Navegación actualizada con Capillas y Sacerdotes
-  - Simplificación UX del formulario de horarios (eliminado campo redundante)
-  - "Templo Parroquial" como opción explícita en selector de ubicación
-  - Creación masiva de horarios recurrentes (selección múltiple de días)
   - M2.6 Integración Facebook configurable desde panel admin
-    - Modelo Setting con encriptación para credenciales sensibles
-    - Página de Integraciones en Configuración
-    - FacebookService que lee de BD (no requiere .env)
-    - Usuario configura credenciales cuando esté en producción
-- Fase 3: Comunidad iniciada
-  - M3.1 Registro de Fieles
-    - Modelo FaithfulMember con campos completos
-    - CRUD en Filament con formulario en tabs
-    - Formulario público Livewire (3 pasos)
-    - Relación con grupos parroquiales (tabla pivot)
-  - M3.2 Directorio de Fieles
-    - Filtros avanzados (estado, verificación, capilla)
-    - Exportación CSV/Excel configurable
-  - M3.1.4 Confirmación por email
-    - Mailable VerificacionFielMail con cola
-    - Vista markdown del email
-    - VerificacionController
-    - Rutas verificar y reenviar
-    - Integrado en formulario Livewire
+- Fase 3: Comunidad (100%) ✓
+  - M3.1 Registro de Fieles (formulario Livewire 3 pasos + verificación email)
+  - M3.2 Directorio de Fieles (filtros + exportación CSV/Excel)
+  - M3.3 Sistema de Comunicaciones
+    - Modelos: EmailTemplate, EmailCampaign, EmailLog
+    - CRUD completo en Filament para plantillas y campañas
+    - Segmentación de destinatarios (newsletter, eventos, avisos, capilla)
+    - Job EnviarCampanaEmail con queue para envío masivo
+    - Variables dinámicas en templates
+  - M3.4 Newsletter
+    - Suscripción rápida (Livewire)
+    - Gestión de preferencias con token
+    - Cancelación de suscripción un clic
+    - Widget en footer
+    - Links de preferencias en emails
+- **Sección de Criptas** (adicional)
+  - Modelo CryptInfo para información general
+  - Modelo CryptCampaign para campañas estacionales
+  - CRUD en Filament (grupo Servicios)
+  - Sección en página de inicio con banner de campaña
+  - Activación automática por fechas (dic-ene)
+  - Seeder con datos de ejemplo
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- M3.3 Sistema de Comunicaciones
-- M3.4 Newsletter
+- Fase 4: Optimización y Calidad (SEO, Performance, Testing)
+- Fase 5: Preparación Producción
 
 ### Notas Importantes
 
-- Sistema de Intenciones de Misa documentado para Fase 6 (Post-MVP)
-- Campo `ubicacion` eliminado del modelo MassSchedule (redundante con chapel_id)
-- Terminología unificada: "Templo Principal" en lugar de "Parroquia Principal"
+- Sistema de Intenciones de Misa y Pasarela de Pago documentado para Fase 6 (Post-MVP)
+- Criptas: sección informativa en inicio, no tiene página dedicada ni enlace en menú
+- Newsletter integrado con sistema de verificación de email existente
 
 ### Bloqueos o Problemas
 

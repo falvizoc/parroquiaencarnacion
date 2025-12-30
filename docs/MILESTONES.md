@@ -9,7 +9,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
-| 3 | Comunidad | En Progreso | 50% |
+| 3 | Comunidad | Completado | 100% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
@@ -194,19 +194,29 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M3.3 - Sistema de Comunicaciones
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Plantillas de email | Pendiente | |
-| Envío masivo | Pendiente | |
-| Segmentación | Pendiente | |
-| Cola de envío (Queue) | Pendiente | |
-| Historial de envíos | Pendiente | |
+| Plantillas de email | Completado | EmailTemplate con variables dinámicas |
+| Envío masivo | Completado | EnviarCampanaEmail Job |
+| Segmentación | Completado | Newsletter, eventos, avisos, capilla |
+| Cola de envío (Queue) | Completado | Job con queue |
+| Historial de envíos | Completado | EmailLog + LogsRelationManager |
 
 ### M3.4 - Newsletter
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Suscripción opt-in | Pendiente | |
-| Preferencias de comunicación | Pendiente | |
-| Integración con comunicaciones | Pendiente | |
-| Cancelar suscripción | Pendiente | |
+| Suscripción opt-in | Completado | SuscripcionNewsletter Livewire |
+| Preferencias de comunicación | Completado | GestionPreferencias con token |
+| Integración con comunicaciones | Completado | Variables en templates |
+| Cancelar suscripción | Completado | Un clic con token |
+
+### M3.5 - Servicios Adicionales (Criptas)
+| Tarea | Estado | Notas |
+|-------|--------|-------|
+| Modelo CryptInfo | Completado | Información general de criptas |
+| Modelo CryptCampaign | Completado | Campañas estacionales |
+| CRUD en Filament | Completado | Grupo "Servicios" |
+| Sección en inicio | Completado | Con banner de campaña |
+| Activación automática | Completado | Por fechas inicio/fin |
+| Seeder de datos | Completado | CryptSeeder |
 
 ---
 
@@ -351,7 +361,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
-Fase 3: █████░░░░░ 50%
+Fase 3: ██████████ 100% ✓
 Fase 4: ░░░░░░░░░░ 0%
 Fase 5: ░░░░░░░░░░ 0%
 ```
@@ -359,7 +369,7 @@ Fase 5: ░░░░░░░░░░ 0%
 ### General MVP
 
 ```
-Progreso total: ███████████░░░░░░░░░ ~55%
+Progreso total: ████████████████░░░░ ~80%
 ```
 
 ---
