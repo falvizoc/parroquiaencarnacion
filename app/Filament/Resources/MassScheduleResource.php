@@ -33,12 +33,18 @@ class MassScheduleResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('chapel_id')
                             ->label('Ubicación')
-                            ->relationship('chapel', 'nombre')
-                            ->placeholder('Templo Principal (Parroquia)')
+                            ->options(function () {
+                                $opciones = ['' => '🏛️ Templo Parroquial (Principal)'];
+                                $capillas = Chapel::activo()->ordenado()->pluck('nombre', 'id')->toArray();
+                                foreach ($capillas as $id => $nombre) {
+                                    $opciones[$id] = '⛪ ' . $nombre;
+                                }
+                                return $opciones;
+                            })
+                            ->default('')
                             ->helperText('Selecciona dónde se celebrará la misa')
                             ->native(false)
-                            ->searchable()
-                            ->preload(),
+                            ->searchable(),
 
                         Forms\Components\Select::make('dia_semana')
                             ->label('Día de la semana')

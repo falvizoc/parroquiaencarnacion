@@ -63,14 +63,14 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.2.0 |
-| **Milestone activo** | M2 - Contenido Dinámico (90%) |
+| **Milestone activo** | M2 - Contenido Dinámico (100%) |
 
 ### Progreso del Día (2025-12-30)
 
 **Completado:**
 - Fase 0: Fundación completa
 - Fase 1: Núcleo Informativo completa
-- Fase 2: Contenido Dinámico (90%)
+- Fase 2: Contenido Dinámico (100%)
   - M2.1 Grupos Parroquiales (CRUD + vistas públicas)
   - M2.2 Sistema de Eventos (CRUD + vistas públicas)
   - M2.3 Sistema de Noticias (CRUD + vistas públicas)
@@ -79,14 +79,15 @@ Al recibir el comando de cierre, el agente debe:
   - Horarios de misa dinámicos desde BD en inicio y horarios
   - Navegación actualizada con Capillas y Sacerdotes
   - Simplificación UX del formulario de horarios (eliminado campo redundante)
+  - "Templo Parroquial" como opción explícita en selector de ubicación
+  - Creación masiva de horarios recurrentes (selección múltiple de días)
 
 **En progreso:**
-- Mejora UX del formulario de horarios de misa
+- (ninguno)
 
 **Pendiente para próxima sesión:**
-1. Agregar "Templo Parroquial" como opción explícita en selector de ubicación
-2. Implementar creación masiva de horarios con periodicidad (UX Frictionless)
-3. Evitar crear misa por misa para horarios recurrentes
+- M2.6 Integración Facebook (requiere credenciales del cliente)
+- Iniciar Fase 3: Comunidad
 
 ### Notas Importantes
 
