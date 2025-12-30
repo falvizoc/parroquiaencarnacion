@@ -6,7 +6,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 
 | Fase | Nombre | Estado | Progreso |
 |------|--------|--------|----------|
-| 0 | Fundación | En progreso | 25% |
+| 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Pendiente | 0% |
 | 2 | Contenido Dinámico | Pendiente | 0% |
 | 3 | Comunidad | Pendiente | 0% |
@@ -23,35 +23,35 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M0.1 - Configuración Inicial
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Crear proyecto Laravel 11 | Pendiente | |
-| Configurar estructura de carpetas | Pendiente | |
+| Crear proyecto Laravel 11 | Completado | Laravel 12.44.0 |
+| Configurar estructura de carpetas | Completado | Estructura estándar Laravel |
 | Crear documentación base | Completado | docs/ |
-| Configurar .env para desarrollo | Pendiente | |
-| Configurar .gitignore | Pendiente | |
+| Configurar .env para desarrollo | Completado | MySQL, timezone MX |
+| Configurar .gitignore | Completado | |
 
 ### M0.2 - Base de Datos
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Diseñar esquema de BD | Pendiente | |
-| Crear migraciones base | Pendiente | |
-| Crear seeders iniciales | Pendiente | |
-| Configurar conexión MySQL | Pendiente | |
+| Diseñar esquema de BD | Pendiente | Para Fase 1 |
+| Crear migraciones base | Completado | Migraciones Laravel por defecto |
+| Crear seeders iniciales | Pendiente | Para Fase 1 |
+| Configurar conexión MySQL | Completado | En .env |
 
 ### M0.3 - Autenticación
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Instalar Filament 3 | Pendiente | |
-| Configurar panel admin | Pendiente | |
-| Crear roles (párroco, secretaría, voluntario) | Pendiente | |
-| Configurar permisos | Pendiente | |
+| Instalar Filament 3 | Completado | v3.3.45 |
+| Configurar panel admin | Completado | /admin |
+| Crear roles (párroco, secretaría, voluntario) | Pendiente | Para Fase 1 |
+| Configurar permisos | Pendiente | Para Fase 1 |
 
 ### M0.4 - Internacionalización
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Configurar locales (es, en) | Pendiente | |
-| Crear archivos de traducción base | Pendiente | |
-| Implementar URLs localizadas | Pendiente | |
-| Middleware de detección de idioma | Pendiente | |
+| Configurar locales (es, en) | Completado | Español por defecto |
+| Crear archivos de traducción base | Completado | resources/lang/ |
+| Implementar URLs localizadas | Completado | /es/, /en/ |
+| Middleware de detección de idioma | Completado | SetLocale middleware |
 
 ---
 
@@ -311,7 +311,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### Por Fase
 
 ```
-Fase 0: ██░░░░░░░░ 25%
+Fase 0: ██████████ 100% ✓
 Fase 1: ░░░░░░░░░░ 0%
 Fase 2: ░░░░░░░░░░ 0%
 Fase 3: ░░░░░░░░░░ 0%
@@ -322,7 +322,7 @@ Fase 5: ░░░░░░░░░░ 0%
 ### General MVP
 
 ```
-Progreso total: ████░░░░░░░░░░░░░░░░ ~5%
+Progreso total: ███░░░░░░░░░░░░░░░░░ ~15%
 ```
 
 ---
