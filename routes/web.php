@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\VerificacionController;
 use App\Models\Chapel;
+use App\Models\CryptCampaign;
+use App\Models\CryptInfo;
 use App\Models\Event;
 use App\Models\MassSchedule;
 use App\Models\News;
@@ -45,7 +47,11 @@ Route::prefix('{locale}')
                 ->get()
                 ->groupBy('dia_semana');
 
-            return view('pages.inicio', compact('horariosPorDia'));
+            // Información de criptas para mostrar en inicio
+            $criptasInfo = CryptInfo::paraInicio();
+            $criptasCampana = CryptCampaign::obtenerVigente();
+
+            return view('pages.inicio', compact('horariosPorDia', 'criptasInfo', 'criptasCampana'));
         })->name('inicio');
 
         // Horarios de misa

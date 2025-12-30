@@ -256,6 +256,108 @@
         </div>
     </section>
 
+    {{-- Zona de Criptas --}}
+    @if($criptasInfo)
+    <section class="py-16 lg:py-24 bg-gray-100">
+        <div class="container-main">
+            {{-- Banner de Campaña (si hay vigente) --}}
+            @if($criptasCampana)
+            <div class="mb-12 rounded-xl overflow-hidden shadow-lg"
+                 style="background-color: {{ $criptasCampana->color_fondo }}">
+                @if($criptasCampana->imagen_banner)
+                    <div class="relative">
+                        <img src="{{ Storage::url($criptasCampana->imagen_banner) }}"
+                             alt="{{ $criptasCampana->titulo }}"
+                             class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="text-center text-white p-6">
+                                <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">{{ $criptasCampana->titulo }}</h3>
+                                <p class="text-white/90 max-w-2xl">{{ $criptasCampana->descripcion }}</p>
+                                @if($criptasCampana->texto_boton && $criptasCampana->url_boton)
+                                    <a href="{{ $criptasCampana->url_boton }}" class="inline-block mt-4 bg-white text-gray-900 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+                                        {{ $criptasCampana->texto_boton }}
+                                    </a>
+                                @endif
+                                @if($criptasCampana->dias_restantes > 0)
+                                    <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} días restantes</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="p-8 md:p-12 text-center text-white">
+                        <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">{{ $criptasCampana->titulo }}</h3>
+                        <p class="text-white/90 max-w-2xl mx-auto">{{ $criptasCampana->descripcion }}</p>
+                        @if($criptasCampana->texto_boton && $criptasCampana->url_boton)
+                            <a href="{{ $criptasCampana->url_boton }}" class="inline-block mt-4 bg-white text-gray-900 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+                                {{ $criptasCampana->texto_boton }}
+                            </a>
+                        @endif
+                        @if($criptasCampana->dias_restantes > 0)
+                            <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} días restantes</p>
+                        @endif
+                    </div>
+                @endif
+            </div>
+            @endif
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                {{-- Imagen --}}
+                <div class="order-2 lg:order-1">
+                    @if($criptasInfo->imagen)
+                        <img src="{{ Storage::url($criptasInfo->imagen) }}"
+                             alt="{{ $criptasInfo->titulo }}"
+                             class="rounded-xl shadow-lg w-full">
+                    @else
+                        <div class="bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl aspect-video flex items-center justify-center">
+                            <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                    @endif
+                </div>
+
+                {{-- Contenido --}}
+                <div class="order-1 lg:order-2">
+                    <h2 class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                        {{ $criptasInfo->titulo }}
+                    </h2>
+                    @if($criptasInfo->subtitulo)
+                        <p class="text-lg text-primary-600 font-medium mb-4">{{ $criptasInfo->subtitulo }}</p>
+                    @endif
+                    <p class="text-gray-600 mb-6">
+                        {{ $criptasInfo->descripcion_corta ?? Str::limit(strip_tags($criptasInfo->descripcion), 200) }}
+                    </p>
+
+                    {{-- Información de contacto --}}
+                    <div class="space-y-3 mb-6">
+                        @if($criptasInfo->telefono_contacto)
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span>{{ $criptasInfo->telefono_contacto }}</span>
+                        </div>
+                        @endif
+                        @if($criptasInfo->horario_atencion)
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>{{ $criptasInfo->horario_atencion }}</span>
+                        </div>
+                        @endif
+                    </div>
+
+                    <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary">
+                        Solicitar información
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
     {{-- Grupos Parroquiales --}}
     <section class="py-16 lg:py-24">
         <div class="container-main">
