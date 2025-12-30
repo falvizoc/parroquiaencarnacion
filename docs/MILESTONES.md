@@ -10,7 +10,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Completado | 100% |
-| 4 | Optimización y Calidad | En Progreso | 60% |
+| 4 | Optimización y Calidad | En Progreso | 80% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
 
@@ -255,10 +255,10 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M4.4 - Analítica
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Google Analytics 4 | Pendiente | |
-| Google Search Console | Pendiente | |
-| Eventos de conversión | Pendiente | |
-| Dashboard de métricas | Pendiente | |
+| Google Analytics 4 | Completado | Configurable desde admin |
+| Google Search Console | Completado | Meta verificación en admin |
+| Eventos de conversión | Completado | Registro, newsletter, contacto |
+| Dashboard de métricas | Completado | Usar dashboard GA4 |
 
 ### M4.5 - Testing
 | Tarea | Estado | Notas |
@@ -362,14 +362,14 @@ Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
 Fase 3: ██████████ 100% ✓
-Fase 4: ██████░░░░ 60%
+Fase 4: ████████░░ 80%
 Fase 5: ░░░░░░░░░░ 0%
 ```
 
 ### General MVP
 
 ```
-Progreso total: ██████████████████░░ ~92%
+Progreso total: ██████████████████░░ ~96%
 ```
 
 ---
