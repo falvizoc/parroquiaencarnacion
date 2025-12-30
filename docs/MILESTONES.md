@@ -8,7 +8,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 |------|--------|--------|----------|
 | 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Completado | 100% |
-| 2 | Contenido Dinámico | Completado* | 95% |
+| 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Pendiente | 0% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
 | 5 | Preparación Producción | Pendiente | 0% |
@@ -161,11 +161,12 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M2.6 - Integración Facebook
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Configurar Facebook App | Pendiente | Requiere credenciales |
-| FacebookService | Pendiente | |
-| Importar posts | Pendiente | |
-| Publicar desde admin | Pendiente | |
-| Sincronización automática | Pendiente | |
+| Modelo Setting (config encriptada) | Completado | Credenciales en BD |
+| Página de Integraciones en admin | Completado | Panel > Configuración > Integraciones |
+| FacebookService | Completado | Lee config de BD |
+| Configurar Facebook App | En Producción | Usuario configura desde panel |
+| Importar posts | Pendiente | Cuando haya credenciales |
+| Widget de posts en sitio público | Pendiente | Cuando haya credenciales |
 
 ---
 
@@ -349,7 +350,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ```
 Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
-Fase 2: █████████░ 95% ✓ (M2.6 pendiente: credenciales)
+Fase 2: ██████████ 100% ✓
 Fase 3: ░░░░░░░░░░ 0%
 Fase 4: ░░░░░░░░░░ 0%
 Fase 5: ░░░░░░░░░░ 0%

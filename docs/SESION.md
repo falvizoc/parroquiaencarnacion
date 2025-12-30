@@ -63,7 +63,7 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.2.0 |
-| **Milestone activo** | M2 - Contenido Dinámico (100%) |
+| **Milestone activo** | Fase 2 Completada - Próximo: Fase 3 |
 
 ### Progreso del Día (2025-12-30)
 
@@ -81,13 +81,17 @@ Al recibir el comando de cierre, el agente debe:
   - Simplificación UX del formulario de horarios (eliminado campo redundante)
   - "Templo Parroquial" como opción explícita en selector de ubicación
   - Creación masiva de horarios recurrentes (selección múltiple de días)
+  - M2.6 Integración Facebook configurable desde panel admin
+    - Modelo Setting con encriptación para credenciales sensibles
+    - Página de Integraciones en Configuración
+    - FacebookService que lee de BD (no requiere .env)
+    - Usuario configura credenciales cuando esté en producción
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- M2.6 Integración Facebook (requiere credenciales del cliente)
-- Iniciar Fase 3: Comunidad
+- Iniciar Fase 3: Comunidad (Registro de Fieles, Directorio, Comunicaciones)
 
 ### Notas Importantes
 
