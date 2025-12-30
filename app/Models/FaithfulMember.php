@@ -38,6 +38,7 @@ class FaithfulMember extends Model
         'recibir_eventos',
         'recibir_avisos',
         'preferencias_adicionales',
+        'token_preferencias',
     ];
 
     protected function casts(): array
@@ -262,5 +263,34 @@ class FaithfulMember extends Model
             'avisos' => $this->recibir_avisos,
             default => false,
         };
+    }
+
+    /**
+     * Generar token de preferencias (para gestión de suscripción).
+     */
+    public function generarTokenPreferencias(): string
+    {
+        if (!$this->token_preferencias) {
+            $this->token_preferencias = Str::random(64);
+            $this->save();
+        }
+
+        return $this->token_preferencias;
+    }
+
+    /**
+     * Obtener URL de gestión de preferencias.
+     */
+    public function getUrlPreferenciasAttribute(): string
+    {
+        return route('preferencias', ['token' => $this->generarTokenPreferencias()]);
+    }
+
+    /**
+     * Obtener URL de cancelación de suscripción.
+     */
+    public function getUrlCancelarSuscripcionAttribute(): string
+    {
+        return route('cancelar-suscripcion', ['token' => $this->generarTokenPreferencias()]);
     }
 }

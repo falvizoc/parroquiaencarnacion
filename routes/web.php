@@ -177,4 +177,27 @@ Route::prefix('{locale}')
 
         Route::post('/reenviar-verificacion', [VerificacionController::class, 'reenviarVerificacion'])
             ->name('reenviar.verificacion');
+
+        // Newsletter y preferencias
+        Route::get('/newsletter', function () {
+            return view('pages.newsletter');
+        })->name('newsletter');
+
+        Route::get('/preferencias/{token}', function (string $locale, string $token) {
+            return view('pages.preferencias', compact('token'));
+        })->name('preferencias');
+
+        Route::get('/cancelar-suscripcion/{token}', function (string $locale, string $token) {
+            $fiel = \App\Models\FaithfulMember::where('token_preferencias', $token)->first();
+
+            if ($fiel) {
+                $fiel->update([
+                    'recibir_newsletter' => false,
+                    'recibir_eventos' => false,
+                    'recibir_avisos' => false,
+                ]);
+            }
+
+            return view('pages.cancelar-suscripcion', ['exito' => $fiel !== null]);
+        })->name('cancelar-suscripcion');
     });

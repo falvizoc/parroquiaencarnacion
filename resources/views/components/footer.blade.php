@@ -123,6 +123,27 @@
         </div>
     </div>
 
+    {{-- Newsletter Section --}}
+    <div class="border-t border-white/10 bg-primary-900/50">
+        <div class="container-main py-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <h3 class="font-semibold text-lg">Suscríbete a nuestro Newsletter</h3>
+                    <p class="text-white/70 text-sm mt-1">Recibe noticias, eventos y reflexiones en tu correo.</p>
+                </div>
+                <a
+                    href="{{ route('newsletter', ['locale' => app()->getLocale()]) }}"
+                    class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Suscribirme
+                </a>
+            </div>
+        </div>
+    </div>
+
     {{-- Bottom Bar --}}
     <div class="border-t border-white/10">
         <div class="container-main py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/60">
