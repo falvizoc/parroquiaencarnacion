@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Mail\VerificacionFielMail;
 use App\Models\Chapel;
 use App\Models\FaithfulMember;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -153,8 +155,8 @@ class RegistroFiel extends Component
         $this->fielRegistrado = $fiel;
         $this->registroCompletado = true;
 
-        // TODO: Enviar email de verificación
-        // Mail::to($fiel->email)->send(new VerificacionEmail($fiel));
+        // Enviar email de verificación
+        Mail::to($fiel->email)->send(new VerificacionFielMail($fiel));
     }
 
     public function getCapillasProperty(): array

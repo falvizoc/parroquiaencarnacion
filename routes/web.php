@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VerificacionController;
 use App\Models\Chapel;
 use App\Models\Event;
 use App\Models\MassSchedule;
@@ -165,8 +166,15 @@ Route::prefix('{locale}')
         })->name('registro');
 
         Route::post('/registro', function () {
-            // Procesar registro de fiel
+            // Procesar registro de fiel (ya no se usa, Livewire maneja esto)
             return redirect()->route('registro', ['locale' => app()->getLocale()])
                 ->with('success', __('general.messages.success'));
         })->name('registro.guardar');
+
+        // Verificación de email
+        Route::get('/verificar/{id}/{token}', [VerificacionController::class, 'verificarEmail'])
+            ->name('verificar.email');
+
+        Route::post('/reenviar-verificacion', [VerificacionController::class, 'reenviarVerificacion'])
+            ->name('reenviar.verificacion');
     });
