@@ -63,7 +63,7 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.2.0 |
-| **Milestone activo** | Fase 3 - Comunidad (40%) |
+| **Milestone activo** | Fase 3 - Comunidad (50%) |
 
 ### Progreso del Día (2025-12-30)
 
@@ -95,12 +95,17 @@ Al recibir el comando de cierre, el agente debe:
   - M3.2 Directorio de Fieles
     - Filtros avanzados (estado, verificación, capilla)
     - Exportación CSV/Excel configurable
+  - M3.1.4 Confirmación por email
+    - Mailable VerificacionFielMail con cola
+    - Vista markdown del email
+    - VerificacionController
+    - Rutas verificar y reenviar
+    - Integrado en formulario Livewire
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- M3.1.4 Confirmación por email
 - M3.3 Sistema de Comunicaciones
 - M3.4 Newsletter
 

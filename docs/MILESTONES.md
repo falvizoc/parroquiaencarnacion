@@ -9,7 +9,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
-| 3 | Comunidad | En Progreso | 40% |
+| 3 | Comunidad | En Progreso | 50% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
@@ -180,7 +180,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | Modelo FaithfulMember | Completado | Con relaciones, scopes y accessors |
 | Formulario público de registro | Completado | Livewire paso a paso (3 pasos) |
 | Validación de datos | Completado | Validación por paso |
-| Confirmación por email | Pendiente | Token generado, falta envío |
+| Confirmación por email | Completado | Mailable + VerificacionController |
 | Página de perfil | Pendiente | |
 
 ### M3.2 - Directorio de Fieles
@@ -351,7 +351,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
-Fase 3: ████░░░░░░ 40%
+Fase 3: █████░░░░░ 50%
 Fase 4: ░░░░░░░░░░ 0%
 Fase 5: ░░░░░░░░░░ 0%
 ```
