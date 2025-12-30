@@ -9,7 +9,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 0 | Fundación | Completado | 100% |
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
-| 3 | Comunidad | Pendiente | 0% |
+| 3 | Comunidad | En Progreso | 40% |
 | 4 | Optimización y Calidad | Pendiente | 0% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
@@ -177,19 +177,19 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M3.1 - Registro de Fieles
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Modelo FaithfulMember | Pendiente | |
-| Formulario público de registro | Pendiente | |
-| Validación de datos | Pendiente | |
-| Confirmación por email | Pendiente | |
+| Modelo FaithfulMember | Completado | Con relaciones, scopes y accessors |
+| Formulario público de registro | Completado | Livewire paso a paso (3 pasos) |
+| Validación de datos | Completado | Validación por paso |
+| Confirmación por email | Pendiente | Token generado, falta envío |
 | Página de perfil | Pendiente | |
 
 ### M3.2 - Directorio de Fieles
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| Vista en Filament | Pendiente | |
-| Búsqueda y filtros | Pendiente | |
-| Exportación (CSV, Excel) | Pendiente | |
-| Gestión de datos | Pendiente | |
+| Vista en Filament | Completado | FaithfulMemberResource con tabs |
+| Búsqueda y filtros | Completado | Estado, verificación, capilla, género |
+| Exportación (CSV, Excel) | Completado | Campos configurables, filtros |
+| Gestión de datos | Completado | CRUD completo con soft deletes |
 
 ### M3.3 - Sistema de Comunicaciones
 | Tarea | Estado | Notas |
@@ -351,7 +351,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
-Fase 3: ░░░░░░░░░░ 0%
+Fase 3: ████░░░░░░ 40%
 Fase 4: ░░░░░░░░░░ 0%
 Fase 5: ░░░░░░░░░░ 0%
 ```
@@ -359,7 +359,7 @@ Fase 5: ░░░░░░░░░░ 0%
 ### General MVP
 
 ```
-Progreso total: ██████████░░░░░░░░░░ ~50%
+Progreso total: ███████████░░░░░░░░░ ~55%
 ```
 
 ---

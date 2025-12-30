@@ -63,7 +63,7 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.2.0 |
-| **Milestone activo** | Fase 2 Completada - Próximo: Fase 3 |
+| **Milestone activo** | Fase 3 - Comunidad (40%) |
 
 ### Progreso del Día (2025-12-30)
 
@@ -86,12 +86,23 @@ Al recibir el comando de cierre, el agente debe:
     - Página de Integraciones en Configuración
     - FacebookService que lee de BD (no requiere .env)
     - Usuario configura credenciales cuando esté en producción
+- Fase 3: Comunidad iniciada
+  - M3.1 Registro de Fieles
+    - Modelo FaithfulMember con campos completos
+    - CRUD en Filament con formulario en tabs
+    - Formulario público Livewire (3 pasos)
+    - Relación con grupos parroquiales (tabla pivot)
+  - M3.2 Directorio de Fieles
+    - Filtros avanzados (estado, verificación, capilla)
+    - Exportación CSV/Excel configurable
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- Iniciar Fase 3: Comunidad (Registro de Fieles, Directorio, Comunicaciones)
+- M3.1.4 Confirmación por email
+- M3.3 Sistema de Comunicaciones
+- M3.4 Newsletter
 
 ### Notas Importantes
 
