@@ -5,38 +5,7 @@
 
 @section('content')
     {{-- Hero Section --}}
-    <section class="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden">
-        {{-- Background Pattern --}}
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-        </div>
-
-        <div class="container-main relative py-20 lg:py-32">
-            <div class="max-w-3xl">
-                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-                    {{ __('general.site.name') }}
-                </h1>
-                <p class="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in">
-                    {{ __('general.site.tagline') }}
-                </p>
-                <div class="flex flex-wrap gap-4 animate-fade-in">
-                    <a href="{{ route('horarios', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
-                        {{ __('general.nav.schedules') }}
-                    </a>
-                    <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-secondary border-white text-white hover:bg-white/10">
-                        {{ __('general.nav.contact') }}
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Wave Divider --}}
-        <div class="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-                <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f9fafb"/>
-            </svg>
-        </div>
-    </section>
+    <x-hero-inicio />
 
     {{-- Horarios Destacados --}}
     <section class="py-16 lg:py-24 bg-gray-50">
@@ -234,27 +203,7 @@
     </section>
 
     {{-- Adoración Perpetua CTA --}}
-    <section class="py-16 lg:py-24 bg-gradient-to-br from-gold-50 to-gold-100">
-        <div class="container-main">
-            <div class="max-w-4xl mx-auto text-center">
-                <div class="w-20 h-20 bg-gold-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-10 h-10 text-gold-700" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                </div>
-                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                    Capilla de Adoración Perpetua
-                </h2>
-                <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
-                    Nuestra capilla está abierta las 24 horas del día, los 7 días de la semana.
-                    Te invitamos a pasar un momento en presencia del Santísimo Sacramento.
-                </p>
-                <a href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" class="btn-primary">
-                    Conoce más sobre la Adoración
-                </a>
-            </div>
-        </div>
-    </section>
+    <x-adoracion-cta />
 
     {{-- Zona de Criptas --}}
     @if($criptasInfo)

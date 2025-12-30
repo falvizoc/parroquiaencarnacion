@@ -106,4 +106,113 @@
             transform: translateY(0);
         }
     }
+
+    /* === HERO SECTION EFFECTS === */
+
+    /* Contenedor parallax */
+    .parallax-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .parallax-bg {
+        position: absolute;
+        inset: -20%;
+        background-size: cover;
+        background-position: center;
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+    }
+
+    /* Overlay oscuro con gradiente solemne */
+    .hero-overlay {
+        @apply absolute inset-0;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+    }
+
+    /* Efecto de luz sutil (shimmer) */
+    .light-shimmer {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 70%
+        );
+        background-size: 200% 200%;
+        animation: shimmer 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes shimmer {
+        0%, 100% {
+            background-position: -200% -200%;
+        }
+        50% {
+            background-position: 200% 200%;
+        }
+    }
+
+    /* Shimmer dorado para Adoración */
+    .gold-shimmer {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(212, 175, 55, 0.1) 50%,
+            transparent 70%
+        );
+        background-size: 200% 200%;
+        animation: shimmer 10s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    /* Animación de entrada para contenido del Hero */
+    .hero-content-animate {
+        animation: heroContentIn 0.8s ease-out;
+    }
+
+    @keyframes heroContentIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Overlay dorado solemne para Adoración */
+    .adoracion-overlay {
+        @apply absolute inset-0;
+        background: linear-gradient(
+            135deg,
+            rgba(120, 90, 40, 0.75) 0%,
+            rgba(160, 130, 60, 0.55) 50%,
+            rgba(100, 75, 35, 0.70) 100%
+        );
+    }
+}
+
+/* Accesibilidad: respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .parallax-bg,
+    .light-shimmer,
+    .gold-shimmer {
+        animation: none !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .hero-content-animate {
+        animation: none !important;
+    }
 }

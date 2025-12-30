@@ -16,22 +16,8 @@ export default defineConfig({
         },
     },
     build: {
-        // Minificación agresiva para producción
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true,
-                drop_debugger: true,
-            },
-        },
-        // Code splitting para mejor caching
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    vendor: ['alpinejs'],
-                },
-            },
-        },
+        // Minificación con esbuild (default de Vite, más rápido)
+        minify: 'esbuild',
         // Target moderno para menor bundle size
         target: 'es2020',
         // Source maps solo en desarrollo
