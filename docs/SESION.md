@@ -63,7 +63,7 @@ Al recibir el comando de cierre, el agente debe:
 | **Última sesión** | 2025-12-30 |
 | **Rama activa** | develop |
 | **Versión actual** | 0.3.0 |
-| **Milestone activo** | Fase 4 - Optimización (20%) |
+| **Milestone activo** | Fase 4 - Optimización (40%) |
 
 ### Progreso del Día (2025-12-30)
 
@@ -99,7 +99,7 @@ Al recibir el comando de cierre, el agente debe:
   - Sección en página de inicio con banner de campaña
   - Activación automática por fechas (dic-ene)
   - Seeder con datos de ejemplo
-- **Fase 4: Optimización (20%)**
+- **Fase 4: Optimización (40%)**
   - M4.1 SEO Técnico (completado)
     - SeoService con View Composer
     - Sitemap.xml dinámico
@@ -108,9 +108,14 @@ Al recibir el comando de cierre, el agente debe:
     - Open Graph y Twitter Cards
     - Canonical URLs automáticos
     - Componente Breadcrumbs con Schema.org
+  - M4.2 AEO (completado)
+    - llms.txt para motores AI
+    - Componente FAQ con Schema.org FAQPage
+    - Página "Nosotros" con E-E-A-T signals
+    - FAQs estructuradas
 
 **En progreso:**
-- M4.2 AEO (Answer Engine Optimization)
+- (ninguno)
 
 **Pendiente para próxima sesión:**
 - M4.3 Performance

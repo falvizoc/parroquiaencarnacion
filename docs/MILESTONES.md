@@ -10,7 +10,7 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 | 1 | Núcleo Informativo | Completado | 100% |
 | 2 | Contenido Dinámico | Completado | 100% |
 | 3 | Comunidad | Completado | 100% |
-| 4 | Optimización y Calidad | En Progreso | 20% |
+| 4 | Optimización y Calidad | En Progreso | 40% |
 | 5 | Preparación Producción | Pendiente | 0% |
 | 6 | Post-MVP | Futuro | 0% |
 
@@ -238,10 +238,10 @@ Plan de desarrollo MVP para el sitio web de la Parroquia Nuestra Señora de la E
 ### M4.2 - AEO (Answer Engine Optimization)
 | Tarea | Estado | Notas |
 |-------|--------|-------|
-| FAQ Schema | Pendiente | |
-| llms.txt | Pendiente | |
-| Contenido estructurado Q&A | Pendiente | |
-| Página de autor/about | Pendiente | |
+| FAQ Schema | Completado | Componente x-faq con FAQPage |
+| llms.txt | Completado | Información estructurada para AI |
+| Contenido estructurado Q&A | Completado | FAQs en página nosotros |
+| Página de autor/about | Completado | /nosotros con E-E-A-T |
 
 ### M4.3 - Performance
 | Tarea | Estado | Notas |
@@ -362,14 +362,14 @@ Fase 0: ██████████ 100% ✓
 Fase 1: ██████████ 100% ✓
 Fase 2: ██████████ 100% ✓
 Fase 3: ██████████ 100% ✓
-Fase 4: ██░░░░░░░░ 20%
+Fase 4: ████░░░░░░ 40%
 Fase 5: ░░░░░░░░░░ 0%
 ```
 
 ### General MVP
 
 ```
-Progreso total: █████████████████░░░ ~84%
+Progreso total: █████████████████░░░ ~88%
 ```
 
 ---
