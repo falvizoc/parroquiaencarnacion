@@ -24,6 +24,9 @@ class Apariencia extends Page implements HasForms
     public ?array $heroData = [];
     public ?array $adoracionData = [];
 
+    // Tab activo
+    public string $activeTab = 'hero';
+
     // URLs de previsualización (actualizadas en tiempo real)
     public ?string $heroPreviewUrl = null;
     public ?string $adoracionPreviewUrl = null;

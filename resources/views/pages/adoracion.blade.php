@@ -3,10 +3,46 @@
 @section('title', __('general.nav.adoration') . ' | ' . __('general.site.short_name'))
 @section('description', 'Capilla de Adoración Perpetua de la Parroquia Nuestra Señora de la Encarnación. Abierta las 24 horas, los 7 días de la semana.')
 
+@php
+    use App\Models\Setting;
+    use Illuminate\Support\Facades\Storage;
+
+    $imagen_adoracion = Setting::obtener('adoracion_imagen');
+    $posicion_adoracion = Setting::obtener('adoracion_posicion', 'center');
+    $efectos_activos = Setting::obtener('adoracion_efectos_activos', true);
+    $tiene_imagen = !empty($imagen_adoracion);
+
+    $bg_position = match($posicion_adoracion) {
+        'top' => 'top',
+        'bottom' => 'bottom',
+        default => 'center',
+    };
+@endphp
+
 @section('content')
     {{-- Hero --}}
-    <section class="bg-gradient-to-br from-gold-600 to-gold-800 text-white py-16 lg:py-24">
-        <div class="container-main">
+    <section class="relative text-white py-16 lg:py-24 overflow-hidden
+                   {{ !$tiene_imagen ? 'bg-gradient-to-br from-gold-600 to-gold-800' : '' }}">
+
+        @if($tiene_imagen)
+            {{-- Imagen de fondo --}}
+            <div class="absolute inset-0 parallax-container">
+                <div class="parallax-bg"
+                     @if($efectos_activos) data-parallax="adoracion" @endif
+                     style="background-image: url('{{ Storage::url($imagen_adoracion) }}'); background-position: center {{ $bg_position }};">
+                </div>
+            </div>
+
+            {{-- Overlay dorado --}}
+            <div class="adoracion-overlay"></div>
+
+            {{-- Shimmer dorado --}}
+            @if($efectos_activos)
+                <div class="gold-shimmer"></div>
+            @endif
+        @endif
+
+        <div class="container-main relative z-10">
             <nav class="text-sm mb-4" aria-label="Breadcrumb">
                 <ol class="flex items-center gap-2 text-white/70">
                     <li>

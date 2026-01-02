@@ -111,7 +111,7 @@
 
     /* Contenedor parallax */
     .parallax-container {
-        position: relative;
+        /* position se define con clases Tailwind (absolute/relative) */
         overflow: hidden;
     }
 
