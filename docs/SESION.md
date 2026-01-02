@@ -60,50 +60,29 @@ Al recibir el comando de cierre, el agente debe:
 
 | Campo | Valor |
 |-------|-------|
-| **Última sesión** | 2025-12-30 |
+| **Última sesión** | 2026-01-02 |
 | **Rama activa** | develop |
-| **Versión actual** | 0.4.0 |
+| **Versión actual** | 0.4.1 |
 | **Milestone activo** | Fase 5 - Preparación Producción (75%) |
 
-### Progreso del Día (2025-12-30)
+### Progreso del Día (2026-01-02)
 
 **Completado:**
-- Fase 0-4: Completadas (100%) ✓
-- **Sistema Hero/Adoración Dinámico** (adicional pre-Fase 5)
-  - Página Filament "Apariencia" para gestionar imágenes
-  - Componentes hero-inicio y adoracion-cta con efectos visuales
-  - Parallax, overlay oscuro, shimmer de luz
-  - CTAs configurables desde admin
-  - Fallback a gradientes si no hay imagen
-- **Fase 5: Preparación Producción (75%)**
-  - M5.1 Seguridad (completado)
-    - SecurityHeaders middleware (CSP, HSTS, X-Frame-Options, Referrer-Policy)
-    - Rate limiting en AppServiceProvider (formularios, verificación, login)
-    - Throttle aplicado a rutas críticas
-    - Auditoría OWASP básica (Mass Assignment, SQL Injection, XSS, CSRF)
-    - **CSP actualizado para permitir Vite en desarrollo**
-  - M5.2 Despliegue (parcial)
-    - .env.production.example con configuración segura
-    - Script deploy-cpanel.sh para automatizar despliegue
-    - Pendiente: configuración en servidor real
-  - M5.3 Documentación (completado)
-    - MANUAL_ADMIN.md con guía completa del panel
-  - M5.4 Go-Live (pendiente)
-    - Requiere acceso al servidor de producción
-- **Mejoras Sesión 5 (2025-12-30)**
-  - Corregido symlink de storage (case sensitivity)
-  - CSP actualizado para desarrollo (Vite localhost:5173)
-  - Previsualización en tiempo real en página Apariencia
-  - Selector de posición de imagen (arriba/centro/abajo) para Adoración
+- **Corrección CSS parallax-container**
+  - Imagen de fondo ahora visible en sección Adoración
+  - Eliminado conflicto position:relative vs absolute de Tailwind
+- **Hero dinámico en página /adoracion**
+  - Usa misma imagen configurada desde admin
+  - Efectos parallax, overlay dorado y shimmer
+- **Página Apariencia reestructurada con tabs**
+  - Tab "Hero (Inicio)" con formulario y vista previa
+  - Tab "Adoración" con formulario y vista previa
+  - Vistas previas colapsadas por defecto
 
 **En progreso:**
 - (ninguno)
 
 **Pendiente para próxima sesión:**
-- **Página Apariencia - Mejoras UI:**
-  1. Corregir posicionamiento de imagen (no funciona correctamente)
-  2. Reestructurar página con pestañas (tabs) en lugar de secciones
-  3. Cada nueva configuración de apariencia = nueva pestaña
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 - Verificación final pre-lanzamiento
 
@@ -141,6 +120,20 @@ Al recibir el comando de cierre, el agente debe:
 **Resultado:**
 - Proyecto al 98% de completitud
 - Pendiente: despliegue en servidor de producción
+
+---
+
+### 2026-01-02 - Sesión 5
+
+**Actividades:**
+- Corregido CSS parallax-container (imagen de fondo visible)
+- Hero de /adoracion ahora usa imagen configurable desde admin
+- Página Apariencia reestructurada con pestañas (tabs)
+- Vistas previas colapsadas por defecto
+
+**Resultado:**
+- Mejoras UI completadas
+- Pendiente: M5.4 Go-Live
 
 ---
 

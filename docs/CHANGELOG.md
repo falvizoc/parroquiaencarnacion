@@ -10,12 +10,16 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ### Agregado
 - Estructura inicial del proyecto
 - Documentación base (PROYECTO.md, CONVENCIONES.md, CHANGELOG.md, SESION.md, MILESTONES.md)
+- Página Apariencia con sistema de pestañas (tabs)
+- Hero dinámico en página /adoracion con imagen configurable
 
 ### Cambiado
-- (ninguno)
+- Página Apariencia reestructurada: secciones → tabs
+- Vistas previas colapsadas por defecto en Apariencia
 
 ### Corregido
-- (ninguno)
+- CSS parallax-container: imagen de fondo ahora visible en sección Adoración
+- Conflicto position:relative vs absolute de Tailwind en parallax
 
 ### Eliminado
 - (ninguno)
