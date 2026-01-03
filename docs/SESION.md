@@ -91,12 +91,14 @@ Al recibir el comando de cierre, el agente debe:
   - ✅ Traducciones asíncronas funcionando correctamente
   - ✅ OpenAI API integrada y operativa
 
-**Pendiente para próxima sesión:**
-- 🐛 **BUG CRÍTICO**: En páginas de detalle/edición, el contenido aparece en español aunque esté seleccionado inglés
-  - Detectado en: Grupos Parroquiales (detalle)
-  - Revisar en: News, Events, Chapels, Priests, EmailTemplates
-  - El listado muestra correctamente el idioma, pero el formulario de edición no
-- ⚙️ **Configuración OpenAI en Dashboard**
+**Completado hoy (2026-01-03 - Sesión 8):**
+- ✅ **Bug de idioma en páginas de edición CORREGIDO**
+  - Causa: `fillForm()` de Filament llamaba `getDefaultTranslatableLocale()` después de mount
+  - Solución: Sobrescribir el método en `PersistentTranslatable` + `insteadof` en todas las Edit pages
+  - Archivos modificados: 6 páginas Edit + trait PersistentTranslatable
+
+**Pendiente:**
+- ⚙️ **Configuración OpenAI en Dashboard** ← SIGUIENTE
   - Agregar sección en Admin > Configuración > Integraciones para OpenAI
   - Permitir al usuario configurar su propia API Key
   - Selector de modelo: gpt-4o-mini (recomendado), gpt-4o, gpt-3.5-turbo
