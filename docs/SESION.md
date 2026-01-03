@@ -96,8 +96,12 @@ Al recibir el comando de cierre, el agente debe:
   - Detectado en: Grupos Parroquiales (detalle)
   - Revisar en: News, Events, Chapels, Priests, EmailTemplates
   - El listado muestra correctamente el idioma, pero el formulario de edición no
+- ⚙️ **Configuración OpenAI en Dashboard**
+  - Agregar sección en Admin > Configuración para API Key de OpenAI
+  - Permitir al usuario configurar su propia key
+  - Guardar encriptado en BD (tabla settings o similar)
+  - Validar conexión antes de guardar
 - Traducir contenido restante (noticias 3-6, grupos 3-6, etc.)
-- Configurar OPENAI_API_KEY en producción
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
 ### Notas Importantes
