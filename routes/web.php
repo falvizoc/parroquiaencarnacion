@@ -85,7 +85,27 @@ Route::prefix('{locale}')
             $criptasInfo = CryptInfo::paraInicio();
             $criptasCampana = CryptCampaign::obtenerVigente();
 
-            return view('pages.inicio', compact('horariosPorDia', 'criptasInfo', 'criptasCampana'));
+            // Próximos eventos (con traducción si está en inglés)
+            $eventosProximos = Event::activo()
+                ->conTraduccion()
+                ->proximos()
+                ->take(3)
+                ->get();
+
+            // Grupos parroquiales destacados (con traducción)
+            $gruposDestacados = ParishGroup::activo()
+                ->conTraduccion()
+                ->ordenado()
+                ->take(6)
+                ->get();
+
+            return view('pages.inicio', compact(
+                'horariosPorDia',
+                'criptasInfo',
+                'criptasCampana',
+                'eventosProximos',
+                'gruposDestacados'
+            ));
         })->name('inicio');
 
         // Horarios de misa

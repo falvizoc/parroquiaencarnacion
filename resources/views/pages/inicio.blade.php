@@ -103,101 +103,49 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {{-- Evento Placeholder 1 --}}
-                <article class="card group">
-                    <div class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 relative overflow-hidden">
-                        <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-sm">
-                            <div class="text-xs text-gray-500 uppercase">Ene</div>
-                            <div class="text-xl font-bold text-primary-600">15</div>
+                @forelse($eventosProximos as $evento)
+                    <article class="card group">
+                        <div class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 relative overflow-hidden">
+                            @if($evento->imagen)
+                                <img src="{{ Storage::url($evento->imagen) }}" alt="{{ $evento->titulo }}" class="w-full h-full object-cover">
+                            @endif
+                            <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-sm">
+                                <div class="text-xs text-gray-500 uppercase">{{ $evento->fecha_inicio->translatedFormat('M') }}</div>
+                                <div class="text-xl font-bold text-primary-600">{{ $evento->fecha_inicio->format('d') }}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-semibold text-lg text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                            Retiro de Adviento
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Jornada de reflexión y oración para preparar nuestros corazones.
-                        </p>
-                        <div class="flex items-center gap-4 text-sm text-gray-500">
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                9:00 AM
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                </svg>
-                                Salón Parroquial
-                            </span>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                                {{ $evento->titulo }}
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                                {{ $evento->extracto ?? Str::limit(strip_tags($evento->descripcion), 100) }}
+                            </p>
+                            <div class="flex items-center gap-4 text-sm text-gray-500">
+                                @if($evento->hora_inicio)
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        {{ $evento->hora_inicio->format('g:i A') }}
+                                    </span>
+                                @endif
+                                @if($evento->lugar)
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        </svg>
+                                        {{ $evento->lugar }}
+                                    </span>
+                                @endif
+                            </div>
                         </div>
+                    </article>
+                @empty
+                    <div class="col-span-full text-center py-8 text-gray-500">
+                        {{ __('general.messages.no_events') }}
                     </div>
-                </article>
-
-                {{-- Evento Placeholder 2 --}}
-                <article class="card group">
-                    <div class="aspect-video bg-gradient-to-br from-gold-100 to-gold-200 relative overflow-hidden">
-                        <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-sm">
-                            <div class="text-xs text-gray-500 uppercase">Ene</div>
-                            <div class="text-xl font-bold text-primary-600">20</div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-semibold text-lg text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                            Misa de Sanación
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Celebración especial con imposición de manos y oración por los enfermos.
-                        </p>
-                        <div class="flex items-center gap-4 text-sm text-gray-500">
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                7:00 PM
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                </svg>
-                                Templo Principal
-                            </span>
-                        </div>
-                    </div>
-                </article>
-
-                {{-- Evento Placeholder 3 --}}
-                <article class="card group">
-                    <div class="aspect-video bg-gradient-to-br from-primary-200 to-primary-300 relative overflow-hidden">
-                        <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-sm">
-                            <div class="text-xs text-gray-500 uppercase">Ene</div>
-                            <div class="text-xl font-bold text-primary-600">25</div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-semibold text-lg text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                            Taller para Catequistas
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Formación continua para todos los catequistas de la parroquia.
-                        </p>
-                        <div class="flex items-center gap-4 text-sm text-gray-500">
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                10:00 AM
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                </svg>
-                                Aula 3
-                            </span>
-                        </div>
-                    </div>
-                </article>
+                @endforelse
             </div>
         </div>
     </section>
@@ -320,16 +268,26 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                @foreach(['Coro', 'Catequesis', 'Jóvenes', 'Matrimonios', 'Legión de María', 'Ministros'] as $grupo)
+                @forelse($gruposDestacados as $grupo)
                 <a href="{{ route('grupos.index', ['locale' => app()->getLocale()]) }}" class="card p-6 text-center hover:shadow-md hover:border-primary-200 transition-all group">
-                    <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary-200 transition-colors">
-                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium text-gray-900 text-sm">{{ $grupo }}</h3>
+                    @if($grupo->icono)
+                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary-200 transition-colors overflow-hidden">
+                            <img src="{{ Storage::url($grupo->icono) }}" alt="{{ $grupo->nombre }}" class="w-8 h-8 object-contain">
+                        </div>
+                    @else
+                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary-200 transition-colors">
+                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                    @endif
+                    <h3 class="font-medium text-gray-900 text-sm">{{ $grupo->nombre }}</h3>
                 </a>
-                @endforeach
+                @empty
+                    <div class="col-span-full text-center py-8 text-gray-500">
+                        {{ __('general.messages.no_groups') }}
+                    </div>
+                @endforelse
             </div>
 
             <div class="text-center mt-8">

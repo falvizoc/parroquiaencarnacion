@@ -2,11 +2,26 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class CryptInfo extends Model
 {
+    use HasTranslations, HasAiTranslation;
+
+    /**
+     * Campos que soportan traducción automática.
+     */
+    public array $translatable = [
+        'titulo',
+        'subtitulo',
+        'descripcion',
+        'descripcion_corta',
+        'horario_atencion',
+    ];
+
     protected $fillable = [
         'titulo',
         'subtitulo',
