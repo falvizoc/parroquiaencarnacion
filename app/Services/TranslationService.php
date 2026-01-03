@@ -94,14 +94,14 @@ class TranslationService
     {
         // Verificar si la integración está activa
         if (!$this->estaActivo()) {
-            throw new \Exception('La integración de OpenAI no está activa. Configúrala en Admin > Integraciones.');
+            throw new \Exception('La integración de IA no está activa. Configúrala en Admin > Integraciones.');
         }
 
         // Limpiar texto de HTML excesivo si es necesario
         $textoLimpio = $this->prepararTextoParaTraduccion($texto);
 
         // Obtener modelo configurado o usar por defecto
-        $modelo = Setting::obtener('openai_modelo', 'gpt-4o-mini');
+        $modelo = Setting::obtener('ia_modelo', 'gpt-4o-mini');
 
         // Obtener cliente de OpenAI (usa API Key de settings o .env)
         $client = $this->obtenerCliente();
@@ -126,37 +126,27 @@ class TranslationService
     }
 
     /**
-     * Verifica si la integración de OpenAI está activa.
+     * Verifica si la integración de IA está activa.
      */
     public function estaActivo(): bool
     {
-        // Si está configurado en settings, usar eso
-        $configuradoEnSettings = Setting::where('clave', 'openai_activo')->exists();
-
-        if ($configuradoEnSettings) {
-            return (bool) Setting::obtener('openai_activo', false);
-        }
-
-        // Si no hay configuración en settings, verificar si hay API Key en .env
-        return !empty(config('openai.api_key'));
+        return (bool) Setting::obtener('ia_activo', false);
     }
 
     /**
-     * Obtiene el cliente de OpenAI con la API Key correcta.
+     * Obtiene el cliente de OpenAI con la API Key del dashboard.
      */
     protected function obtenerCliente()
     {
-        // Priorizar API Key de settings
-        $apiKeySettings = Setting::obtener('openai_api_key');
+        $apiKey = Setting::obtener('ia_api_key');
 
-        if (!empty($apiKeySettings)) {
-            return \OpenAI::factory()
-                ->withApiKey($apiKeySettings)
-                ->make();
+        if (empty($apiKey)) {
+            throw new \Exception('API Key no configurada. Ve a Admin > Integraciones > Inteligencia Artificial.');
         }
 
-        // Fallback al cliente por defecto (usa .env)
-        return \OpenAI::client(config('openai.api_key'));
+        return \OpenAI::factory()
+            ->withApiKey($apiKey)
+            ->make();
     }
 
     /**

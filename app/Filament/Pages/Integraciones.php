@@ -29,7 +29,9 @@ class Integraciones extends Page implements HasForms
 
     public ?array $facebookData = [];
     public ?array $analyticsData = [];
-    public ?array $openaiData = [];
+    public ?array $iaData = [];
+
+    public string $activeTab = 'ia';
 
     public function mount(): void
     {
@@ -47,15 +49,49 @@ class Integraciones extends Page implements HasForms
             'search_console_verificacion' => Setting::obtener('search_console_verificacion', ''),
         ];
 
-        $this->openaiData = [
-            'openai_activo' => Setting::obtener('openai_activo', false),
-            'openai_api_key' => Setting::obtener('openai_api_key', ''),
-            'openai_modelo' => Setting::obtener('openai_modelo', 'gpt-4o-mini'),
+        // Migrar settings antiguos a nuevos nombres si existen
+        $this->migrarSettingsIA();
+
+        $this->iaData = [
+            'ia_activo' => Setting::obtener('ia_activo', false),
+            'ia_api_key' => Setting::obtener('ia_api_key', ''),
+            'ia_modelo' => Setting::obtener('ia_modelo', 'gpt-4o-mini'),
+            'ia_proveedor' => Setting::obtener('ia_proveedor', 'openai'),
         ];
 
         $this->facebookForm->fill($this->facebookData);
         $this->analyticsForm->fill($this->analyticsData);
-        $this->openaiForm->fill($this->openaiData);
+        $this->iaForm->fill($this->iaData);
+    }
+
+    /**
+     * Migra settings de openai_* a ia_* si existen.
+     */
+    protected function migrarSettingsIA(): void
+    {
+        $mappings = [
+            'openai_activo' => 'ia_activo',
+            'openai_api_key' => 'ia_api_key',
+            'openai_modelo' => 'ia_modelo',
+        ];
+
+        foreach ($mappings as $old => $new) {
+            $oldValue = Setting::obtener($old);
+            $newValue = Setting::obtener($new);
+
+            // Solo migrar si el valor antiguo existe y el nuevo no
+            if ($oldValue !== null && $newValue === null) {
+                Setting::establecer($new, $oldValue, [
+                    'grupo' => 'ia',
+                    'es_sensible' => str_contains($new, 'api_key'),
+                ]);
+            }
+        }
+    }
+
+    public function setActiveTab(string $tab): void
+    {
+        $this->activeTab = $tab;
     }
 
     protected function getForms(): array
@@ -63,15 +99,89 @@ class Integraciones extends Page implements HasForms
         return [
             'facebookForm',
             'analyticsForm',
-            'openaiForm',
+            'iaForm',
         ];
+    }
+
+    public function iaForm(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('Configuración de Inteligencia Artificial')
+                    ->description('Configura el proveedor de IA para traducciones automáticas, generación de contenido y otras funcionalidades inteligentes.')
+                    ->icon('heroicon-o-sparkles')
+                    ->schema([
+                        Forms\Components\Toggle::make('ia_activo')
+                            ->label('Integración activa')
+                            ->helperText('Activa o desactiva todas las funcionalidades de IA')
+                            ->live(),
+
+                        Forms\Components\Select::make('ia_proveedor')
+                            ->label('Proveedor de IA')
+                            ->options([
+                                'openai' => 'OpenAI (GPT-4, GPT-3.5)',
+                                // Preparado para futuros proveedores
+                                // 'anthropic' => 'Anthropic (Claude)',
+                                // 'google' => 'Google (Gemini)',
+                            ])
+                            ->default('openai')
+                            ->helperText('Selecciona el proveedor de servicios de IA')
+                            ->disabled(fn (Forms\Get $get) => !$get('ia_activo'))
+                            ->live(),
+
+                        Forms\Components\TextInput::make('ia_api_key')
+                            ->label('API Key')
+                            ->password()
+                            ->revealable()
+                            ->placeholder('sk-...')
+                            ->helperText('Tu clave de API del proveedor seleccionado')
+                            ->disabled(fn (Forms\Get $get) => !$get('ia_activo')),
+
+                        Forms\Components\Select::make('ia_modelo')
+                            ->label('Modelo de IA')
+                            ->options([
+                                'gpt-4o-mini' => 'GPT-4o Mini (Recomendado - Económico y rápido)',
+                                'gpt-4o' => 'GPT-4o (Mayor calidad, más costoso)',
+                                'gpt-4-turbo' => 'GPT-4 Turbo (Balance calidad/costo)',
+                                'gpt-3.5-turbo' => 'GPT-3.5 Turbo (Más económico)',
+                            ])
+                            ->default('gpt-4o-mini')
+                            ->helperText('El modelo a usar para las tareas de IA')
+                            ->disabled(fn (Forms\Get $get) => !$get('ia_activo')),
+
+                        Forms\Components\Placeholder::make('ia_estado')
+                            ->label('Estado de la conexión')
+                            ->content(function () {
+                                $activo = Setting::obtener('ia_activo', false);
+                                $apiKey = Setting::obtener('ia_api_key');
+
+                                if (!$activo) {
+                                    return '⚪ Integración desactivada';
+                                }
+
+                                if (empty($apiKey)) {
+                                    return '🟡 Falta configurar API Key';
+                                }
+
+                                return '🟢 Configurado - Usa "Probar Conexión" para verificar';
+                            }),
+
+                        Forms\Components\Placeholder::make('ia_funcionalidades')
+                            ->label('Funcionalidades disponibles')
+                            ->content('• Traducción automática de contenido (ES ↔ EN)
+• Generación de extractos y resúmenes (próximamente)
+• Sugerencias de contenido (próximamente)')
+                            ->columnSpanFull(),
+                    ]),
+            ])
+            ->statePath('iaData');
     }
 
     public function facebookForm(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Facebook')
+                Forms\Components\Section::make('Configuración de Facebook')
                     ->description('Configura la integración con Facebook para importar publicaciones y sincronizar contenido.')
                     ->icon('heroicon-o-globe-alt')
                     ->schema([
@@ -179,57 +289,98 @@ class Integraciones extends Page implements HasForms
             ->statePath('analyticsData');
     }
 
-    public function openaiForm(Form $form): Form
+    public function guardarIA(): void
     {
-        return $form
-            ->schema([
-                Forms\Components\Section::make('OpenAI - Traducciones con IA')
-                    ->description('Configura la API de OpenAI para traducción automática de contenido.')
-                    ->icon('heroicon-o-language')
-                    ->schema([
-                        Forms\Components\Toggle::make('openai_activo')
-                            ->label('Integración activa')
-                            ->helperText('Activa o desactiva las traducciones automáticas con IA')
-                            ->live(),
+        $data = $this->iaForm->getState();
 
-                        Forms\Components\TextInput::make('openai_api_key')
-                            ->label('API Key')
-                            ->password()
-                            ->revealable()
-                            ->placeholder('sk-...')
-                            ->helperText('Tu clave de API de OpenAI. Consíguela en platform.openai.com')
-                            ->disabled(fn (Forms\Get $get) => !$get('openai_activo')),
+        Setting::establecer('ia_activo', $data['ia_activo'], [
+            'grupo' => 'ia',
+            'tipo' => 'boolean',
+        ]);
 
-                        Forms\Components\Select::make('openai_modelo')
-                            ->label('Modelo de IA')
-                            ->options([
-                                'gpt-4o-mini' => 'GPT-4o Mini (Recomendado - Económico y rápido)',
-                                'gpt-4o' => 'GPT-4o (Mayor calidad, más costoso)',
-                                'gpt-3.5-turbo' => 'GPT-3.5 Turbo (Más económico, menor calidad)',
-                            ])
-                            ->default('gpt-4o-mini')
-                            ->helperText('El modelo a usar para las traducciones')
-                            ->disabled(fn (Forms\Get $get) => !$get('openai_activo')),
+        Setting::establecer('ia_proveedor', $data['ia_proveedor'] ?? 'openai', [
+            'grupo' => 'ia',
+        ]);
 
-                        Forms\Components\Placeholder::make('openai_estado')
-                            ->label('Estado de la conexión')
-                            ->content(function () {
-                                $activo = Setting::obtener('openai_activo', false);
-                                $apiKey = Setting::obtener('openai_api_key');
+        Setting::establecer('ia_api_key', $data['ia_api_key'], [
+            'grupo' => 'ia',
+            'es_sensible' => true,
+        ]);
 
-                                if (!$activo) {
-                                    return '⚪ Integración desactivada';
-                                }
+        Setting::establecer('ia_modelo', $data['ia_modelo'], [
+            'grupo' => 'ia',
+        ]);
 
-                                if (empty($apiKey)) {
-                                    return '🟡 Falta configurar API Key';
-                                }
+        Notification::make()
+            ->title('Configuración guardada')
+            ->body('La configuración de Inteligencia Artificial se ha guardado correctamente.')
+            ->success()
+            ->send();
+    }
 
-                                return '🟢 Configurado - Usa "Probar Conexión" para verificar';
-                            }),
-                    ]),
-            ])
-            ->statePath('openaiData');
+    public function probarConexionIA(): void
+    {
+        $activo = Setting::obtener('ia_activo', false);
+
+        if (!$activo) {
+            Notification::make()
+                ->title('Integración desactivada')
+                ->body('Activa la integración antes de probar la conexión.')
+                ->warning()
+                ->send();
+            return;
+        }
+
+        $apiKey = Setting::obtener('ia_api_key');
+
+        if (empty($apiKey)) {
+            Notification::make()
+                ->title('Configuración incompleta')
+                ->body('Ingresa tu API Key antes de probar.')
+                ->warning()
+                ->send();
+            return;
+        }
+
+        try {
+            $modelo = Setting::obtener('ia_modelo', 'gpt-4o-mini');
+
+            // Crear cliente temporal con la API Key configurada
+            $client = \OpenAI::factory()
+                ->withApiKey($apiKey)
+                ->make();
+
+            $response = $client->chat()->create([
+                'model' => $modelo,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Responde solo con "OK" sin nada más.'],
+                ],
+                'max_tokens' => 5,
+            ]);
+
+            Notification::make()
+                ->title('Conexión exitosa')
+                ->body("IA respondió correctamente usando el modelo {$modelo}.")
+                ->success()
+                ->send();
+        } catch (\Exception $e) {
+            $mensaje = $e->getMessage();
+
+            // Simplificar mensajes de error comunes
+            if (str_contains($mensaje, 'Incorrect API key')) {
+                $mensaje = 'API Key inválida. Verifica que sea correcta.';
+            } elseif (str_contains($mensaje, 'exceeded your current quota')) {
+                $mensaje = 'Sin créditos disponibles. Recarga tu cuenta.';
+            } elseif (str_contains($mensaje, 'model')) {
+                $mensaje = 'Modelo no disponible. Prueba con otro modelo.';
+            }
+
+            Notification::make()
+                ->title('Error de conexión')
+                ->body($mensaje)
+                ->danger()
+                ->send();
+        }
     }
 
     public function guardarAnalytics(): void
@@ -327,98 +478,6 @@ class Integraciones extends Page implements HasForms
             Notification::make()
                 ->title('Error de conexión')
                 ->body($resultado['error'])
-                ->danger()
-                ->send();
-        }
-    }
-
-    public function guardarOpenai(): void
-    {
-        $data = $this->openaiForm->getState();
-
-        Setting::establecer('openai_activo', $data['openai_activo'], [
-            'grupo' => 'openai',
-            'tipo' => 'boolean',
-        ]);
-
-        Setting::establecer('openai_api_key', $data['openai_api_key'], [
-            'grupo' => 'openai',
-            'es_sensible' => true,
-        ]);
-
-        Setting::establecer('openai_modelo', $data['openai_modelo'], [
-            'grupo' => 'openai',
-        ]);
-
-        Notification::make()
-            ->title('Configuración guardada')
-            ->body('La configuración de OpenAI se ha guardado correctamente.')
-            ->success()
-            ->send();
-    }
-
-    public function probarConexionOpenai(): void
-    {
-        $activo = Setting::obtener('openai_activo', false);
-
-        if (!$activo) {
-            Notification::make()
-                ->title('Integración desactivada')
-                ->body('Activa la integración antes de probar la conexión.')
-                ->warning()
-                ->send();
-            return;
-        }
-
-        $apiKey = Setting::obtener('openai_api_key');
-
-        if (empty($apiKey)) {
-            Notification::make()
-                ->title('Configuración incompleta')
-                ->body('Ingresa tu API Key antes de probar.')
-                ->warning()
-                ->send();
-            return;
-        }
-
-        try {
-            $modelo = Setting::obtener('openai_modelo', 'gpt-4o-mini');
-
-            // Crear cliente temporal con la API Key configurada
-            $client = \OpenAI::factory()
-                ->withApiKey($apiKey)
-                ->make();
-
-            $response = $client->chat()->create([
-                'model' => $modelo,
-                'messages' => [
-                    ['role' => 'user', 'content' => 'Responde solo con "OK" sin nada más.'],
-                ],
-                'max_tokens' => 5,
-            ]);
-
-            $respuesta = $response->choices[0]->message->content ?? '';
-
-            Notification::make()
-                ->title('Conexión exitosa')
-                ->body("OpenAI respondió correctamente usando el modelo {$modelo}.")
-                ->success()
-                ->send();
-        } catch (\Exception $e) {
-            $mensaje = $e->getMessage();
-
-            // Simplificar mensajes de error comunes
-            if (str_contains($mensaje, 'Incorrect API key')) {
-                $mensaje = 'API Key inválida. Verifica que sea correcta.';
-            } elseif (str_contains($mensaje, 'exceeded your current quota')) {
-                $mensaje = 'Sin créditos disponibles. Recarga tu cuenta en OpenAI.';
-            } elseif (str_contains($mensaje, 'model')) {
-                $mensaje = 'Modelo no disponible. Prueba con otro modelo.';
-            }
-
-            Notification::make()
-                ->title('Error de conexión')
-                ->body($mensaje)
                 ->danger()
                 ->send();
         }

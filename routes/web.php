@@ -97,8 +97,9 @@ Route::prefix('{locale}')
                 ->get()
                 ->groupBy('dia_semana');
 
-            // Capillas con sus horarios
+            // Capillas con sus horarios (solo las traducidas)
             $capillas = Chapel::activo()
+                ->conTraduccion()
                 ->ordenado()
                 ->with(['massSchedules' => function ($query) {
                     $query->activo()->ordenados();
@@ -110,8 +111,8 @@ Route::prefix('{locale}')
 
         // Noticias
         Route::get('/noticias', function () {
-            $noticias = News::activo()->publicado()->reciente()->paginate(9);
-            $noticiasDestacadas = News::activo()->publicado()->destacado()->reciente()->take(3)->get();
+            $noticias = News::activo()->publicado()->conTraduccion()->reciente()->paginate(9);
+            $noticiasDestacadas = News::activo()->publicado()->conTraduccion()->destacado()->reciente()->take(3)->get();
             return view('pages.noticias.index', compact('noticias', 'noticiasDestacadas'));
         })->name('noticias.index');
 
@@ -119,6 +120,7 @@ Route::prefix('{locale}')
             $noticia = News::where('slug', $slug)->activo()->publicado()->firstOrFail();
             $otrasNoticias = News::activo()
                 ->publicado()
+                ->conTraduccion()
                 ->reciente()
                 ->where('id', '!=', $noticia->id)
                 ->take(3)
@@ -128,14 +130,15 @@ Route::prefix('{locale}')
 
         // Eventos
         Route::get('/eventos', function () {
-            $eventosProximos = Event::activo()->proximos()->take(12)->get();
-            $eventosPasados = Event::activo()->pasados()->take(6)->get();
+            $eventosProximos = Event::activo()->conTraduccion()->proximos()->take(12)->get();
+            $eventosPasados = Event::activo()->conTraduccion()->pasados()->take(6)->get();
             return view('pages.eventos.index', compact('eventosProximos', 'eventosPasados'));
         })->name('eventos.index');
 
         Route::get('/eventos/{slug}', function (string $locale, string $slug) {
             $evento = Event::where('slug', $slug)->activo()->firstOrFail();
             $otrosEventos = Event::activo()
+                ->conTraduccion()
                 ->proximos()
                 ->where('id', '!=', $evento->id)
                 ->take(3)
@@ -145,13 +148,14 @@ Route::prefix('{locale}')
 
         // Grupos parroquiales
         Route::get('/grupos', function () {
-            $grupos = ParishGroup::activo()->ordenado()->get();
+            $grupos = ParishGroup::activo()->conTraduccion()->ordenado()->get();
             return view('pages.grupos.index', compact('grupos'));
         })->name('grupos.index');
 
         Route::get('/grupos/{slug}', function (string $locale, string $slug) {
             $grupo = ParishGroup::where('slug', $slug)->activo()->firstOrFail();
             $otrosGrupos = ParishGroup::activo()
+                ->conTraduccion()
                 ->where('id', '!=', $grupo->id)
                 ->ordenado()
                 ->take(3)
@@ -161,15 +165,16 @@ Route::prefix('{locale}')
 
         // Capillas
         Route::get('/capillas', function () {
-            $capillas = Chapel::activo()->ordenado()->get();
+            $capillas = Chapel::activo()->conTraduccion()->ordenado()->get();
             return view('pages.capillas.index', compact('capillas'));
         })->name('capillas.index');
 
         Route::get('/capillas/{slug}', function (string $locale, string $slug) {
             $capilla = Chapel::where('slug', $slug)->activo()->firstOrFail();
             $horarios = MassSchedule::where('chapel_id', $capilla->id)->activo()->ordenados()->get();
-            $grupos = ParishGroup::where('chapel_id', $capilla->id)->activo()->ordenado()->get();
+            $grupos = ParishGroup::where('chapel_id', $capilla->id)->activo()->conTraduccion()->ordenado()->get();
             $otrasCapillas = Chapel::activo()
+                ->conTraduccion()
                 ->where('id', '!=', $capilla->id)
                 ->ordenado()
                 ->take(3)
@@ -179,8 +184,8 @@ Route::prefix('{locale}')
 
         // Sacerdotes
         Route::get('/sacerdotes', function () {
-            $parroco = Priest::activo()->parroco()->first();
-            $vicarios = Priest::activo()->vicarios()->ordenado()->get();
+            $parroco = Priest::activo()->conTraduccion()->parroco()->first();
+            $vicarios = Priest::activo()->conTraduccion()->vicarios()->ordenado()->get();
             return view('pages.sacerdotes', compact('parroco', 'vicarios'));
         })->name('sacerdotes');
 
