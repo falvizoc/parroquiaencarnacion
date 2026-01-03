@@ -129,6 +129,23 @@ Al recibir el comando de cierre, el agente debe:
   - TranslationService actualizado para usar configuración centralizada
   - Archivos: Integraciones.php, TranslationService.php, HasAiTranslation.php, routes/web.php
 
+**Completado (2026-01-03 - Sesión 9 - Corrección de traducciones y parallax):**
+- ✅ **Traducciones dinámicas en página de inicio CORREGIDAS**
+  - Eventos y grupos ahora se pasan desde rutas a la vista (no hardcodeados)
+  - CryptInfo modelo actualizado con trait HasAiTranslation
+  - Archivos: routes/web.php, app/Models/CryptInfo.php
+
+- ✅ **Bug de cache de traducciones en footer CORREGIDO**
+  - Causa: `Setting::obtener()` cacheaba defaults (traducciones) con `Cache::remember()`
+  - Solución: Solo cachear valores reales de BD, no defaults
+  - Archivo: app/Models/Setting.php
+
+- ✅ **Imagen de Adoración Perpetua CORREGIDA**
+  - Causa: Conflicto de especificidad CSS en Tailwind v4
+  - Clases `absolute inset-0` combinadas con `.parallax-container` no se aplicaban
+  - Solución: Mover posicionamiento directo al CSS + dimensiones explícitas
+  - Archivos: resources/css/app.css, adoracion-cta.blade.php, hero-inicio.blade.php
+
 **Pendiente:**
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
