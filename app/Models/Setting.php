@@ -70,27 +70,41 @@ class Setting extends Model
 
     /**
      * Obtener una configuración por clave.
+     *
+     * Nota: El default no se cachea para permitir que las traducciones
+     * se evalúen correctamente según el idioma activo.
      */
     public static function obtener(string $clave, mixed $default = null): mixed
     {
         $cacheKey = "setting_{$clave}";
 
-        return Cache::remember($cacheKey, 3600, function () use ($clave, $default) {
-            $setting = static::where('clave', $clave)->first();
+        // Intentar obtener del cache (solo valores reales, no defaults)
+        $cached = Cache::get($cacheKey);
+        if ($cached !== null) {
+            return $cached;
+        }
 
-            if (!$setting) {
-                return $default;
-            }
+        // Buscar en la base de datos
+        $setting = static::where('clave', $clave)->first();
 
-            $valor = $setting->valor_desencriptado;
+        if (!$setting) {
+            // Retornar default sin cachear (permite traducciones dinámicas)
+            return $default;
+        }
 
-            return match ($setting->tipo) {
-                'boolean' => filter_var($valor, FILTER_VALIDATE_BOOLEAN),
-                'integer' => (int) $valor,
-                'json' => json_decode($valor, true),
-                default => $valor,
-            };
-        });
+        $valor = $setting->valor_desencriptado;
+
+        $resultado = match ($setting->tipo) {
+            'boolean' => filter_var($valor, FILTER_VALIDATE_BOOLEAN),
+            'integer' => (int) $valor,
+            'json' => json_decode($valor, true),
+            default => $valor,
+        };
+
+        // Cachear solo valores reales de la BD
+        Cache::put($cacheKey, $resultado, 3600);
+
+        return $resultado;
     }
 
     /**
