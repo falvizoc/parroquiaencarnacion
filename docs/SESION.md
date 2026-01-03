@@ -62,8 +62,8 @@ Al recibir el comando de cierre, el agente debe:
 |-------|-------|
 | **Última sesión** | 2026-01-03 |
 | **Rama activa** | develop |
-| **Versión actual** | 0.6.0 |
-| **Milestone activo** | Sistema Multiidioma Completado |
+| **Versión actual** | 0.6.1 |
+| **Milestone activo** | Preparación Producción (75%) |
 
 ### Progreso del Día (2026-01-03)
 
@@ -145,6 +145,18 @@ Al recibir el comando de cierre, el agente debe:
   - Clases `absolute inset-0` combinadas con `.parallax-container` no se aplicaban
   - Solución: Mover posicionamiento directo al CSS + dimensiones explícitas
   - Archivos: resources/css/app.css, adoracion-cta.blade.php, hero-inicio.blade.php
+
+**Completado (2026-01-03 - Sesión 10 - Renombrado y mejora UX filtros):**
+- ✅ **Renombrado 'Templo Principal' → 'Templo Parroquial'**
+  - 17 ocurrencias en 14 archivos
+  - Modelos, Resources, Jobs, traducciones, vistas, seeders, tests
+  - Commits: `2a9fc65`
+
+- ✅ **Filtro de ubicación unificado en Horarios de Misa**
+  - Eliminado filtro redundante "Templo Parroquial" (TernaryFilter)
+  - Unificado en único SelectFilter "Ubicación"
+  - Incluye: Templo Parroquial + todas las capillas activas
+  - Commit: `8238edb`
 
 **Pendiente:**
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
