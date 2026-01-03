@@ -5,8 +5,8 @@
 @section('content')
     <section class="bg-gradient-to-br from-primary-800 to-primary-900 text-white py-16">
         <div class="container-main">
-            <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('Registro de Fieles') }}</h1>
-            <p class="mt-4 text-white/80 text-lg">{{ __('Únete a nuestra comunidad parroquial y mantente informado.') }}</p>
+            <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.register.title') }}</h1>
+            <p class="mt-4 text-white/80 text-lg">{{ __('general.register.intro') }}</p>
         </div>
     </section>
 

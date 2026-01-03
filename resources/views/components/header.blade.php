@@ -1,3 +1,12 @@
+@php
+    use App\Models\Setting;
+    use Illuminate\Support\Facades\Storage;
+
+    $logotipo = Setting::obtener('logotipo');
+    $nombreParroquia = Setting::obtener('nombre_parroquia', __('general.site.short_name'));
+    $ubicacion = Setting::obtener('ubicacion', __('general.site.location'));
+    $tieneLogotipo = !empty($logotipo);
+@endphp
 <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-100">
     {{-- Top Bar --}}
     <div class="bg-primary-900 text-white text-sm">
@@ -8,7 +17,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    {{ __('general.site.location') }}
+                    {{ $ubicacion }}
                 </span>
             </div>
             <div class="flex items-center gap-4">
@@ -33,17 +42,23 @@
         <div class="flex items-center justify-between h-16 lg:h-20">
             {{-- Logo --}}
             <a href="{{ route('inicio', ['locale' => app()->getLocale()]) }}" class="flex items-center gap-3">
-                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-primary-600 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                </div>
+                @if($tieneLogotipo)
+                    <img src="{{ Storage::url($logotipo) }}"
+                         alt="{{ $nombreParroquia }}"
+                         class="w-10 h-10 lg:w-12 lg:h-12 object-contain">
+                @else
+                    <div class="w-10 h-10 lg:w-12 lg:h-12 bg-primary-600 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                @endif
                 <div class="hidden sm:block">
                     <div class="font-serif font-bold text-lg text-primary-900 leading-tight">
-                        {{ __('general.site.short_name') }}
+                        {{ $nombreParroquia }}
                     </div>
                     <div class="text-xs text-gray-500">
-                        {{ __('general.site.location') }}
+                        {{ $ubicacion }}
                     </div>
                 </div>
             </a>

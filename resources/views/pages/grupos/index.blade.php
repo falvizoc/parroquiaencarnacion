@@ -24,8 +24,8 @@
             </nav>
             <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.nav.groups') }}</h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Comunidades de fe donde puedes crecer espiritualmente junto a otros hermanos.
-                Encuentra tu lugar en nuestra parroquia.
+                {{ __('general.groups.intro') }}
+                {{ __('general.groups.find_place') }}
             </p>
         </div>
     </section>
@@ -89,7 +89,7 @@
 
                             <a href="{{ route('grupos.detalle', ['locale' => app()->getLocale(), 'slug' => $grupo->slug]) }}"
                                class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm">
-                                Conocer más
+                                {{ __('general.actions.learn_more') }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                 </svg>
@@ -103,20 +103,20 @@
                     <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
-                    <p class="text-gray-500">No hay grupos disponibles en este momento.</p>
+                    <p class="text-gray-500">{{ __('general.messages.no_groups') }}</p>
                 </div>
             @endif
 
             {{-- CTA --}}
             <div class="mt-16 bg-primary-50 rounded-2xl p-8 lg:p-12 text-center">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-primary-900 mb-4">
-                    ¿Interesado en unirte a algún grupo?
+                    {{ __('general.groups.interested') }}
                 </h2>
                 <p class="text-gray-600 mb-6 max-w-xl mx-auto">
-                    Contáctanos para más información sobre cómo participar en nuestras comunidades de fe.
+                    {{ __('general.groups.contact_info') }}
                 </p>
                 <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary">
-                    Contáctanos
+                    {{ __('general.actions.contact_us') }}
                 </a>
             </div>
         </div>

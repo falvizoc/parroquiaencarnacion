@@ -64,7 +64,6 @@ class FaithfulMember extends Model
     public const GENEROS = [
         'masculino' => 'Masculino',
         'femenino' => 'Femenino',
-        'otro' => 'Prefiero no decir',
     ];
 
     /**

@@ -3,9 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NewsResource\Pages;
+use App\Jobs\TranslateContentJob;
 use App\Models\News;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -13,6 +16,7 @@ use Illuminate\Support\Str;
 
 class NewsResource extends Resource
 {
+    use Translatable;
     protected static ?string $model = News::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
@@ -155,6 +159,22 @@ class NewsResource extends Resource
                     ->falseLabel('No destacadas'),
             ])
             ->actions([
+                Tables\Actions\Action::make('traducir')
+                    ->label('Traducir')
+                    ->icon('heroicon-o-language')
+                    ->color('info')
+                    ->requiresConfirmation()
+                    ->modalHeading('Traducir todos los campos')
+                    ->modalDescription('Se traducirán todos los campos traducibles al inglés usando IA. Esto puede tomar unos segundos.')
+                    ->modalSubmitActionLabel('Traducir ahora')
+                    ->action(function (News $record) {
+                        TranslateContentJob::dispatch($record, $record->getTranslatableAttributes());
+                        Notification::make()
+                            ->title('Traducción iniciada')
+                            ->body('Los campos se están traduciendo. Actualiza la página en unos segundos.')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

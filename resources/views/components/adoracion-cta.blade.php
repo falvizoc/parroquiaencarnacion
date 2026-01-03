@@ -48,19 +48,18 @@
 
             {{-- Título --}}
             <h2 class="font-serif text-3xl lg:text-4xl font-bold {{ $tiene_imagen ? 'text-white' : 'text-gray-900' }} mb-4">
-                Capilla de Adoración Perpetua
+                {{ __('general.adoration.title') }}
             </h2>
 
             {{-- Descripción --}}
             <p class="{{ $tiene_imagen ? 'text-white/90' : 'text-gray-600' }} text-lg mb-8 max-w-2xl mx-auto">
-                Nuestra capilla está abierta las 24 horas del día, los 7 días de la semana.
-                Te invitamos a pasar un momento en presencia del Santísimo Sacramento.
+                {{ __('general.components.adoration_cta_description') }}
             </p>
 
             {{-- CTA --}}
             <a href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}"
                class="{{ $tiene_imagen ? 'btn-primary bg-white text-gold-700 hover:bg-gray-100' : 'btn-primary' }}">
-                Conoce más sobre la Adoración
+                {{ __('general.components.adoration_cta_button') }}
             </a>
         </div>
     </div>

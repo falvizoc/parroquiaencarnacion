@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,13 @@ use Illuminate\Support\Str;
 
 class ParishGroup extends Model
 {
+    use HasAiTranslation;
+
+    /**
+     * Campos traducibles automáticamente.
+     */
+    public array $translatable = ['nombre', 'slug', 'descripcion_corta', 'descripcion', 'lugar_reunion'];
+
     protected $fillable = [
         'chapel_id',
         'nombre',

@@ -2,12 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class Priest extends Model
 {
+    use HasAiTranslation;
+
+    /**
+     * Campos traducibles automáticamente.
+     */
+    public array $translatable = ['nombre', 'slug', 'cargo', 'titulo', 'mensaje', 'biografia'];
+
     protected $fillable = [
         'nombre',
         'slug',

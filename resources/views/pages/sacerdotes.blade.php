@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nuestros Sacerdotes | ' . __('general.site.short_name'))
+@section('title', __('general.priests.title') . ' | ' . __('general.site.short_name'))
 @section('description', 'Conoce a los sacerdotes de la Parroquia Nuestra Señora de la Encarnación en Tampico.')
 
 @section('content')
@@ -18,13 +18,13 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
-                        <span class="text-white">Nuestros Sacerdotes</span>
+                        <span class="text-white">{{ __('general.priests.title') }}</span>
                     </li>
                 </ol>
             </nav>
-            <h1 class="font-serif text-4xl lg:text-5xl font-bold">Nuestros Sacerdotes</h1>
+            <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.priests.title') }}</h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Conoce a los sacerdotes que sirven a nuestra comunidad parroquial con dedicación y amor pastoral.
+                {{ __('general.priests.intro') }}
             </p>
         </div>
     </section>
@@ -64,7 +64,7 @@
 
                             @if($parroco->fecha_asignacion)
                                 <p class="text-gray-500 mb-6">
-                                    Párroco desde {{ $parroco->fecha_asignacion->translatedFormat('F \\d\\e Y') }}
+                                    {{ __('general.priests.pastor_since') }} {{ $parroco->fecha_asignacion->translatedFormat('F \\d\\e Y') }}
                                 </p>
                             @endif
 
@@ -76,7 +76,7 @@
 
                             @if($parroco->biografia)
                                 <div class="bg-gray-50 rounded-lg p-6">
-                                    <h3 class="font-semibold text-gray-900 mb-2">Biografía</h3>
+                                    <h3 class="font-semibold text-gray-900 mb-2">{{ __('general.priests.biography') }}</h3>
                                     <p class="text-gray-600">{{ $parroco->biografia }}</p>
                                 </div>
                             @endif
@@ -104,7 +104,7 @@
         <section class="py-16 bg-gray-50">
             <div class="container-main">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8 text-center">
-                    Vicarios Parroquiales
+                    {{ __('general.priests.vicar_priests') }}
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -138,7 +138,7 @@
 
                                 @if($vicario->fecha_asignacion)
                                     <p class="text-sm text-gray-500 mb-4">
-                                        Desde {{ $vicario->fecha_asignacion->translatedFormat('F Y') }}
+                                        {{ __('general.priests.pastor_since') }} {{ $vicario->fecha_asignacion->translatedFormat('F Y') }}
                                     </p>
                                 @endif
 
@@ -154,7 +154,7 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                         </svg>
-                                        Contactar
+                                        {{ __('general.actions.contact_us') }}
                                     </a>
                                 @endif
                             </div>
@@ -168,8 +168,8 @@
     {{-- CTA --}}
     <section class="py-12 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="text-2xl font-bold mb-4">¿Necesitas hablar con un sacerdote?</h2>
-            <p class="text-white/80 mb-6">Puedes agendar una cita o visitar la oficina parroquial.</p>
+            <h2 class="text-2xl font-bold mb-4">{{ __('general.priests.need_to_talk') }}</h2>
+            <p class="text-white/80 mb-6">{{ __('general.priests.appointment_info') }}</p>
             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.contact') }}
             </a>

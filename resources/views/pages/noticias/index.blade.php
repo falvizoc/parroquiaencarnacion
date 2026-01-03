@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', __('general.nav.news') . ' | ' . __('general.site.short_name'))
-@section('description', 'Noticias y comunicados de la Parroquia Nuestra Señora de la Encarnación en Tampico.')
+@section('description', __('general.events.calendar_description'))
 
 @section('content')
     {{-- Hero --}}
@@ -24,7 +24,7 @@
             </nav>
             <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.nav.news') }}</h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Mantente informado sobre las actividades y comunicados de nuestra comunidad parroquial.
+                {{ __('general.home.events_intro') }}
             </p>
         </div>
     </section>
@@ -34,7 +34,7 @@
         <section class="py-16 bg-gray-50">
             <div class="container-main">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                    Noticias Destacadas
+                    {{ __('general.news.featured') }}
                 </h2>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -56,7 +56,7 @@
                                     @endif
                                     <div class="absolute top-4 left-4">
                                         <span class="px-3 py-1 text-sm font-medium rounded-full bg-gold-500 text-white">
-                                            Destacado
+                                            {{ __('general.news.featured') }}
                                         </span>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     @endif
                                     <a href="{{ route('noticias.detalle', ['locale' => app()->getLocale(), 'slug' => $destacada->slug]) }}"
                                        class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm mt-4">
-                                        Leer más
+                                        {{ __('general.actions.read_more') }}
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -122,7 +122,7 @@
     <section class="py-16 lg:py-24">
         <div class="container-main">
             <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                Todas las Noticias
+                {{ __('general.news.all') }}
             </h2>
 
             @if($noticias->count() > 0)
@@ -161,7 +161,7 @@
                                 @if($noticia->es_destacado)
                                     <div class="absolute top-4 left-4">
                                         <span class="px-2 py-1 text-xs font-medium rounded-full bg-gold-500 text-white">
-                                            Destacado
+                                            {{ __('general.news.featured') }}
                                         </span>
                                     </div>
                                 @endif
@@ -172,7 +172,7 @@
                                 <div class="flex items-center gap-3 text-sm text-gray-500 mb-3">
                                     <span>{{ $noticia->fecha_formateada }}</span>
                                     <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-                                    <span>{{ $noticia->tiempo_lectura }} min de lectura</span>
+                                    <span>{{ $noticia->tiempo_lectura }} {{ __('general.time.minutes_read') }}</span>
                                 </div>
 
                                 <h3 class="font-serif text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
@@ -195,7 +195,7 @@
 
                                 <a href="{{ route('noticias.detalle', ['locale' => app()->getLocale(), 'slug' => $noticia->slug]) }}"
                                    class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm mt-4">
-                                    Leer más
+                                    {{ __('general.actions.read_more') }}
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>
@@ -216,8 +216,8 @@
                     <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                     </svg>
-                    <p class="text-gray-500">No hay noticias publicadas por el momento.</p>
-                    <p class="text-gray-400 text-sm mt-2">Vuelve pronto para conocer las novedades de nuestra parroquia.</p>
+                    <p class="text-gray-500">{{ __('general.messages.no_news') }}</p>
+                    <p class="text-gray-400 text-sm mt-2">{{ __('general.home.events_intro') }}</p>
                 </div>
             @endif
         </div>
@@ -226,8 +226,8 @@
     {{-- CTA --}}
     <section class="py-12 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="text-2xl font-bold mb-4">¿Quieres estar al día con nuestras noticias?</h2>
-            <p class="text-white/80 mb-6">Síguenos en nuestras redes sociales o visítanos en la parroquia.</p>
+            <h2 class="text-2xl font-bold mb-4">{{ __('general.news.stay_updated') }}</h2>
+            <p class="text-white/80 mb-6">{{ __('general.footer.follow_us') }}</p>
             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.contact') }}
             </a>

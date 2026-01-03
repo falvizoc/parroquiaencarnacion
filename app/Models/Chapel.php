@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,6 +10,13 @@ use Illuminate\Support\Str;
 
 class Chapel extends Model
 {
+    use HasAiTranslation;
+
+    /**
+     * Campos traducibles automáticamente.
+     */
+    public array $translatable = ['nombre', 'slug', 'descripcion', 'direccion'];
+
     protected $fillable = [
         'nombre',
         'slug',

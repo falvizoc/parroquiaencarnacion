@@ -7,18 +7,15 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                 </svg>
             </div>
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ __('¡Registro exitoso!') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ __('general.register.success_title') }}!</h2>
             <p class="text-gray-600 mb-6">
-                {{ __('Gracias por registrarte, :nombre. Hemos enviado un correo de verificación a :email.', [
-                    'nombre' => $fielRegistrado->nombre,
-                    'email' => $fielRegistrado->email
-                ]) }}
+                {{ __('general.register.success_message') }}
             </p>
             <p class="text-sm text-gray-500 mb-8">
-                {{ __('Por favor revisa tu bandeja de entrada y haz clic en el enlace de verificación para completar tu registro.') }}
+                {{ __('general.register.verify_email') }}
             </p>
             <a href="{{ route('inicio', ['locale' => app()->getLocale()]) }}" class="btn-primary">
-                {{ __('Volver al inicio') }}
+                {{ __('general.actions.back') }}
             </a>
         </div>
     @else
@@ -26,10 +23,11 @@
             {{-- Indicador de pasos --}}
             <div class="bg-gray-50 px-8 py-4 border-b">
                 <div class="flex items-center justify-between">
-                    @foreach([1 => 'Datos Personales', 2 => 'Contacto', 3 => 'Preferencias'] as $num => $label)
+                    @foreach([1 => __('general.register.step1'), 2 => __('general.register.step2'), 3 => __('general.register.step3')] as $num => $label)
                         <button
+                            type="button"
                             wire:click="irAPaso({{ $num }})"
-                            @if($num > $paso) disabled @endif
+                            {{ $num > $paso ? 'disabled' : '' }}
                             class="flex items-center gap-2 {{ $num <= $paso ? 'cursor-pointer' : 'cursor-not-allowed opacity-50' }}"
                         >
                             <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
@@ -57,12 +55,12 @@
                 {{-- Paso 1: Datos Personales --}}
                 @if($paso == 1)
                     <div class="space-y-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Datos Personales') }}</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.register.personal_info') }}</h3>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Nombre(s)') }} <span class="text-red-500">*</span>
+                                    {{ __('general.register.first_name') }} <span class="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -75,7 +73,7 @@
 
                             <div>
                                 <label for="apellido_paterno" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Apellido Paterno') }} <span class="text-red-500">*</span>
+                                    {{ __('general.register.last_name') }} <span class="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -85,24 +83,12 @@
                                 >
                                 @error('apellido_paterno') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                             </div>
-
-                            <div>
-                                <label for="apellido_materno" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Apellido Materno') }}
-                                </label>
-                                <input
-                                    type="text"
-                                    id="apellido_materno"
-                                    wire:model="apellido_materno"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                                >
-                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Fecha de Nacimiento') }}
+                                    {{ __('general.register.birth_date') }}
                                 </label>
                                 <input
                                     type="date"
@@ -115,14 +101,14 @@
 
                             <div>
                                 <label for="genero" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Género') }}
+                                    {{ __('general.register.gender') }}
                                 </label>
                                 <select
                                     id="genero"
                                     wire:model="genero"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                 >
-                                    <option value="">{{ __('Seleccionar...') }}</option>
+                                    <option value="">{{ __('general.forms.select_option') }}</option>
                                     @foreach(\App\Models\FaithfulMember::GENEROS as $value => $label)
                                         <option value="{{ $value }}">{{ $label }}</option>
                                     @endforeach
@@ -135,11 +121,11 @@
                 {{-- Paso 2: Contacto --}}
                 @if($paso == 2)
                     <div class="space-y-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Información de Contacto') }}</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.register.contact_info') }}</h3>
 
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                                {{ __('Correo Electrónico') }} <span class="text-red-500">*</span>
+                                {{ __('general.contact.email') }} <span class="text-red-500">*</span>
                             </label>
                             <input
                                 type="email"
@@ -148,12 +134,12 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 @error('email') border-red-500 @enderror"
                             >
                             @error('email') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
-                            <p class="mt-1 text-xs text-gray-500">{{ __('Te enviaremos un correo de verificación.') }}</p>
+                            <p class="mt-1 text-xs text-gray-500">{{ __('general.register.verify_email') }}</p>
                         </div>
 
                         <div>
                             <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">
-                                {{ __('Teléfono') }}
+                                {{ __('general.contact.phone') }}
                             </label>
                             <input
                                 type="tel"
@@ -166,7 +152,7 @@
 
                         <div>
                             <label for="direccion" class="block text-sm font-medium text-gray-700 mb-1">
-                                {{ __('Dirección') }}
+                                {{ __('general.register.address') }}
                             </label>
                             <textarea
                                 id="direccion"
@@ -179,7 +165,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="colonia" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Colonia') }}
+                                    {{ __('general.register.city') }}
                                 </label>
                                 <input
                                     type="text"
@@ -191,7 +177,7 @@
 
                             <div>
                                 <label for="codigo_postal" class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('Código Postal') }}
+                                    {{ __('general.register.zip_code') }}
                                 </label>
                                 <input
                                     type="text"
@@ -208,27 +194,27 @@
                 {{-- Paso 3: Preferencias --}}
                 @if($paso == 3)
                     <div class="space-y-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Preferencias') }}</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.register.step3') }}</h3>
 
                         <div>
                             <label for="chapel_id" class="block text-sm font-medium text-gray-700 mb-1">
-                                {{ __('Capilla de tu preferencia') }}
+                                {{ __('general.register.select_chapel') }}
                             </label>
                             <select
                                 id="chapel_id"
                                 wire:model="chapel_id"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                             >
-                                <option value="">{{ __('Templo Parroquial (Principal)') }}</option>
+                                <option value="">{{ __('general.places.main_temple') }}</option>
                                 @foreach($this->capillas as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
-                            <p class="mt-1 text-xs text-gray-500">{{ __('Selecciona donde asistes con más frecuencia.') }}</p>
+                            <p class="mt-1 text-xs text-gray-500">{{ __('general.forms.select_option') }}</p>
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm font-medium text-gray-700 mb-3">{{ __('¿Qué comunicaciones deseas recibir?') }}</p>
+                            <p class="text-sm font-medium text-gray-700 mb-3">{{ __('general.register.preferences_title') }}</p>
                             <div class="space-y-3">
                                 <label class="flex items-start gap-3">
                                     <input
@@ -237,8 +223,8 @@
                                         class="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                                     >
                                     <div>
-                                        <span class="text-gray-900 font-medium">{{ __('Boletín Parroquial') }}</span>
-                                        <p class="text-xs text-gray-500">{{ __('Noticias, reflexiones y actividades de la parroquia.') }}</p>
+                                        <span class="text-gray-900 font-medium">{{ __('general.register.receive_newsletter') }}</span>
+                                        <p class="text-xs text-gray-500">{{ __('general.footer.newsletter_description') }}</p>
                                     </div>
                                 </label>
 
@@ -249,8 +235,8 @@
                                         class="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                                     >
                                     <div>
-                                        <span class="text-gray-900 font-medium">{{ __('Avisos de Eventos') }}</span>
-                                        <p class="text-xs text-gray-500">{{ __('Retiros, celebraciones especiales y actividades.') }}</p>
+                                        <span class="text-gray-900 font-medium">{{ __('general.register.receive_events') }}</span>
+                                        <p class="text-xs text-gray-500">{{ __('general.home.events_intro') }}</p>
                                     </div>
                                 </label>
 
@@ -261,8 +247,8 @@
                                         class="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                                     >
                                     <div>
-                                        <span class="text-gray-900 font-medium">{{ __('Avisos Importantes') }}</span>
-                                        <p class="text-xs text-gray-500">{{ __('Comunicados urgentes y cambios de horarios.') }}</p>
+                                        <span class="text-gray-900 font-medium">{{ __('general.register.receive_notices') }}</span>
+                                        <p class="text-xs text-gray-500">{{ __('general.schedules.holidays_note') }}</p>
                                     </div>
                                 </label>
                             </div>
@@ -277,8 +263,8 @@
                                 >
                                 <div>
                                     <span class="text-gray-900">
-                                        {{ __('He leído y acepto el') }}
-                                        <a href="#" class="text-primary-600 hover:underline">{{ __('Aviso de Privacidad') }}</a>
+                                        {{ __('general.contact.privacy_notice') }}
+                                        <a href="#" class="text-primary-600 hover:underline">{{ __('general.footer.privacy') }}</a>
                                         <span class="text-red-500">*</span>
                                     </span>
                                 </div>
@@ -296,7 +282,7 @@
                             wire:click="pasoAnterior"
                             class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
                         >
-                            {{ __('Anterior') }}
+                            {{ __('general.actions.previous') }}
                         </button>
                     @else
                         <div></div>
@@ -309,10 +295,10 @@
                         wire:loading.class="opacity-50 cursor-not-allowed"
                     >
                         <span wire:loading.remove>
-                            {{ $paso == $totalPasos ? __('Registrarme') : __('Siguiente') }}
+                            {{ $paso == $totalPasos ? __('general.actions.submit') : __('general.actions.next') }}
                         </span>
                         <span wire:loading>
-                            {{ __('Procesando...') }}
+                            {{ __('general.messages.loading') }}
                         </span>
                         @if($paso < $totalPasos)
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

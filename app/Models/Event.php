@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,13 @@ use Carbon\Carbon;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, HasAiTranslation;
+
+    /**
+     * Campos traducibles automáticamente.
+     */
+    public array $translatable = ['titulo', 'slug', 'descripcion_corta', 'descripcion', 'lugar', 'direccion'];
+
     protected $fillable = [
         'titulo',
         'slug',

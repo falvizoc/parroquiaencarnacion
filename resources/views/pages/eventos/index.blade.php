@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', __('general.nav.events') . ' | ' . __('general.site.short_name'))
-@section('description', 'Calendario de eventos y actividades de la Parroquia Nuestra Señora de la Encarnación en Tampico.')
+@section('description', __('general.events.calendar_description'))
 
 @section('content')
     {{-- Hero --}}
@@ -24,7 +24,7 @@
             </nav>
             <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.nav.events') }}</h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Calendario de actividades y celebraciones de nuestra comunidad parroquial.
+                {{ __('general.events.calendar_description') }}
             </p>
         </div>
     </section>
@@ -33,7 +33,7 @@
     <section class="py-16 lg:py-24">
         <div class="container-main">
             <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                Próximos Eventos
+                {{ __('general.events.upcoming') }}
             </h2>
 
             @if($eventosProximos->count() > 0)
@@ -115,7 +115,7 @@
 
                                 <a href="{{ route('eventos.detalle', ['locale' => app()->getLocale(), 'slug' => $evento->slug]) }}"
                                    class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm mt-4">
-                                    Ver detalles
+                                    {{ __('general.actions.view_details') }}
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>
@@ -129,8 +129,8 @@
                     <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
-                    <p class="text-gray-500">No hay eventos próximos programados.</p>
-                    <p class="text-gray-400 text-sm mt-2">Vuelve pronto para conocer nuestras actividades.</p>
+                    <p class="text-gray-500">{{ __('general.messages.no_events') }}</p>
+                    <p class="text-gray-400 text-sm mt-2">{{ __('general.home.events_intro') }}</p>
                 </div>
             @endif
         </div>
@@ -141,7 +141,7 @@
         <section class="py-16 bg-gray-50">
             <div class="container-main">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                    Eventos Anteriores
+                    {{ __('general.events.past') }}
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -172,8 +172,8 @@
     {{-- CTA --}}
     <section class="py-12 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="text-2xl font-bold mb-4">¿Tienes alguna pregunta sobre nuestros eventos?</h2>
-            <p class="text-white/80 mb-6">Contáctanos para más información.</p>
+            <h2 class="text-2xl font-bold mb-4">{{ __('general.events.questions') }}</h2>
+            <p class="text-white/80 mb-6">{{ __('general.groups.contact_info') }}</p>
             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.contact') }}
             </a>

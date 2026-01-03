@@ -26,8 +26,7 @@
                 {{ __('general.nav.schedules') }}
             </h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Te invitamos a participar en nuestras celebraciones eucarísticas.
-                Aquí encontrarás todos los horarios de misa de nuestra parroquia y sus capillas.
+                {{ __('general.home.schedules_intro') }}
             </p>
         </div>
     </section>
@@ -37,7 +36,7 @@
         <div class="container-main">
             <div class="flex flex-wrap gap-3">
                 <a href="#parroquia-principal" class="px-4 py-2 bg-primary-600 text-white rounded-full text-sm font-medium hover:bg-primary-700 transition-colors">
-                    Templo Principal
+                    {{ __('general.schedules.main_temple') }}
                 </a>
                 @foreach($capillas as $capilla)
                     <a href="#{{ $capilla->slug }}" class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors border">
@@ -58,20 +57,20 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900">Templo Principal</h2>
-                    <p class="text-gray-600">Parroquia Nuestra Señora de la Encarnación</p>
+                    <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900">{{ __('general.schedules.main_temple') }}</h2>
+                    <p class="text-gray-600">{{ __('general.schedules.parish_name') }}</p>
                 </div>
             </div>
 
             @php
                 $diasSemana = [
-                    0 => ['nombre' => 'Domingo', 'icono' => 'sun', 'destacado' => true],
-                    1 => ['nombre' => 'Lunes', 'icono' => 'calendar', 'destacado' => false],
-                    2 => ['nombre' => 'Martes', 'icono' => 'calendar', 'destacado' => false],
-                    3 => ['nombre' => 'Miércoles', 'icono' => 'calendar', 'destacado' => false],
-                    4 => ['nombre' => 'Jueves', 'icono' => 'calendar', 'destacado' => false],
-                    5 => ['nombre' => 'Viernes', 'icono' => 'calendar', 'destacado' => false],
-                    6 => ['nombre' => 'Sábado', 'icono' => 'moon', 'destacado' => true],
+                    0 => ['nombre' => __('general.days.sunday'), 'icono' => 'sun', 'destacado' => true],
+                    1 => ['nombre' => __('general.days.monday'), 'icono' => 'calendar', 'destacado' => false],
+                    2 => ['nombre' => __('general.days.tuesday'), 'icono' => 'calendar', 'destacado' => false],
+                    3 => ['nombre' => __('general.days.wednesday'), 'icono' => 'calendar', 'destacado' => false],
+                    4 => ['nombre' => __('general.days.thursday'), 'icono' => 'calendar', 'destacado' => false],
+                    5 => ['nombre' => __('general.days.friday'), 'icono' => 'calendar', 'destacado' => false],
+                    6 => ['nombre' => __('general.days.saturday'), 'icono' => 'moon', 'destacado' => true],
                 ];
             @endphp
 
@@ -103,9 +102,9 @@
                                         {{ $datoDia['nombre'] }}
                                     </h3>
                                     @if($numeroDia === 0)
-                                        <p class="text-sm text-primary-600">Día del Señor</p>
+                                        <p class="text-sm text-primary-600">{{ __('general.days.lords_day') }}</p>
                                     @elseif($numeroDia === 6)
-                                        <p class="text-sm text-gold-600">Vigilia Dominical</p>
+                                        <p class="text-sm text-gold-600">{{ __('general.days.sunday_vigil') }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -129,7 +128,7 @@
                                     @endforeach
                                 </ul>
                             @else
-                                <p class="text-gray-500 text-sm italic">No hay misas programadas</p>
+                                <p class="text-gray-500 text-sm italic">{{ __('general.messages.no_schedules') }}</p>
                             @endif
                         </div>
                     </div>
@@ -175,7 +174,7 @@
                             @endif
 
                             <a href="{{ route('capillas.detalle', ['locale' => app()->getLocale(), 'slug' => $capilla->slug]) }}" class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 text-sm font-medium">
-                                Ver más información
+                                {{ __('general.events.more_info') }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                 </svg>
@@ -223,8 +222,8 @@
                             </div>
                         @else
                             <div class="bg-gray-100 rounded-lg p-6 text-center">
-                                <p class="text-gray-500">No hay horarios de misa registrados para esta capilla.</p>
-                                <p class="text-sm text-gray-400 mt-1">Contacta a la parroquia para más información.</p>
+                                <p class="text-gray-500">{{ __('general.messages.no_schedules') }}</p>
+                                <p class="text-sm text-gray-400 mt-1">{{ __('general.groups.contact_info') }}</p>
                             </div>
                         @endif
                     </div>
@@ -237,25 +236,25 @@
     <section class="py-12 bg-white">
         <div class="container-main">
             <div class="p-6 bg-gray-50 rounded-xl">
-                <h3 class="font-semibold text-gray-900 mb-3">Notas importantes</h3>
+                <h3 class="font-semibold text-gray-900 mb-3">{{ __('general.schedules.important_notes') }}</h3>
                 <ul class="space-y-2 text-gray-600">
                     <li class="flex items-start gap-2">
                         <svg class="w-5 h-5 text-primary-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span>Las confesiones están disponibles 30 minutos antes de cada misa.</span>
+                        <span>{{ __('general.schedules.confessions_note') }}</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <svg class="w-5 h-5 text-primary-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span>Los horarios pueden variar en días festivos y celebraciones especiales.</span>
+                        <span>{{ __('general.schedules.holidays_note') }}</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <svg class="w-5 h-5 text-primary-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span>Para misas especiales (bodas, quinceañeras, difuntos) favor de contactar la oficina parroquial.</span>
+                        <span>{{ __('general.schedules.special_masses_note') }}</span>
                     </li>
                 </ul>
             </div>
@@ -265,8 +264,8 @@
     {{-- CTA Contacto --}}
     <section class="py-12 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="text-2xl font-bold mb-4">¿Tienes alguna pregunta?</h2>
-            <p class="text-white/80 mb-6">Contáctanos para más información sobre horarios o servicios especiales.</p>
+            <h2 class="text-2xl font-bold mb-4">{{ __('general.schedules.questions_title') }}</h2>
+            <p class="text-white/80 mb-6">{{ __('general.schedules.questions_description') }}</p>
             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.contact') }}
             </a>

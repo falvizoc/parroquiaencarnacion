@@ -1,5 +1,14 @@
 <x-filament-panels::page>
     <x-filament::tabs>
+        {{-- Tab Identidad --}}
+        <x-filament::tabs.item
+            :active="$activeTab === 'identidad'"
+            wire:click="$set('activeTab', 'identidad')"
+            icon="heroicon-o-building-library"
+        >
+            Identidad
+        </x-filament::tabs.item>
+
         {{-- Tab Hero --}}
         <x-filament::tabs.item
             :active="$activeTab === 'hero'"
@@ -20,6 +29,105 @@
     </x-filament::tabs>
 
     <div class="mt-6">
+        {{-- Contenido Identidad --}}
+        @if($activeTab === 'identidad')
+            <div class="space-y-6">
+                <form wire:submit="guardarIdentidad">
+                    {{ $this->identidadForm }}
+
+                    <div class="mt-4">
+                        <x-filament::button type="submit">
+                            Guardar Identidad
+                        </x-filament::button>
+                    </div>
+                </form>
+
+                {{-- Vista previa Logotipo --}}
+                <x-filament::section collapsible collapsed>
+                    <x-slot name="heading">
+                        Vista previa del Logotipo
+                    </x-slot>
+                    <x-slot name="description">
+                        Así se verá el logotipo en el encabezado y pie de página
+                    </x-slot>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{-- Preview en header claro --}}
+                        <div class="p-4 bg-white rounded-lg border" wire:key="logo-preview-light-{{ $logotipoPreviewUrl }}">
+                            <p class="text-xs text-gray-500 mb-3">En fondo claro (header):</p>
+                            <div class="flex items-center gap-3">
+                                @if($logotipoPreviewUrl)
+                                    <img src="{{ $logotipoPreviewUrl }}"
+                                         alt="Logotipo"
+                                         class="w-12 h-12 object-contain">
+                                @else
+                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                                <div>
+                                    <div class="font-serif font-bold text-gray-900 leading-tight">
+                                        {{ $this->identidadData['nombre_parroquia'] ?? 'Parroquia Nuestra Señora de la Encarnación' }}
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                        {{ $this->identidadData['ubicacion'] ?? 'Tampico, Tamaulipas, México' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Preview en footer oscuro --}}
+                        <div class="p-4 bg-primary-950 rounded-lg" wire:key="logo-preview-dark-{{ $logotipoPreviewUrl }}">
+                            <p class="text-xs text-white/50 mb-3">En fondo oscuro (footer):</p>
+                            <div class="flex items-center gap-3 mb-2">
+                                @if($logotipoPreviewUrl)
+                                    <img src="{{ $logotipoPreviewUrl }}"
+                                         alt="Logotipo"
+                                         class="w-12 h-12 object-contain">
+                                @else
+                                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                                <div>
+                                    <div class="font-serif font-bold text-white leading-tight">
+                                        {{ $this->identidadData['nombre_parroquia'] ?? 'Parroquia Nuestra Señora de la Encarnación' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/70 mb-2">
+                                {{ $this->identidadData['slogan'] ?? 'Comunidad de fe, esperanza y caridad' }}
+                            </p>
+                            <div class="text-xs text-white/60 flex items-center gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                </svg>
+                                {{ $this->identidadData['ubicacion'] ?? 'Tampico, Tamaulipas, México' }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Preview Favicon --}}
+                    @if($faviconPreviewUrl)
+                        <div class="mt-4 pt-4 border-t">
+                            <p class="text-xs text-gray-500 mb-2">Favicon (pestaña del navegador):</p>
+                            <div class="flex items-center gap-3 p-2 bg-gray-100 rounded-lg inline-flex">
+                                <img src="{{ $faviconPreviewUrl }}"
+                                     alt="Favicon"
+                                     class="w-4 h-4 object-contain">
+                                <span class="text-sm text-gray-700">{{ $this->identidadData['nombre_parroquia'] ?? 'Parroquia...' }} | Tab del navegador</span>
+                                <span class="text-gray-400">×</span>
+                            </div>
+                        </div>
+                    @endif
+                </x-filament::section>
+            </div>
+        @endif
+
         {{-- Contenido Hero --}}
         @if($activeTab === 'hero')
             <div class="space-y-6">

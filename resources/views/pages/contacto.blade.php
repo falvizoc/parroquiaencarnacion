@@ -26,7 +26,7 @@
                 {{ __('general.nav.contact') }}
             </h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                Estamos aquí para servirte. No dudes en contactarnos para cualquier consulta o información.
+                {{ __('general.about.intro') }}
             </p>
         </div>
     </section>
@@ -37,7 +37,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 {{-- Información de Contacto --}}
                 <div class="lg:col-span-1">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Información de Contacto</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ __('general.contact.info_title') }}</h2>
 
                     <div class="space-y-6">
                         {{-- Dirección --}}
@@ -49,7 +49,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Dirección</h3>
+                                <h3 class="font-semibold text-gray-900">{{ __('general.contact.address') }}</h3>
                                 <p class="text-gray-600 mt-1">
                                     Calle Ejemplo #123<br>
                                     Col. Centro<br>
@@ -67,7 +67,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Teléfono</h3>
+                                <h3 class="font-semibold text-gray-900">{{ __('general.contact.phone') }}</h3>
                                 <p class="text-gray-600 mt-1">
                                     <a href="tel:+528331234567" class="hover:text-primary-600">(833) 123-4567</a>
                                 </p>
@@ -82,7 +82,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Correo Electrónico</h3>
+                                <h3 class="font-semibold text-gray-900">{{ __('general.contact.email') }}</h3>
                                 <p class="text-gray-600 mt-1">
                                     <a href="mailto:contacto@parroquiaencarnaciontampico.org" class="hover:text-primary-600">
                                         contacto@parroquiaencarnaciontampico.org
@@ -99,7 +99,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Horario de Oficina</h3>
+                                <h3 class="font-semibold text-gray-900">{{ __('general.contact.office_hours') }}</h3>
                                 <p class="text-gray-600 mt-1">
                                     Lunes a Viernes: 9:00 AM - 2:00 PM y 4:00 PM - 7:00 PM<br>
                                     Sábado: 9:00 AM - 1:00 PM<br>
@@ -111,7 +111,7 @@
 
                     {{-- Redes Sociales --}}
                     <div class="mt-8">
-                        <h3 class="font-semibold text-gray-900 mb-4">Síguenos</h3>
+                        <h3 class="font-semibold text-gray-900 mb-4">{{ __('general.footer.follow_us') }}</h3>
                         <div class="flex gap-3">
                             <a href="#" class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 hover:bg-primary-200 transition-colors" aria-label="Facebook">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@
                 {{-- Formulario de Contacto --}}
                 <div class="lg:col-span-2">
                     <div class="card p-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Envíanos un Mensaje</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ __('general.contact.send_message_title') }}</h2>
 
                         @if(session('success'))
                             <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
@@ -144,7 +144,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Nombre completo <span class="text-red-500">*</span>
+                                        {{ __('general.contact.form_name') }} <span class="text-red-500">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -158,7 +158,7 @@
 
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Correo electrónico <span class="text-red-500">*</span>
+                                        {{ __('general.contact.form_email') }} <span class="text-red-500">*</span>
                                     </label>
                                     <input
                                         type="email"
@@ -173,7 +173,7 @@
 
                             <div>
                                 <label for="telefono" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Teléfono
+                                    {{ __('general.contact.phone') }}
                                 </label>
                                 <input
                                     type="tel"
@@ -186,7 +186,7 @@
 
                             <div>
                                 <label for="asunto" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Asunto <span class="text-red-500">*</span>
+                                    {{ __('general.contact.form_subject') }} <span class="text-red-500">*</span>
                                 </label>
                                 <select
                                     id="asunto"
@@ -194,19 +194,19 @@
                                     required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                                 >
-                                    <option value="">Selecciona un asunto</option>
-                                    <option value="informacion">Información general</option>
-                                    <option value="sacramentos">Sacramentos (Bautizo, Confirmación, Matrimonio)</option>
-                                    <option value="misa_especial">Solicitud de misa especial</option>
-                                    <option value="grupos">Grupos parroquiales</option>
-                                    <option value="voluntariado">Voluntariado</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="">{{ __('general.contact.select_subject') }}</option>
+                                    <option value="informacion">{{ __('general.contact.subject_general') }}</option>
+                                    <option value="sacramentos">{{ __('general.contact.subject_sacraments') }}</option>
+                                    <option value="grupos">{{ __('general.contact.subject_groups') }}</option>
+                                    <option value="eventos">{{ __('general.contact.subject_events') }}</option>
+                                    <option value="adorador">{{ __('general.contact.subject_adorer') }}</option>
+                                    <option value="otro">{{ __('general.contact.subject_other') }}</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Mensaje <span class="text-red-500">*</span>
+                                    {{ __('general.contact.form_message') }} <span class="text-red-500">*</span>
                                 </label>
                                 <textarea
                                     id="mensaje"
@@ -227,12 +227,12 @@
                                     class="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                                 >
                                 <label for="privacidad" class="text-sm text-gray-600">
-                                    He leído y acepto la <a href="#" class="text-primary-600 hover:underline">Política de Privacidad</a>
+                                    {{ __('general.contact.privacy_notice') }} <a href="#" class="text-primary-600 hover:underline">{{ __('general.footer.privacy') }}</a>
                                 </label>
                             </div>
 
                             <button type="submit" class="btn-primary w-full md:w-auto">
-                                Enviar Mensaje
+                                {{ __('general.actions.send_message') }}
                             </button>
                         </form>
                     </div>
@@ -241,7 +241,7 @@
 
             {{-- Mapa --}}
             <div class="mt-16">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Ubicación</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ __('general.contact.location') }}</h2>
                 <div class="card overflow-hidden">
                     <div class="aspect-video bg-gray-200 flex items-center justify-center">
                         {{-- Placeholder para el mapa --}}
@@ -250,7 +250,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
-                            <p>Mapa de Google Maps</p>
+                            <p>{{ __('general.contact.map_placeholder') }}</p>
                             <p class="text-sm">(Se integrará en producción)</p>
                         </div>
                     </div>

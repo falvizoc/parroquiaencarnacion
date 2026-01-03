@@ -53,7 +53,7 @@
                 </span>
                 @if($noticia->es_destacado)
                     <span class="px-3 py-1 text-sm font-medium rounded-full bg-gold-500 text-white">
-                        Destacado
+                        {{ __('general.news.featured') }}
                     </span>
                 @endif
             </div>
@@ -79,7 +79,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <span>{{ $noticia->tiempo_lectura }} min de lectura</span>
+                    <span>{{ $noticia->tiempo_lectura }} {{ __('general.time.minutes_read') }}</span>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
 
                     {{-- Compartir --}}
                     <div class="mt-12 pt-8 border-t border-gray-200">
-                        <h4 class="font-semibold text-gray-900 mb-4">Compartir esta noticia</h4>
+                        <h4 class="font-semibold text-gray-900 mb-4">{{ __('general.news.share_news') }}</h4>
                         <div class="flex items-center gap-3">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
                                target="_blank"
@@ -156,14 +156,14 @@
                     <div class="sticky top-24 space-y-8">
                         {{-- Info Card --}}
                         <div class="card p-6">
-                            <h3 class="font-semibold text-lg text-gray-900 mb-4">Información</h3>
+                            <h3 class="font-semibold text-lg text-gray-900 mb-4">{{ __('general.groups.info_title') }}</h3>
                             <dl class="space-y-4">
                                 <div>
-                                    <dt class="text-sm text-gray-500 mb-1">Categoría</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.news.category') }}</dt>
                                     <dd class="font-medium text-gray-900">{{ $noticia->nombre_categoria }}</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm text-gray-500 mb-1">Fecha de publicación</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.news.published_date') }}</dt>
                                     <dd class="font-medium text-gray-900">{{ $noticia->fecha_formateada }}</dd>
                                 </div>
                                 @if($noticia->autor)
@@ -173,7 +173,7 @@
                                     </div>
                                 @endif
                                 <div>
-                                    <dt class="text-sm text-gray-500 mb-1">Tiempo de lectura</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.news.reading_time') }}</dt>
                                     <dd class="font-medium text-gray-900">{{ $noticia->tiempo_lectura }} min</dd>
                                 </div>
                             </dl>
@@ -181,13 +181,13 @@
 
                         {{-- CTA --}}
                         <div class="card p-6 bg-primary-50 border-primary-100">
-                            <h3 class="font-semibold text-lg text-gray-900 mb-2">¿Tienes alguna pregunta?</h3>
+                            <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ __('general.schedules.questions_title') }}</h3>
                             <p class="text-sm text-gray-600 mb-4">
-                                Contáctanos para más información sobre esta noticia u otras actividades parroquiales.
+                                {{ __('general.schedules.questions_description') }}
                             </p>
                             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}"
                                class="btn-primary w-full text-center">
-                                Contáctanos
+                                {{ __('general.actions.contact_us') }}
                             </a>
                         </div>
 
@@ -197,7 +197,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
-                            Ver todas las noticias
+                            {{ __('general.actions.view_all_news') }}
                         </a>
                     </div>
                 </aside>
@@ -210,7 +210,7 @@
         <section class="py-16 bg-gray-50">
             <div class="container-main">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                    Más noticias
+                    {{ __('general.news.more_news') }}
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach($otrasNoticias as $otraNoticia)

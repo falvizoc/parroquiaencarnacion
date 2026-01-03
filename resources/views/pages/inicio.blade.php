@@ -15,7 +15,7 @@
                     {{ __('general.nav.schedules') }}
                 </h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    Te invitamos a participar en nuestras celebraciones eucarísticas.
+                    {{ __('general.home.schedules_intro') }}
                 </p>
             </div>
 
@@ -32,7 +32,7 @@
                         @if(isset($horariosPorDia[0]) && $horariosPorDia[0]->count() > 0)
                             {{ $horariosPorDia[0]->pluck('hora')->map(fn($h) => $h->format('H:i'))->implode(', ') }}
                         @else
-                            Consultar horarios
+                            {{ __('general.actions.check_schedules') }}
                         @endif
                     </p>
                 </div>
@@ -44,13 +44,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-lg text-gray-900 mb-2">Lunes a Viernes</h3>
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ __('general.days.weekdays') }}</h3>
                     <p class="text-gray-600 text-sm">
                         @php
                             // Obtener horarios únicos de lunes (día 1) como referencia
                             $horariosEntreSemana = isset($horariosPorDia[1])
                                 ? $horariosPorDia[1]->pluck('hora')->map(fn($h) => $h->format('H:i'))->unique()->implode(', ')
-                                : 'Consultar horarios';
+                                : __('general.actions.check_schedules');
                         @endphp
                         {{ $horariosEntreSemana }}
                     </p>
@@ -68,7 +68,7 @@
                         @if(isset($horariosPorDia[6]) && $horariosPorDia[6]->count() > 0)
                             {{ $horariosPorDia[6]->pluck('hora')->map(fn($h) => $h->format('H:i'))->implode(', ') }}
                         @else
-                            Consultar horarios
+                            {{ __('general.actions.check_schedules') }}
                         @endif
                     </p>
                 </div>
@@ -91,10 +91,10 @@
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
                 <div>
                     <h2 class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-                        Próximos Eventos
+                        {{ __('general.home.upcoming_events') }}
                     </h2>
                     <p class="text-gray-600">
-                        Actividades y celebraciones de nuestra comunidad parroquial.
+                        {{ __('general.home.events_intro') }}
                     </p>
                 </div>
                 <a href="{{ route('eventos.index', ['locale' => app()->getLocale()]) }}" class="btn-secondary">
@@ -228,7 +228,7 @@
                                     </a>
                                 @endif
                                 @if($criptasCampana->dias_restantes > 0)
-                                    <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} días restantes</p>
+                                    <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} {{ __('general.messages.days_remaining') }}</p>
                                 @endif
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                             </a>
                         @endif
                         @if($criptasCampana->dias_restantes > 0)
-                            <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} días restantes</p>
+                            <p class="text-sm text-white/80 mt-3">{{ $criptasCampana->dias_restantes }} {{ __('general.messages.days_remaining') }}</p>
                         @endif
                     </div>
                 @endif
@@ -299,7 +299,7 @@
                     </div>
 
                     <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary">
-                        Solicitar información
+                        {{ __('general.actions.request_info') }}
                     </a>
                 </div>
             </div>
@@ -315,7 +315,7 @@
                     {{ __('general.nav.groups') }}
                 </h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    Únete a una de nuestras comunidades y crece en tu fe junto a otros hermanos.
+                    {{ __('general.home.groups_intro') }}
                 </p>
             </div>
 
@@ -334,7 +334,7 @@
 
             <div class="text-center mt-8">
                 <a href="{{ route('grupos.index', ['locale' => app()->getLocale()]) }}" class="btn-secondary">
-                    Ver todos los grupos
+                    {{ __('general.actions.view_all_groups') }}
                 </a>
             </div>
         </div>
@@ -344,11 +344,10 @@
     <section class="py-16 lg:py-24 bg-primary-900 text-white">
         <div class="container-main text-center">
             <h2 class="font-serif text-3xl lg:text-4xl font-bold mb-4">
-                ¿Eres nuevo en nuestra parroquia?
+                {{ __('general.home.cta_title') }}
             </h2>
             <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                Regístrate como fiel de nuestra comunidad y mantente informado sobre nuestras actividades,
-                eventos especiales y comunicaciones importantes.
+                {{ __('general.home.cta_description') }}
             </p>
             <a href="{{ route('registro', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.register') }}

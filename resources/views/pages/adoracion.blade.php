@@ -66,10 +66,10 @@
                     </svg>
                 </div>
                 <h1 class="font-serif text-4xl lg:text-5xl font-bold mb-4">
-                    Capilla de Adoración Perpetua
+                    {{ __('general.adoration.title') }}
                 </h1>
                 <p class="text-xl text-white/90">
-                    Un espacio de encuentro con Jesús Sacramentado, disponible las 24 horas del día, los 7 días de la semana.
+                    {{ __('general.adoration.intro') }}
                 </p>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     {{-- ¿Qué es la Adoración? --}}
                     <div>
                         <h2 class="font-serif text-3xl font-bold text-gray-900 mb-6">
-                            ¿Qué es la Adoración Perpetua?
+                            {{ __('general.adoration.what_is_title') }}
                         </h2>
                         <div class="prose prose-lg max-w-none text-gray-600">
                             <p>
@@ -102,7 +102,7 @@
                     {{-- Beneficios --}}
                     <div>
                         <h2 class="font-serif text-2xl font-bold text-gray-900 mb-6">
-                            Frutos de la Adoración
+                            {{ __('general.adoration.fruits_title') }}
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="flex gap-4">
@@ -112,8 +112,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Paz interior</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Encuentra tranquilidad en la presencia de Cristo.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.fruit_peace') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.fruit_peace_desc') }}</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
@@ -123,8 +123,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Fortaleza espiritual</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Renueva tu fe y encuentra fuerzas para los desafíos.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.fruit_strength') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.fruit_strength_desc') }}</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
@@ -134,8 +134,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Comunidad de fe</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Únete a otros fieles en oración continua.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.fruit_community') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.fruit_community_desc') }}</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
@@ -145,8 +145,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Tiempo con Dios</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Dedica momentos exclusivos a tu relación con el Señor.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.fruit_time') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.fruit_time_desc') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -155,28 +155,28 @@
                     {{-- Cómo participar --}}
                     <div class="bg-gray-50 rounded-xl p-8">
                         <h2 class="font-serif text-2xl font-bold text-gray-900 mb-6">
-                            ¿Cómo participar?
+                            {{ __('general.adoration.how_to_title') }}
                         </h2>
                         <ol class="space-y-4">
                             <li class="flex gap-4">
                                 <span class="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">1</span>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Visita la capilla</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Puedes venir en cualquier momento, de día o de noche.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.step_visit') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.open_24_7_desc') }}</p>
                                 </div>
                             </li>
                             <li class="flex gap-4">
                                 <span class="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">2</span>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Comprométete a una hora</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Si deseas, puedes adoptar una hora semanal fija para asegurar que siempre haya adoradores.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.step_commit') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.adoration.become_adorer_desc') }}</p>
                                 </div>
                             </li>
                             <li class="flex gap-4">
                                 <span class="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">3</span>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900">Regístrate como adorador</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Contáctanos para formar parte del grupo de adoradores comprometidos.</p>
+                                    <h3 class="font-semibold text-gray-900">{{ __('general.adoration.step_register') }}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ __('general.actions.contact_us') }}</p>
                                 </div>
                             </li>
                         </ol>
@@ -191,11 +191,11 @@
                             <svg class="w-5 h-5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            Horario
+                            {{ __('general.adoration.schedule_title') }}
                         </h3>
                         <p class="text-gray-600">
-                            <strong class="text-gray-900">Abierto 24/7</strong><br>
-                            Las 24 horas del día, los 7 días de la semana.
+                            <strong class="text-gray-900">{{ __('general.adoration.open_24_7') }}</strong><br>
+                            {{ __('general.adoration.open_24_7_desc') }}
                         </p>
                     </div>
 
@@ -205,22 +205,21 @@
                             <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
-                            Ubicación
+                            {{ __('general.adoration.location_title') }}
                         </h3>
                         <p class="text-gray-600">
-                            Capilla anexa al templo principal.<br>
-                            Entrada por la puerta lateral.
+                            {{ __('general.adoration.location_desc') }}
                         </p>
                     </div>
 
                     {{-- Contacto --}}
                     <div class="card p-6">
-                        <h3 class="font-semibold text-lg text-gray-900 mb-4">¿Quieres ser adorador?</h3>
+                        <h3 class="font-semibold text-lg text-gray-900 mb-4">{{ __('general.adoration.become_adorer_title') }}</h3>
                         <p class="text-gray-600 text-sm mb-4">
-                            Contáctanos para unirte al grupo de adoradores y adoptar una hora semanal.
+                            {{ __('general.adoration.become_adorer_desc') }}
                         </p>
                         <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary w-full text-center">
-                            Contactar
+                            {{ __('general.actions.contact_us') }}
                         </a>
                     </div>
 

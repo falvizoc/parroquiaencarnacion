@@ -40,10 +40,32 @@ Route::get('/', function () {
 
 // Cambio de idioma
 Route::get('/idioma/{locale}', function (string $locale) {
-    if (in_array($locale, ['es', 'en'])) {
-        session()->put('locale', $locale);
+    if (!in_array($locale, ['es', 'en'])) {
+        return redirect()->back();
     }
-    return redirect()->back();
+
+    session()->put('locale', $locale);
+
+    // Obtener la URL anterior y reemplazar el prefijo de idioma
+    $urlAnterior = url()->previous();
+    $urlActual = url('/');
+
+    // Extraer el path relativo de la URL anterior
+    $pathAnterior = str_replace($urlActual, '', $urlAnterior);
+
+    // Reemplazar el prefijo de idioma en el path
+    $idiomaAnterior = app()->getLocale();
+    if (str_starts_with($pathAnterior, '/' . $idiomaAnterior)) {
+        $pathNuevo = '/' . $locale . substr($pathAnterior, 3);
+    } elseif (str_starts_with($pathAnterior, '/es') || str_starts_with($pathAnterior, '/en')) {
+        // Si el path empieza con /es o /en, reemplazar
+        $pathNuevo = '/' . $locale . substr($pathAnterior, 3);
+    } else {
+        // Si no hay prefijo de idioma, agregarlo
+        $pathNuevo = '/' . $locale . $pathAnterior;
+    }
+
+    return redirect($pathNuevo);
 })->name('cambiar.idioma');
 
 // Rutas con prefijo de idioma

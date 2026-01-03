@@ -3,10 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ParishGroupResource\Pages;
+use App\Jobs\TranslateContentJob;
 use App\Models\Chapel;
 use App\Models\ParishGroup;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,6 +17,7 @@ use Illuminate\Support\Str;
 
 class ParishGroupResource extends Resource
 {
+    use Translatable;
     protected static ?string $model = ParishGroup::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
@@ -200,6 +204,22 @@ class ParishGroupResource extends Resource
                     ->options(ParishGroup::DIAS_SEMANA),
             ])
             ->actions([
+                Tables\Actions\Action::make('traducir')
+                    ->label('Traducir')
+                    ->icon('heroicon-o-language')
+                    ->color('info')
+                    ->requiresConfirmation()
+                    ->modalHeading('Traducir todos los campos')
+                    ->modalDescription('Se traducirán todos los campos traducibles al inglés usando IA.')
+                    ->modalSubmitActionLabel('Traducir ahora')
+                    ->action(function (ParishGroup $record) {
+                        TranslateContentJob::dispatch($record, $record->getTranslatableAttributes());
+                        Notification::make()
+                            ->title('Traducción iniciada')
+                            ->body('Los campos se están traduciendo. Actualiza la página en unos segundos.')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

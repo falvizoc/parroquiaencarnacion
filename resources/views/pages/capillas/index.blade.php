@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Capillas | ' . __('general.site.short_name'))
+@section('title', __('general.nav.chapels') . ' | ' . __('general.site.short_name'))
 @section('description', 'Conoce las capillas de la Parroquia Nuestra Señora de la Encarnación en Tampico.')
 
 @section('content')
@@ -18,13 +18,13 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
-                        <span class="text-white">Capillas</span>
+                        <span class="text-white">{{ __('general.nav.chapels') }}</span>
                     </li>
                 </ol>
             </nav>
-            <h1 class="font-serif text-4xl lg:text-5xl font-bold">Nuestras Capillas</h1>
+            <h1 class="font-serif text-4xl lg:text-5xl font-bold">{{ __('general.chapels.title') }}</h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl">
-                La Parroquia Nuestra Señora de la Encarnación cuenta con capillas filiales que sirven a diferentes zonas de nuestra comunidad.
+                {{ __('general.chapels.intro') }}
             </p>
         </div>
     </section>
@@ -89,16 +89,16 @@
 
                                     <div class="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
                                         <span class="text-sm text-gray-500">
-                                            <strong class="text-gray-700">{{ $capilla->horarios_count }}</strong> horarios de misa
+                                            <strong class="text-gray-700">{{ $capilla->horarios_count }}</strong> {{ strtolower(__('general.chapels.mass_schedules')) }}
                                         </span>
                                         <span class="text-sm text-gray-500">
-                                            <strong class="text-gray-700">{{ $capilla->grupos_count }}</strong> grupos
+                                            <strong class="text-gray-700">{{ $capilla->grupos_count }}</strong> {{ strtolower(__('general.nav.groups')) }}
                                         </span>
                                     </div>
 
                                     <a href="{{ route('capillas.detalle', ['locale' => app()->getLocale(), 'slug' => $capilla->slug]) }}"
                                        class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm mt-4">
-                                        Ver detalles
+                                        {{ __('general.actions.view_details') }}
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -113,7 +113,7 @@
                     <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>
-                    <p class="text-gray-500">No hay capillas registradas.</p>
+                    <p class="text-gray-500">{{ __('general.messages.no_chapels') }}</p>
                 </div>
             @endif
         </div>
@@ -122,8 +122,8 @@
     {{-- CTA --}}
     <section class="py-12 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="text-2xl font-bold mb-4">¿Necesitas más información?</h2>
-            <p class="text-white/80 mb-6">Contáctanos para conocer más sobre nuestras capillas y servicios.</p>
+            <h2 class="text-2xl font-bold mb-4">{{ __('general.chapels.need_more_info') }}</h2>
+            <p class="text-white/80 mb-6">{{ __('general.groups.contact_info') }}</p>
             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
                 {{ __('general.nav.contact') }}
             </a>

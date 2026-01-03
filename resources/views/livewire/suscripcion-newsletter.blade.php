@@ -7,9 +7,9 @@
             </svg>
             <h3 class="text-lg font-semibold text-green-800 mb-2">
                 @if($yaRegistrado)
-                    ¡Preferencias actualizadas!
+                    {{ __('general.preferences.update_success') }}
                 @else
-                    ¡Gracias por suscribirte!
+                    {{ __('general.newsletter.success_message') }}
                 @endif
             </h3>
             <p class="text-green-700">{{ $mensaje }}</p>
@@ -20,7 +20,7 @@
             {{-- Nombre --}}
             <div>
                 <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
-                    Nombre
+                    {{ __('general.register.first_name') }}
                 </label>
                 <input
                     type="text"
@@ -37,7 +37,7 @@
             {{-- Email --}}
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                    Correo electrónico
+                    {{ __('general.contact.email') }}
                 </label>
                 <input
                     type="email"
@@ -53,7 +53,7 @@
 
             {{-- Preferencias --}}
             <div>
-                <p class="block text-sm font-medium text-gray-700 mb-2">¿Qué te gustaría recibir?</p>
+                <p class="block text-sm font-medium text-gray-700 mb-2">{{ __('general.register.preferences_title') }}</p>
                 <div class="space-y-2">
                     <label class="flex items-center">
                         <input
@@ -61,7 +61,7 @@
                             wire:model="recibir_newsletter"
                             class="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
                         >
-                        <span class="ml-2 text-sm text-gray-600">Newsletter semanal</span>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('general.register.receive_newsletter') }}</span>
                     </label>
                     <label class="flex items-center">
                         <input
@@ -69,7 +69,7 @@
                             wire:model="recibir_eventos"
                             class="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
                         >
-                        <span class="ml-2 text-sm text-gray-600">Invitaciones a eventos</span>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('general.register.receive_events') }}</span>
                     </label>
                     <label class="flex items-center">
                         <input
@@ -77,7 +77,7 @@
                             wire:model="recibir_avisos"
                             class="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
                         >
-                        <span class="ml-2 text-sm text-gray-600">Avisos importantes</span>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('general.register.receive_notices') }}</span>
                     </label>
                 </div>
                 @error('preferencias')
@@ -92,18 +92,18 @@
                 wire:loading.attr="disabled"
                 wire:loading.class="opacity-75 cursor-wait"
             >
-                <span wire:loading.remove>Suscribirme</span>
+                <span wire:loading.remove>{{ __('general.actions.subscribe') }}</span>
                 <span wire:loading class="flex items-center">
                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Procesando...
+                    {{ __('general.messages.loading') }}
                 </span>
             </button>
 
             <p class="text-xs text-gray-500 text-center">
-                Puedes cancelar tu suscripción en cualquier momento.
+                {{ __('general.unsubscribe.change_mind') }}
             </p>
         </form>
     @endif

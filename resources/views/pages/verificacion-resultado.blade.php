@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Verificación de Email') . ' | ' . __('general.site.short_name'))
+@section('title', __('general.verification.success_title') . ' | ' . __('general.site.short_name'))
 
 @section('content')
     <section class="py-20">
@@ -35,9 +35,9 @@
 
                     <h1 class="text-2xl font-bold text-gray-900 mb-4">
                         @if($exito)
-                            {{ __('¡Verificación Completada!') }}
+                            {{ __('general.verification.success_title') }}
                         @else
-                            {{ __('Verificación Fallida') }}
+                            {{ __('general.verification.error_title') }}
                         @endif
                     </h1>
 
@@ -45,7 +45,7 @@
 
                     @if($exito && isset($fiel))
                         <div class="bg-gray-50 rounded-lg p-4 mb-6 text-left">
-                            <p class="text-sm text-gray-500 mb-2">{{ __('Datos de tu registro:') }}</p>
+                            <p class="text-sm text-gray-500 mb-2">{{ __('general.register.personal_info') }}:</p>
                             <p class="font-medium text-gray-900">{{ $fiel->nombre_completo }}</p>
                             <p class="text-gray-600">{{ $fiel->email }}</p>
                         </div>
@@ -53,12 +53,12 @@
 
                     <div class="flex flex-col sm:flex-row gap-3 justify-center">
                         <a href="{{ route('inicio', ['locale' => app()->getLocale()]) }}" class="btn-primary">
-                            {{ __('Ir al inicio') }}
+                            {{ __('general.nav.home') }}
                         </a>
 
                         @if(!$exito)
                             <a href="{{ route('registro', ['locale' => app()->getLocale()]) }}" class="btn-secondary">
-                                {{ __('Volver a registrarse') }}
+                                {{ __('general.nav.register') }}
                             </a>
                         @endif
                     </div>

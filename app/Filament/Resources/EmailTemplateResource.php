@@ -3,15 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmailTemplateResource\Pages;
+use App\Jobs\TranslateContentJob;
 use App\Models\EmailTemplate;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
 class EmailTemplateResource extends Resource
 {
+    use Translatable;
     protected static ?string $model = EmailTemplate::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
@@ -154,6 +158,22 @@ class EmailTemplateResource extends Resource
                     ->falseLabel('Solo inactivas'),
             ])
             ->actions([
+                Tables\Actions\Action::make('traducir')
+                    ->label('Traducir')
+                    ->icon('heroicon-o-language')
+                    ->color('info')
+                    ->requiresConfirmation()
+                    ->modalHeading('Traducir todos los campos')
+                    ->modalDescription('Se traducirán todos los campos traducibles al inglés usando IA.')
+                    ->modalSubmitActionLabel('Traducir ahora')
+                    ->action(function (EmailTemplate $record) {
+                        TranslateContentJob::dispatch($record, $record->getTranslatableAttributes());
+                        Notification::make()
+                            ->title('Traducción iniciada')
+                            ->body('Los campos se están traduciendo. Actualiza la página en unos segundos.')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\Action::make('duplicar')
                     ->label('Duplicar')
                     ->icon('heroicon-o-document-duplicate')

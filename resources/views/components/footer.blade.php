@@ -1,3 +1,13 @@
+@php
+    use App\Models\Setting;
+    use Illuminate\Support\Facades\Storage;
+
+    $logotipo = Setting::obtener('logotipo');
+    $nombreParroquia = Setting::obtener('nombre_parroquia', __('general.site.short_name'));
+    $slogan = Setting::obtener('slogan', __('general.site.tagline'));
+    $ubicacion = Setting::obtener('ubicacion', __('general.site.location'));
+    $tieneLogotipo = !empty($logotipo);
+@endphp
 <footer class="bg-primary-950 text-white">
     {{-- Main Footer --}}
     <div class="container-main py-12 lg:py-16">
@@ -5,32 +15,38 @@
             {{-- Columna 1: Información de la Parroquia --}}
             <div class="lg:col-span-1">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8 text-gold-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
+                    @if($tieneLogotipo)
+                        <img src="{{ Storage::url($logotipo) }}"
+                             alt="{{ $nombreParroquia }}"
+                             class="w-12 h-12 object-contain">
+                    @else
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-gold-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                    @endif
                     <div>
                         <div class="font-serif font-bold text-lg leading-tight">
-                            {{ __('general.site.short_name') }}
+                            {{ $nombreParroquia }}
                         </div>
                     </div>
                 </div>
                 <p class="text-white/70 text-sm mb-4">
-                    {{ __('general.site.tagline') }}
+                    {{ $slogan }}
                 </p>
                 <div class="flex items-center gap-2 text-sm text-white/70">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    {{ __('general.site.location') }}
+                    {{ $ubicacion }}
                 </div>
             </div>
 
             {{-- Columna 2: Enlaces Rápidos --}}
             <div>
-                <h3 class="font-semibold text-lg mb-4">Navegación</h3>
+                <h3 class="font-semibold text-lg mb-4">{{ __('general.nav.navigation') }}</h3>
                 <ul class="space-y-2">
                     <li>
                         <a href="{{ route('horarios', ['locale' => app()->getLocale()]) }}" class="text-white/70 hover:text-white transition-colors">
@@ -62,23 +78,23 @@
 
             {{-- Columna 3: Horarios --}}
             <div>
-                <h3 class="font-semibold text-lg mb-4">Horarios de Misa</h3>
+                <h3 class="font-semibold text-lg mb-4">{{ __('general.nav.schedules') }}</h3>
                 <ul class="space-y-2 text-sm text-white/70">
                     <li class="flex justify-between">
-                        <span>Domingo</span>
+                        <span>{{ __('general.days.sunday') }}</span>
                         <span>8:00, 10:00, 12:00, 19:00</span>
                     </li>
                     <li class="flex justify-between">
-                        <span>Lunes a Viernes</span>
+                        <span>{{ __('general.days.weekdays') }}</span>
                         <span>7:00, 19:00</span>
                     </li>
                     <li class="flex justify-between">
-                        <span>Sábado</span>
+                        <span>{{ __('general.days.saturday') }}</span>
                         <span>8:00, 19:00</span>
                     </li>
                 </ul>
                 <a href="{{ route('horarios', ['locale' => app()->getLocale()]) }}" class="inline-flex items-center gap-1 text-gold-400 hover:text-gold-300 text-sm mt-4 transition-colors">
-                    Ver todos los horarios
+                    {{ __('general.actions.view_all_schedules') }}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
@@ -87,7 +103,7 @@
 
             {{-- Columna 4: Contacto y Redes --}}
             <div>
-                <h3 class="font-semibold text-lg mb-4">Contacto</h3>
+                <h3 class="font-semibold text-lg mb-4">{{ __('general.nav.contact') }}</h3>
                 <ul class="space-y-3 text-sm text-white/70">
                     <li class="flex items-start gap-2">
                         <svg class="w-5 h-5 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,8 +144,8 @@
         <div class="container-main py-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="text-center md:text-left">
-                    <h3 class="font-semibold text-lg">Suscríbete a nuestro Newsletter</h3>
-                    <p class="text-white/70 text-sm mt-1">Recibe noticias, eventos y reflexiones en tu correo.</p>
+                    <h3 class="font-semibold text-lg">{{ __('general.footer.newsletter_title') }}</h3>
+                    <p class="text-white/70 text-sm mt-1">{{ __('general.footer.newsletter_description') }}</p>
                 </div>
                 <a
                     href="{{ route('newsletter', ['locale' => app()->getLocale()]) }}"
@@ -138,7 +154,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
-                    Suscribirme
+                    {{ __('general.actions.subscribe') }}
                 </a>
             </div>
         </div>

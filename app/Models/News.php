@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAiTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,7 +10,13 @@ use Illuminate\Support\Str;
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, HasAiTranslation;
+
+    /**
+     * Campos traducibles automáticamente.
+     */
+    public array $translatable = ['titulo', 'slug', 'extracto', 'contenido'];
+
     protected $fillable = [
         'titulo',
         'slug',

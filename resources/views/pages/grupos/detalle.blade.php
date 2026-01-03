@@ -64,13 +64,13 @@
                 <aside class="lg:col-span-1">
                     {{-- Tarjeta de información --}}
                     <div class="card p-6 sticky top-24">
-                        <h2 class="font-semibold text-lg text-gray-900 mb-4">Información del Grupo</h2>
+                        <h2 class="font-semibold text-lg text-gray-900 mb-4">{{ __('general.groups.info_title') }}</h2>
 
                         <dl class="space-y-4">
                             {{-- Horario --}}
                             @if($grupo->horario_formateado)
                                 <div>
-                                    <dt class="text-sm text-gray-500 mb-1">Horario de reunión</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.groups.meeting_schedule') }}</dt>
                                     <dd class="flex items-center gap-2 text-gray-900">
                                         <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -83,7 +83,7 @@
                             {{-- Lugar --}}
                             @if($grupo->lugar_reunion)
                                 <div>
-                                    <dt class="text-sm text-gray-500 mb-1">Lugar de reunión</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.groups.meeting_place') }}</dt>
                                     <dd class="flex items-center gap-2 text-gray-900">
                                         <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -97,7 +97,7 @@
                             {{-- Coordinador --}}
                             @if($grupo->coordinador_nombre)
                                 <div class="pt-4 border-t border-gray-100">
-                                    <dt class="text-sm text-gray-500 mb-1">Coordinador</dt>
+                                    <dt class="text-sm text-gray-500 mb-1">{{ __('general.groups.coordinator') }}</dt>
                                     <dd class="text-gray-900 font-medium">{{ $grupo->coordinador_nombre }}</dd>
 
                                     @if($grupo->coordinador_telefono)
@@ -131,7 +131,7 @@
                         <div class="mt-6 pt-6 border-t border-gray-100">
                             <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}"
                                class="btn-primary w-full text-center">
-                                Quiero unirme
+                                {{ __('general.actions.join_us') }}
                             </a>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
         <section class="py-16 bg-gray-50">
             <div class="container-main">
                 <h2 class="font-serif text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                    Otros grupos que te pueden interesar
+                    {{ __('general.groups.other_groups') }}
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach($otrosGrupos as $otroGrupo)

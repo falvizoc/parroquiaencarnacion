@@ -23,13 +23,16 @@ class Apariencia extends Page implements HasForms
 
     public ?array $heroData = [];
     public ?array $adoracionData = [];
+    public ?array $identidadData = [];
 
     // Tab activo
-    public string $activeTab = 'hero';
+    public string $activeTab = 'identidad';
 
     // URLs de previsualización (actualizadas en tiempo real)
     public ?string $heroPreviewUrl = null;
     public ?string $adoracionPreviewUrl = null;
+    public ?string $logotipoPreviewUrl = null;
+    public ?string $faviconPreviewUrl = null;
     public string $adoracionPosicion = 'center';
 
     public function mount(): void
@@ -54,8 +57,18 @@ class Apariencia extends Page implements HasForms
             'adoracion_efectos_activos' => Setting::obtener('adoracion_efectos_activos', true),
         ];
 
+        // Cargar datos de Identidad
+        $this->identidadData = [
+            'logotipo' => Setting::obtener('logotipo', ''),
+            'favicon' => Setting::obtener('favicon', ''),
+            'nombre_parroquia' => Setting::obtener('nombre_parroquia', 'Parroquia Nuestra Señora de la Encarnación'),
+            'slogan' => Setting::obtener('slogan', 'Comunidad de fe, esperanza y caridad'),
+            'ubicacion' => Setting::obtener('ubicacion', 'Tampico, Tamaulipas, México'),
+        ];
+
         $this->heroForm->fill($this->heroData);
         $this->adoracionForm->fill($this->adoracionData);
+        $this->identidadForm->fill($this->identidadData);
 
         // Inicializar URLs de previsualización
         $this->actualizarPreviews();
@@ -74,6 +87,12 @@ class Apariencia extends Page implements HasForms
         $adoracionImagen = $this->adoracionData['adoracion_imagen'] ?? null;
         $this->adoracionPreviewUrl = $this->obtenerUrlImagen($adoracionImagen);
         $this->adoracionPosicion = $this->adoracionData['adoracion_posicion'] ?? 'center';
+
+        // Identidad preview
+        $logotipo = $this->identidadData['logotipo'] ?? null;
+        $this->logotipoPreviewUrl = $this->obtenerUrlImagen($logotipo);
+        $favicon = $this->identidadData['favicon'] ?? null;
+        $this->faviconPreviewUrl = $this->obtenerUrlImagen($favicon);
     }
 
     /**
@@ -122,9 +141,17 @@ class Apariencia extends Page implements HasForms
         $this->actualizarPreviews();
     }
 
+    /**
+     * Listener para cuando cambia el logotipo
+     */
+    public function updatedIdentidadData(): void
+    {
+        $this->actualizarPreviews();
+    }
+
     protected function getForms(): array
     {
-        return ['heroForm', 'adoracionForm'];
+        return ['heroForm', 'adoracionForm', 'identidadForm'];
     }
 
     public function heroForm(Form $form): Form
@@ -180,6 +207,69 @@ class Apariencia extends Page implements HasForms
                     ]),
             ])
             ->statePath('heroData');
+    }
+
+    public function identidadForm(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('Logotipo de la Parroquia')
+                    ->description('Sube el logotipo oficial de la parroquia para mostrar en el sitio web.')
+                    ->icon('heroicon-o-building-library')
+                    ->schema([
+                        Forms\Components\FileUpload::make('logotipo')
+                            ->label('Logotipo Principal')
+                            ->image()
+                            ->directory('identidad')
+                            ->disk('public')
+                            ->imageResizeMode('contain')
+                            ->imageResizeTargetWidth('400')
+                            ->imageResizeTargetHeight('400')
+                            ->acceptedFileTypes(['image/png', 'image/svg+xml', 'image/webp'])
+                            ->helperText('Formato: PNG, SVG o WebP con fondo transparente. Resolución recomendada: 200x200 a 400x400 px. Tamaño máximo: 1MB.')
+                            ->maxSize(1024)
+                            ->live()
+                            ->afterStateUpdated(fn () => $this->actualizarPreviews()),
+
+                        Forms\Components\FileUpload::make('favicon')
+                            ->label('Favicon')
+                            ->image()
+                            ->directory('identidad')
+                            ->disk('public')
+                            ->imageResizeMode('contain')
+                            ->imageResizeTargetWidth('64')
+                            ->imageResizeTargetHeight('64')
+                            ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/ico'])
+                            ->helperText('Icono para la pestaña del navegador. Formato: PNG o ICO. Resolución: 32x32 o 64x64 px.')
+                            ->maxSize(256)
+                            ->live()
+                            ->afterStateUpdated(fn () => $this->actualizarPreviews()),
+                    ]),
+
+                Forms\Components\Section::make('Información de la Parroquia')
+                    ->description('Esta información se muestra en el encabezado y pie de página.')
+                    ->icon('heroicon-o-identification')
+                    ->schema([
+                        Forms\Components\TextInput::make('nombre_parroquia')
+                            ->label('Nombre de la Parroquia')
+                            ->placeholder('Parroquia Nuestra Señora de la Encarnación')
+                            ->maxLength(100)
+                            ->helperText('El nombre completo se usará en títulos y meta tags.'),
+
+                        Forms\Components\TextInput::make('slogan')
+                            ->label('Slogan / Lema')
+                            ->placeholder('Comunidad de fe, esperanza y caridad')
+                            ->maxLength(150)
+                            ->helperText('Frase que aparece debajo del nombre en el footer.'),
+
+                        Forms\Components\TextInput::make('ubicacion')
+                            ->label('Ubicación')
+                            ->placeholder('Tampico, Tamaulipas, México')
+                            ->maxLength(100)
+                            ->helperText('Se muestra debajo del nombre en el header.'),
+                    ]),
+            ])
+            ->statePath('identidadData');
     }
 
     public function adoracionForm(Form $form): Form
@@ -284,6 +374,37 @@ class Apariencia extends Page implements HasForms
         Notification::make()
             ->title('Adoración actualizada')
             ->body('La configuración de la sección de Adoración se ha guardado correctamente.')
+            ->success()
+            ->send();
+    }
+
+    public function guardarIdentidad(): void
+    {
+        $data = $this->identidadForm->getState();
+
+        Setting::establecer('logotipo', $data['logotipo'] ?? '', [
+            'grupo' => 'identidad',
+        ]);
+
+        Setting::establecer('favicon', $data['favicon'] ?? '', [
+            'grupo' => 'identidad',
+        ]);
+
+        Setting::establecer('nombre_parroquia', $data['nombre_parroquia'] ?? '', [
+            'grupo' => 'identidad',
+        ]);
+
+        Setting::establecer('slogan', $data['slogan'] ?? '', [
+            'grupo' => 'identidad',
+        ]);
+
+        Setting::establecer('ubicacion', $data['ubicacion'] ?? '', [
+            'grupo' => 'identidad',
+        ]);
+
+        Notification::make()
+            ->title('Identidad actualizada')
+            ->body('El logotipo e información de la parroquia se han guardado correctamente.')
             ->success()
             ->send();
     }

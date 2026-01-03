@@ -48,7 +48,7 @@ class RegistroFiel extends Component
             'apellido_paterno' => 'required|string|max:255',
             'apellido_materno' => 'nullable|string|max:255',
             'fecha_nacimiento' => 'nullable|date|before:today',
-            'genero' => 'nullable|in:masculino,femenino,otro',
+            'genero' => 'nullable|in:masculino,femenino',
 
             // Paso 2
             'email' => 'required|email|unique:faithful_members,email|max:255',

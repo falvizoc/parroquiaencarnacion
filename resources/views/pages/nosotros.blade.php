@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Nuestra Parroquia | ' . __('general.site.short_name'))
+@section('title', __('general.about.title') . ' | ' . __('general.site.short_name'))
 @section('description', 'Conoce la historia, misión y valores de la Parroquia Nuestra Señora de la Encarnación en Tampico, Tamaulipas. Una comunidad católica de fe, esperanza y caridad.')
 
 @section('breadcrumbs')
     <x-breadcrumbs :items="[
-        ['nombre' => 'Nuestra Parroquia', 'url' => '']
+        ['nombre' => __('general.about.title'), 'url' => '']
     ]" />
 @endsection
 
@@ -13,7 +13,7 @@
     {{-- Hero --}}
     <section class="bg-gradient-to-br from-primary-800 to-primary-900 text-white py-20">
         <div class="container-main text-center">
-            <h1 class="font-serif text-4xl lg:text-5xl font-bold mb-4">Nuestra Parroquia</h1>
+            <h1 class="font-serif text-4xl lg:text-5xl font-bold mb-4">{{ __('general.about.title') }}</h1>
             <p class="text-xl text-white/80 max-w-2xl mx-auto">
                 {{ __('general.site.tagline') }}
             </p>
@@ -26,7 +26,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="font-serif text-3xl font-bold text-gray-900 mb-6">
-                        Parroquia Nuestra Señora de la Encarnación
+                        {{ __('general.site.name') }}
                     </h2>
                     <div class="prose prose-lg text-gray-600">
                         <p>
@@ -67,7 +67,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">Nuestra Misión</h3>
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">{{ __('general.about.mission_title') }}</h3>
                     <p class="text-gray-600">
                         Evangelizar y acompañar a nuestra comunidad en el encuentro personal con Cristo,
                         celebrando los sacramentos y viviendo la caridad cristiana.
@@ -81,7 +81,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                         </svg>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">Nuestra Visión</h3>
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">{{ __('general.about.vision_title') }}</h3>
                     <p class="text-gray-600">
                         Ser una parroquia viva y misionera, donde cada fiel encuentre su lugar
                         para crecer en la fe y servir a los demás.
@@ -94,7 +94,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">Nuestros Valores</h3>
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">{{ __('general.about.values_title') }}</h3>
                     <p class="text-gray-600">
                         Fe, esperanza, caridad, comunidad, servicio, acogida, formación
                         y compromiso con el Evangelio.
@@ -107,36 +107,36 @@
     {{-- Servicios --}}
     <section class="py-16">
         <div class="container-main">
-            <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">Nuestros Servicios</h2>
+            <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">{{ __('general.about.services_title') }}</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="card p-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">Celebración de Misas</h3>
-                    <p class="text-sm text-gray-600 mb-4">Misas diarias y dominicales en el templo principal y capillas.</p>
+                    <h3 class="font-semibold text-gray-900 mb-2">{{ __('general.about.service_masses') }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ __('general.about.service_masses_desc') }}</p>
                     <a href="{{ route('horarios', ['locale' => app()->getLocale()]) }}" class="text-primary-600 text-sm font-medium hover:underline">
                         Ver horarios →
                     </a>
                 </div>
 
                 <div class="card p-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">Sacramentos</h3>
-                    <p class="text-sm text-gray-600 mb-4">Bautismo, Primera Comunión, Confirmación, Matrimonio y más.</p>
+                    <h3 class="font-semibold text-gray-900 mb-2">{{ __('general.about.service_sacraments') }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ __('general.about.service_sacraments_desc') }}</p>
                     <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="text-primary-600 text-sm font-medium hover:underline">
                         Más información →
                     </a>
                 </div>
 
                 <div class="card p-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">Formación</h3>
-                    <p class="text-sm text-gray-600 mb-4">Catequesis, grupos de estudio bíblico y programas de formación.</p>
+                    <h3 class="font-semibold text-gray-900 mb-2">{{ __('general.about.service_formation') }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ __('general.about.service_formation_desc') }}</p>
                     <a href="{{ route('grupos.index', ['locale' => app()->getLocale()]) }}" class="text-primary-600 text-sm font-medium hover:underline">
                         Ver grupos →
                     </a>
                 </div>
 
                 <div class="card p-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">Adoración Perpetua</h3>
-                    <p class="text-sm text-gray-600 mb-4">Capilla de adoración al Santísimo Sacramento disponible 24/7.</p>
+                    <h3 class="font-semibold text-gray-900 mb-2">{{ __('general.about.service_adoration') }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ __('general.about.service_adoration_desc') }}</p>
                     <a href="{{ route('adoracion', ['locale' => app()->getLocale()]) }}" class="text-primary-600 text-sm font-medium hover:underline">
                         Conocer más →
                     </a>
@@ -176,17 +176,17 @@
     {{-- CTA --}}
     <section class="py-16 bg-primary-900 text-white">
         <div class="container-main text-center">
-            <h2 class="font-serif text-3xl font-bold mb-4">¿Desea formar parte de nuestra comunidad?</h2>
+            <h2 class="font-serif text-3xl font-bold mb-4">{{ __('general.about.join_title') }}</h2>
             <p class="text-white/80 mb-8 max-w-2xl mx-auto">
                 Le invitamos a registrarse y mantenerse informado de nuestras actividades,
                 eventos y noticias parroquiales.
             </p>
             <div class="flex flex-wrap gap-4 justify-center">
                 <a href="{{ route('registro', ['locale' => app()->getLocale()]) }}" class="btn-secondary">
-                    Registrarse
+                    {{ __('general.nav.register') }}
                 </a>
                 <a href="{{ route('contacto', ['locale' => app()->getLocale()]) }}" class="btn-outline-white">
-                    Contáctenos
+                    {{ __('general.actions.contact_us') }}
                 </a>
             </div>
         </div>
