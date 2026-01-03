@@ -106,8 +106,15 @@ Al recibir el comando de cierre, el agente debe:
   - TranslationService actualizado para usar modelo configurable
   - Prioriza API Key de settings sobre .env
 
+- ✅ **Traducción de contenido restante COMPLETADA**
+  - Noticias: 3 registros traducidos (IDs 3, 4, 6)
+  - Grupos Parroquiales: 3 registros traducidos (IDs 4, 5, 6)
+  - Eventos: 6 registros traducidos (todos)
+  - Sacerdotes: 2 registros traducidos (todos)
+  - Capillas: 3 registros traducidos (todas)
+  - Traducciones realizadas con OpenAI GPT-4o-mini
+
 **Pendiente:**
-- Traducir contenido restante (noticias 3-6, grupos 3-6, etc.)
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
 ### Notas Importantes
