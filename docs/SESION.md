@@ -114,6 +114,11 @@ Al recibir el comando de cierre, el agente debe:
   - Capillas: 3 registros traducidos (todas)
   - Traducciones realizadas con OpenAI GPT-4o-mini
 
+- ✅ **Bug de scopes en Priest para campos JSON CORREGIDO**
+  - Causa: Scopes `parroco()` y `vicarios()` buscaban string literal en campo JSON traducible
+  - Solución: Usar notación `cargo->es` para queries en campos traducibles
+  - Archivos modificados: `app/Models/Priest.php`
+
 **Pendiente:**
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
