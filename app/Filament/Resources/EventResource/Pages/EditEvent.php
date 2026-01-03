@@ -9,8 +9,9 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditEvent extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
-    use PersistentTranslatable;
+    use EditRecord\Concerns\Translatable, PersistentTranslatable {
+        PersistentTranslatable::getDefaultTranslatableLocale insteadof EditRecord\Concerns\Translatable;
+    }
 
     protected static string $resource = EventResource::class;
 
