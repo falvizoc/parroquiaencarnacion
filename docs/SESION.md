@@ -97,8 +97,9 @@ Al recibir el comando de cierre, el agente debe:
   - Revisar en: News, Events, Chapels, Priests, EmailTemplates
   - El listado muestra correctamente el idioma, pero el formulario de edición no
 - ⚙️ **Configuración OpenAI en Dashboard**
-  - Agregar sección en Admin > Configuración para API Key de OpenAI
-  - Permitir al usuario configurar su propia key
+  - Agregar sección en Admin > Configuración > Integraciones para OpenAI
+  - Permitir al usuario configurar su propia API Key
+  - Selector de modelo: gpt-4o-mini (recomendado), gpt-4o, gpt-3.5-turbo
   - Guardar encriptado en BD (tabla settings o similar)
   - Validar conexión antes de guardar
 - Traducir contenido restante (noticias 3-6, grupos 3-6, etc.)
