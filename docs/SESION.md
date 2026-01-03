@@ -119,6 +119,16 @@ Al recibir el comando de cierre, el agente debe:
   - Solución: Usar notación `cargo->es` para queries en campos traducibles
   - Archivos modificados: `app/Models/Priest.php`
 
+- ✅ **Mejoras de arquitectura IA y UX (5 puntos solicitados)**
+  1. Eliminadas referencias de API Key de `.env` (centralizado en dashboard)
+  2. Renombrada sección OpenAI a "Inteligencia Artificial" (settings `ia_*`)
+  3. Agregado campo `ia_proveedor` para futuros proveedores (Anthropic, Google)
+  4. Implementado `scopeConTraduccion()` para ocultar contenido sin traducir en inglés
+  5. Página Integraciones rediseñada con navegación por tabs (Frictionless)
+  - Migración automática de settings `openai_*` → `ia_*`
+  - TranslationService actualizado para usar configuración centralizada
+  - Archivos: Integraciones.php, TranslationService.php, HasAiTranslation.php, routes/web.php
+
 **Pendiente:**
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
