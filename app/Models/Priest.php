@@ -62,8 +62,9 @@ class Priest extends Model
 
         // Validate only one parroco can exist
         static::saving(function ($priest) {
-            if ($priest->cargo === 'parroco' && $priest->activo) {
-                $existingParroco = static::where('cargo', 'parroco')
+            $cargoEs = is_array($priest->cargo) ? ($priest->cargo['es'] ?? '') : $priest->getTranslation('cargo', 'es');
+            if ($cargoEs === 'parroco' && $priest->activo) {
+                $existingParroco = static::where('cargo->es', 'parroco')
                     ->where('activo', true)
                     ->where('id', '!=', $priest->id ?? 0)
                     ->exists();
@@ -83,30 +84,32 @@ class Priest extends Model
 
     public function scopeOrdenado(Builder $query): Builder
     {
-        return $query->orderByRaw("CASE WHEN cargo = 'parroco' THEN 0 ELSE 1 END")
+        return $query->orderByRaw("CASE WHEN JSON_EXTRACT(cargo, '$.es') = 'parroco' THEN 0 ELSE 1 END")
                      ->orderBy('orden')
                      ->orderBy('nombre');
     }
 
     public function scopeParroco(Builder $query): Builder
     {
-        return $query->where('cargo', 'parroco');
+        return $query->where('cargo->es', 'parroco');
     }
 
     public function scopeVicarios(Builder $query): Builder
     {
-        return $query->where('cargo', 'vicario');
+        return $query->where('cargo->es', 'vicario');
     }
 
     // Accessors
     public function getNombreCargoAttribute(): string
     {
-        return self::CARGOS[$this->cargo] ?? $this->cargo;
+        $cargoEs = $this->getTranslation('cargo', 'es');
+        return self::CARGOS[$cargoEs] ?? $this->cargo;
     }
 
     public function getNombreTituloAttribute(): string
     {
-        return self::TITULOS[$this->titulo] ?? '';
+        $tituloEs = $this->getTranslation('titulo', 'es');
+        return self::TITULOS[$tituloEs] ?? '';
     }
 
     public function getNombreCompletoAttribute(): string
@@ -127,6 +130,6 @@ class Priest extends Model
 
     public function isParroco(): bool
     {
-        return $this->cargo === 'parroco';
+        return $this->getTranslation('cargo', 'es') === 'parroco';
     }
 }
