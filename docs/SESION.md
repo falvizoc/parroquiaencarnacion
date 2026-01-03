@@ -92,6 +92,10 @@ Al recibir el comando de cierre, el agente debe:
   - ✅ OpenAI API integrada y operativa
 
 **Pendiente para próxima sesión:**
+- 🐛 **BUG CRÍTICO**: En páginas de detalle/edición, el contenido aparece en español aunque esté seleccionado inglés
+  - Detectado en: Grupos Parroquiales (detalle)
+  - Revisar en: News, Events, Chapels, Priests, EmailTemplates
+  - El listado muestra correctamente el idioma, pero el formulario de edición no
 - Traducir contenido restante (noticias 3-6, grupos 3-6, etc.)
 - Configurar OPENAI_API_KEY en producción
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
