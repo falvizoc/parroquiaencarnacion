@@ -334,6 +334,63 @@ Alpine.data('calendario', () => ({
 5. Skip links para navegación
 6. Textos alternativos en imágenes
 
+## UX/UI - Componentes Estándar
+
+### Principio Frictionless
+
+El diseño del panel administrativo sigue el principio **Frictionless**: reducir la
+fricción cognitiva del usuario mediante navegación horizontal clara, agrupación
+lógica de contenido y retroalimentación visual inmediata.
+
+### Navegación por Tabs (Estándar Oficial)
+
+Para páginas con múltiples secciones, usar el componente estándar `<x-admin.tabs>`:
+
+```blade
+{{-- Navegación por Tabs (usando componente estándar) --}}
+<x-admin.tabs>
+    {{-- Tab con ícono de marca (integraciones externas) --}}
+    <x-admin.tabs.item :active="$activeTab === 'openai'" wire:click="setActiveTab('openai')">
+        <x-slot:icon>
+            <svg viewBox="0 0 24 24" fill="currentColor">...</svg>
+        </x-slot:icon>
+        OpenAI
+    </x-admin.tabs.item>
+
+    {{-- Tab con heroicon (secciones internas) --}}
+    <x-admin.tabs.item :active="$activeTab === 'general'" wire:click="setActiveTab('general')">
+        <x-slot:icon>
+            <x-heroicon-o-cog-6-tooth class="h-5 w-5" />
+        </x-slot:icon>
+        General
+    </x-admin.tabs.item>
+</x-admin.tabs>
+```
+
+**Reglas de uso:**
+
+| Contexto | Tipo de Ícono | Ejemplo |
+|----------|---------------|---------|
+| Integraciones externas | SVG oficial de marca | OpenAI, Google, Facebook |
+| Secciones internas | Heroicons outline | Identidad, Configuración |
+| Sin ícono claro | Omitir slot `icon` | - |
+
+**Archivos del componente:**
+- `resources/views/components/admin/tabs/index.blade.php` - Contenedor
+- `resources/views/components/admin/tabs/item.blade.php` - Item individual
+
+**Páginas que usan este estándar:**
+- `Integraciones` - OpenAI, Google Analytics, Facebook
+- `Apariencia` - Identidad, Hero, Adoración
+
+### Estilos visuales del Tab
+
+- **Fondo contenedor**: `rounded-xl bg-gray-100 dark:bg-gray-800 p-1`
+- **Tab activo**: `bg-white dark:bg-gray-900 text-primary-600 shadow-sm`
+- **Tab inactivo**: `text-gray-600 hover:bg-white/50`
+- **Transición**: `transition-all duration-200`
+- **Íconos**: `h-5 w-5` (20px)
+
 ## Testing
 
 ```php

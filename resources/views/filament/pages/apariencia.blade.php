@@ -1,32 +1,30 @@
 <x-filament-panels::page>
-    <x-filament::tabs>
+    {{-- Navegación por Tabs (usando componente estándar) --}}
+    <x-admin.tabs>
         {{-- Tab Identidad --}}
-        <x-filament::tabs.item
-            :active="$activeTab === 'identidad'"
-            wire:click="$set('activeTab', 'identidad')"
-            icon="heroicon-o-building-library"
-        >
+        <x-admin.tabs.item :active="$activeTab === 'identidad'" wire:click="$set('activeTab', 'identidad')">
+            <x-slot:icon>
+                <x-heroicon-o-building-library class="h-5 w-5" />
+            </x-slot:icon>
             Identidad
-        </x-filament::tabs.item>
+        </x-admin.tabs.item>
 
         {{-- Tab Hero --}}
-        <x-filament::tabs.item
-            :active="$activeTab === 'hero'"
-            wire:click="$set('activeTab', 'hero')"
-            icon="heroicon-o-photo"
-        >
+        <x-admin.tabs.item :active="$activeTab === 'hero'" wire:click="$set('activeTab', 'hero')">
+            <x-slot:icon>
+                <x-heroicon-o-photo class="h-5 w-5" />
+            </x-slot:icon>
             Hero (Inicio)
-        </x-filament::tabs.item>
+        </x-admin.tabs.item>
 
         {{-- Tab Adoración --}}
-        <x-filament::tabs.item
-            :active="$activeTab === 'adoracion'"
-            wire:click="$set('activeTab', 'adoracion')"
-            icon="heroicon-o-sparkles"
-        >
+        <x-admin.tabs.item :active="$activeTab === 'adoracion'" wire:click="$set('activeTab', 'adoracion')">
+            <x-slot:icon>
+                <x-heroicon-o-sparkles class="h-5 w-5" />
+            </x-slot:icon>
             Adoración
-        </x-filament::tabs.item>
-    </x-filament::tabs>
+        </x-admin.tabs.item>
+    </x-admin.tabs>
 
     <div class="mt-6">
         {{-- Contenido Identidad --}}
