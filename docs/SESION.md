@@ -97,13 +97,16 @@ Al recibir el comando de cierre, el agente debe:
   - Solución: Sobrescribir el método en `PersistentTranslatable` + `insteadof` en todas las Edit pages
   - Archivos modificados: 6 páginas Edit + trait PersistentTranslatable
 
-**Pendiente:**
-- ⚙️ **Configuración OpenAI en Dashboard** ← SIGUIENTE
-  - Agregar sección en Admin > Configuración > Integraciones para OpenAI
-  - Permitir al usuario configurar su propia API Key
+- ✅ **Configuración OpenAI en Dashboard COMPLETADA**
+  - Sección OpenAI en Admin > Integraciones
+  - Toggle para activar/desactivar integración
+  - Campo API Key (encriptado con `es_sensible`)
   - Selector de modelo: gpt-4o-mini (recomendado), gpt-4o, gpt-3.5-turbo
-  - Guardar encriptado en BD (tabla settings o similar)
-  - Validar conexión antes de guardar
+  - Botón "Probar Conexión" con validación
+  - TranslationService actualizado para usar modelo configurable
+  - Prioriza API Key de settings sobre .env
+
+**Pendiente:**
 - Traducir contenido restante (noticias 3-6, grupos 3-6, etc.)
 - M5.4 Go-Live (configurar dominio, SSL, BD en servidor)
 
