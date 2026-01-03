@@ -159,22 +159,26 @@ class MassScheduleResource extends Resource
             ])
             ->defaultSort('dia_semana')
             ->filters([
-                Tables\Filters\SelectFilter::make('chapel_id')
+                Tables\Filters\SelectFilter::make('ubicacion')
                     ->label('Ubicación')
-                    ->relationship('chapel', 'nombre')
-                    ->placeholder('Todas las ubicaciones')
-                    ->searchable()
-                    ->preload(),
-
-                Tables\Filters\TernaryFilter::make('templo_principal')
-                    ->label('Templo Parroquial')
-                    ->placeholder('Todas')
-                    ->trueLabel('Solo Templo Parroquial')
-                    ->falseLabel('Solo Capillas')
-                    ->queries(
-                        true: fn ($query) => $query->whereNull('chapel_id'),
-                        false: fn ($query) => $query->whereNotNull('chapel_id'),
-                    ),
+                    ->options(function () {
+                        $opciones = ['templo_parroquial' => '🏛️ Templo Parroquial'];
+                        $capillas = Chapel::activo()->ordenado()->pluck('nombre', 'id')->toArray();
+                        foreach ($capillas as $id => $nombre) {
+                            $opciones[$id] = '⛪ ' . $nombre;
+                        }
+                        return $opciones;
+                    })
+                    ->query(function ($query, array $data) {
+                        if (empty($data['value'])) {
+                            return $query;
+                        }
+                        if ($data['value'] === 'templo_parroquial') {
+                            return $query->whereNull('chapel_id');
+                        }
+                        return $query->where('chapel_id', $data['value']);
+                    })
+                    ->placeholder('Todas las ubicaciones'),
 
                 Tables\Filters\SelectFilter::make('dia_semana')
                     ->label('Día')
