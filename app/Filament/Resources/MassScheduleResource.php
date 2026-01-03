@@ -115,9 +115,9 @@ class MassScheduleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('chapel.nombre')
                     ->label('Ubicación')
-                    ->default('Templo Principal')
+                    ->default('Templo Parroquial')
                     ->badge()
-                    ->color(fn (?string $state): string => $state === 'Templo Principal' ? 'primary' : 'gray')
+                    ->color(fn (?string $state): string => $state === 'Templo Parroquial' ? 'primary' : 'gray')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('nombre_dia')
@@ -167,9 +167,9 @@ class MassScheduleResource extends Resource
                     ->preload(),
 
                 Tables\Filters\TernaryFilter::make('templo_principal')
-                    ->label('Templo Principal')
+                    ->label('Templo Parroquial')
                     ->placeholder('Todas')
-                    ->trueLabel('Solo Templo Principal')
+                    ->trueLabel('Solo Templo Parroquial')
                     ->falseLabel('Solo Capillas')
                     ->queries(
                         true: fn ($query) => $query->whereNull('chapel_id'),

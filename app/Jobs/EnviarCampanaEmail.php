@@ -122,7 +122,7 @@ class EnviarCampanaEmail implements ShouldQueue
             '{{apellidos}}' => $fiel->apellidos,
             '{{nombre_completo}}' => $fiel->nombre_completo,
             '{{email}}' => $fiel->email,
-            '{{capilla}}' => $fiel->chapel?->nombre ?? 'Templo Principal',
+            '{{capilla}}' => $fiel->chapel?->nombre ?? 'Templo Parroquial',
             '{{fecha_actual}}' => now()->format('d/m/Y'),
             '{{nombre_parroquia}}' => config('app.name'),
         ];

@@ -209,7 +209,7 @@ class FaithfulMemberResource extends Resource
 
                 Tables\Columns\TextColumn::make('chapel.nombre')
                     ->label('Capilla')
-                    ->default('Templo Principal')
+                    ->default('Templo Parroquial')
                     ->badge()
                     ->toggleable(),
 

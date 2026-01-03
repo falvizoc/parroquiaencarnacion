@@ -104,7 +104,7 @@ class MassSchedule extends Model
      */
     public function getNombreUbicacionAttribute(): string
     {
-        return $this->chapel ? $this->chapel->nombre : 'Templo Principal';
+        return $this->chapel ? $this->chapel->nombre : 'Templo Parroquial';
     }
 
     /**

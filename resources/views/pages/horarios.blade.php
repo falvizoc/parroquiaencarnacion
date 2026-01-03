@@ -286,7 +286,7 @@
                 "startDate": "{{ now()->next('Sunday')->format('Y-m-d') }}T08:00:00-06:00",
                 "location": {
                     "@@type": "Place",
-                    "name": "Templo Principal"
+                    "name": "Templo Parroquial"
                 }
             }
         ]

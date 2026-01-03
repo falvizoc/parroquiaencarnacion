@@ -178,7 +178,7 @@ return [
 
     // Página de Horarios
     'schedules' => [
-        'main_temple' => 'Templo Principal',
+        'main_temple' => 'Templo Parroquial',
         'parish_name' => 'Parroquia Nuestra Señora de la Encarnación',
         'important_notes' => 'Notas importantes',
         'confessions_note' => 'Las confesiones están disponibles 30 minutos antes de cada misa.',
@@ -432,7 +432,7 @@ return [
 
     // Lugares comunes
     'places' => [
-        'main_temple' => 'Templo Principal',
+        'main_temple' => 'Templo Parroquial',
         'parish_hall' => 'Salón Parroquial',
         'chapel' => 'Capilla',
         'classroom' => 'Aula',

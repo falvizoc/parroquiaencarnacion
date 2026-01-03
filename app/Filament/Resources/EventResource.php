@@ -102,7 +102,7 @@ class EventResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('lugar')
                             ->maxLength(255)
-                            ->helperText('Ej: Templo Principal, Salón Parroquial'),
+                            ->helperText('Ej: Templo Parroquial, Salón Parroquial'),
 
                         Forms\Components\Textarea::make('direccion')
                             ->label('Dirección completa')

@@ -113,7 +113,7 @@ class ListFaithfulMembers extends ListRecords
                                 'fecha_nacimiento' => $fiel->fecha_nacimiento?->format('d/m/Y') ?? '',
                                 'genero' => $fiel->nombre_genero,
                                 'estado_civil' => $fiel->nombre_estado_civil,
-                                'capilla' => $fiel->chapel?->nombre ?? 'Templo Principal',
+                                'capilla' => $fiel->chapel?->nombre ?? 'Templo Parroquial',
                                 'fecha_registro' => $fiel->created_at->format('d/m/Y'),
                                 default => '',
                             };

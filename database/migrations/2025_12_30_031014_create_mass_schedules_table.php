@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('descripcion')->nullable();
 
             // Ubicación dentro de la parroquia
-            $table->string('ubicacion')->default('Templo Principal');
+            $table->string('ubicacion')->default('Templo Parroquial');
 
             // Idioma de la misa
             $table->string('idioma')->default('es');

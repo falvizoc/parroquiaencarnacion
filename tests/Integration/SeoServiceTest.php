@@ -59,7 +59,7 @@ class SeoServiceTest extends TestCase
             'nombre' => 'Evento de Prueba',
             'descripcion' => 'Descripción del evento',
             'fecha_inicio' => now()->addDays(5),
-            'ubicacion' => 'Templo Principal',
+            'ubicacion' => 'Templo Parroquial',
         ]);
 
         $schemas = $this->seo->getSchemaExtra();

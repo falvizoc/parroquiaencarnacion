@@ -223,7 +223,7 @@ Al recibir el comando de cierre, el agente debe:
 - Implementado M2.5 Sistema de Sacerdotes (párroco único, vicarios, vistas públicas)
 - Actualizada relación MassSchedule y ParishGroup con Chapel
 - Horarios de misa ahora dinámicos desde BD en inicio.blade.php y horarios.blade.php
-- Página de horarios muestra Templo Principal + cada capilla con sus horarios
+- Página de horarios muestra Templo Parroquial + cada capilla con sus horarios
 - Agregados Capillas y Sacerdotes al menú de navegación (con i18n)
 - Simplificación UX: eliminado campo redundante "ubicación específica"
 - Documentado Sistema de Intenciones de Misa para Fase 6 (Post-MVP)

@@ -178,7 +178,7 @@ return [
 
     // Schedules Page
     'schedules' => [
-        'main_temple' => 'Main Temple',
+        'main_temple' => 'Parish Temple',
         'parish_name' => 'Our Lady of the Incarnation Parish',
         'important_notes' => 'Important notes',
         'confessions_note' => 'Confessions are available 30 minutes before each Mass.',
@@ -432,7 +432,7 @@ return [
 
     // Common places
     'places' => [
-        'main_temple' => 'Main Temple',
+        'main_temple' => 'Parish Temple',
         'parish_hall' => 'Parish Hall',
         'chapel' => 'Chapel',
         'classroom' => 'Classroom',
