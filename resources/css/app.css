@@ -109,15 +109,19 @@
 
     /* === HERO SECTION EFFECTS === */
 
-    /* Contenedor parallax */
+    /* Contenedor parallax - posicionamiento absoluto para cubrir el padre */
     .parallax-container {
-        /* position se define con clases Tailwind (absolute/relative) */
+        position: absolute;
+        inset: 0;
         overflow: hidden;
     }
 
+    /* Fondo con parallax - expandido 20% para efecto de movimiento */
     .parallax-bg {
         position: absolute;
         inset: -20%;
+        width: 140%;
+        height: 140%;
         background-size: cover;
         background-position: center;
         will-change: transform;

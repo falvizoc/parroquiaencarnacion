@@ -15,7 +15,7 @@
 
     @if($tiene_imagen)
         {{-- Imagen de fondo con parallax --}}
-        <div class="absolute inset-0 parallax-container">
+        <div class="parallax-container">
             <div class="parallax-bg"
                  @if($efectos_activos) data-parallax="hero" @endif
                  style="background-image: url('{{ Storage::url($imagen_hero) }}');">

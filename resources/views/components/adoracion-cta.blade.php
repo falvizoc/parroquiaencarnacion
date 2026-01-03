@@ -20,8 +20,8 @@
                {{ !$tiene_imagen ? 'bg-gradient-to-br from-gold-50 to-gold-100' : '' }}">
 
     @if($tiene_imagen)
-        {{-- Imagen de fondo --}}
-        <div class="absolute inset-0 parallax-container">
+        {{-- Imagen de fondo con parallax --}}
+        <div class="parallax-container">
             <div class="parallax-bg"
                  @if($efectos_activos) data-parallax="adoracion" @endif
                  style="background-image: url('{{ Storage::url($imagen_adoracion) }}'); background-position: center {{ $bg_position }};">
