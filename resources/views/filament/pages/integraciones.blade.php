@@ -1,5 +1,68 @@
 <x-filament-panels::page>
     <div class="space-y-6">
+        {{-- Sección OpenAI --}}
+        <form wire:submit="guardarOpenai">
+            {{ $this->openaiForm }}
+
+            <div class="mt-4 flex gap-3">
+                <x-filament::button type="submit">
+                    Guardar Configuración
+                </x-filament::button>
+
+                <x-filament::button
+                    type="button"
+                    color="gray"
+                    wire:click="probarConexionOpenai"
+                >
+                    Probar Conexión
+                </x-filament::button>
+            </div>
+        </form>
+
+        {{-- Información de ayuda OpenAI --}}
+        <x-filament::section collapsible collapsed>
+            <x-slot name="heading">
+                Cómo obtener tu API Key de OpenAI
+            </x-slot>
+
+            <div class="prose prose-sm dark:prose-invert max-w-none">
+                <ol>
+                    <li>
+                        <strong>Crear cuenta en OpenAI:</strong>
+                        <ul>
+                            <li>Ve a <a href="https://platform.openai.com" target="_blank" class="text-primary-600 hover:underline">platform.openai.com</a></li>
+                            <li>Crea una cuenta o inicia sesión</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Agregar créditos (si es necesario):</strong>
+                        <ul>
+                            <li>Ve a <strong>Settings → Billing</strong></li>
+                            <li>Agrega un método de pago y créditos</li>
+                            <li>GPT-4o Mini cuesta aproximadamente $0.15 por cada 1M tokens</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Crear API Key:</strong>
+                        <ul>
+                            <li>Ve a <strong>API Keys</strong> en el menú lateral</li>
+                            <li>Haz clic en <strong>"Create new secret key"</strong></li>
+                            <li>Copia la clave (empieza con <code>sk-</code>)</li>
+                            <li><strong>Importante:</strong> Solo podrás verla una vez</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <p class="text-sm text-blue-800 dark:text-blue-200">
+                        <strong>💡 Recomendación:</strong> Usa el modelo <strong>GPT-4o Mini</strong> para traducciones. Es rápido, económico y ofrece excelente calidad para este tipo de tareas.
+                    </p>
+                </div>
+            </div>
+        </x-filament::section>
+
+        <hr class="border-gray-200 dark:border-gray-700">
+
         {{-- Sección Analytics --}}
         <form wire:submit="guardarAnalytics">
             {{ $this->analyticsForm }}

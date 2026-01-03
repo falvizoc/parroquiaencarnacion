@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Setting;
 use App\Models\TranslationLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -91,11 +92,22 @@ class TranslationService
      */
     public function traducirTexto(string $texto, string $tipoCampo = 'general'): string
     {
+        // Verificar si la integración está activa
+        if (!$this->estaActivo()) {
+            throw new \Exception('La integración de OpenAI no está activa. Configúrala en Admin > Integraciones.');
+        }
+
         // Limpiar texto de HTML excesivo si es necesario
         $textoLimpio = $this->prepararTextoParaTraduccion($texto);
 
-        $response = OpenAI::chat()->create([
-            'model' => 'gpt-4o-mini',
+        // Obtener modelo configurado o usar por defecto
+        $modelo = Setting::obtener('openai_modelo', 'gpt-4o-mini');
+
+        // Obtener cliente de OpenAI (usa API Key de settings o .env)
+        $client = $this->obtenerCliente();
+
+        $response = $client->chat()->create([
+            'model' => $modelo,
             'messages' => [
                 [
                     'role' => 'system',
@@ -111,6 +123,40 @@ class TranslationService
         ]);
 
         return trim($response->choices[0]->message->content);
+    }
+
+    /**
+     * Verifica si la integración de OpenAI está activa.
+     */
+    public function estaActivo(): bool
+    {
+        // Si está configurado en settings, usar eso
+        $configuradoEnSettings = Setting::where('clave', 'openai_activo')->exists();
+
+        if ($configuradoEnSettings) {
+            return (bool) Setting::obtener('openai_activo', false);
+        }
+
+        // Si no hay configuración en settings, verificar si hay API Key en .env
+        return !empty(config('openai.api_key'));
+    }
+
+    /**
+     * Obtiene el cliente de OpenAI con la API Key correcta.
+     */
+    protected function obtenerCliente()
+    {
+        // Priorizar API Key de settings
+        $apiKeySettings = Setting::obtener('openai_api_key');
+
+        if (!empty($apiKeySettings)) {
+            return \OpenAI::factory()
+                ->withApiKey($apiKeySettings)
+                ->make();
+        }
+
+        // Fallback al cliente por defecto (usa .env)
+        return \OpenAI::client(config('openai.api_key'));
     }
 
     /**
